@@ -1,0 +1,21 @@
+provider: yfinance
+tickers:
+  SPX: ^GSPC
+  NDX: ^NDX
+  SX5E: ^STOXX50E
+  ES: ES=F
+  VIX: ^VIX
+  XLK: XLK
+  XLF: XLF
+  XLV: XLV
+  XLE: XLE
+start: "2003-01-01"
+end: "2027-08-07"
+price_field: Close
+forward_fill_limit: 5
+
+# Prospective confirmatory evaluation window:
+# 2026-08-10 through 2027-08-06 inclusive.
+# Historical observations before 2026-08-10 are initialization-only.
+# Primary MarketMind release: 0.1.0
+# Frozen source commit: ad1b13da2f7ea02ee24ae6097d8451a634e4ee97
