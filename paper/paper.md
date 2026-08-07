@@ -10,7 +10,6 @@ tags:
   - technical analysis
 authors:
   - name: Layan Oraidi
-    orcid: 0000-0000-0000-0000
     affiliation: 1
 affiliations:
   - name: Independent research software project
