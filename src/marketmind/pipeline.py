@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from collections.abc import Sequence
 import json
+from collections.abc import Sequence
 from pathlib import Path
 
 from marketmind.data import frame_fingerprint, read_price_csv
