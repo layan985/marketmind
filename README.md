@@ -24,6 +24,23 @@ MII is then classified into low, medium, and high states using lower and upper t
 learned from the preceding three years and refreshed monthly. Every estimator and
 classification decision uses information available at that date only.
 
+## Prospective preregistered validation
+
+A prospective out-of-sample validation of the paper's regime-to-signal mapping is frozen in
+[`preregistration/OSF_MARKETMIND_PROSPECTIVE_2026.md`](preregistration/OSF_MARKETMIND_PROSPECTIVE_2026.md).
+The confirmatory holdout runs from **10 August 2026 through 6 August 2027** and tests the
+precommitted mapping **High MII → trend, Medium MII → breakout/volatility expansion,
+Low MII → mean reversion**. The design freezes MarketMind 0.1.0, the primary market panel,
+signal definitions, one-session execution lag, 5-bps primary transaction-cost assumption,
+bootstrap inference, exclusions, and robustness checks before the holdout begins.
+
+The executable data request is frozen in
+[`config/preregistered-validation-2026.yml`](config/preregistered-validation-2026.yml), and
+all deviations are recorded in [`preregistration/DEVIATIONS.csv`](preregistration/DEVIATIONS.csv).
+OSF submission metadata and the final registration checklist are in
+[`preregistration/OSF_SUBMISSION_METADATA.md`](preregistration/OSF_SUBMISSION_METADATA.md).
+The OSF DOI will be added here only after the public registration is actually issued.
+
 ## Installation
 
 ```bash
