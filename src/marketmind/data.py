@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-import hashlib
-import json
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
+import hashlib
+import json
 from pathlib import Path
 from typing import Any
 
@@ -13,7 +13,6 @@ import pandas as pd
 import yaml
 
 from marketmind._validation import validate_frame
-
 
 PAPER_PUBLIC_TICKERS: dict[str, str] = {
     "SPX": "^GSPC",
@@ -40,7 +39,7 @@ class DataConfig:
     forward_fill_limit: int | None = 5
 
     @classmethod
-    def from_yaml(cls, path: str | Path) -> "DataConfig":
+    def from_yaml(cls, path: str | Path) -> DataConfig:
         """Read a pipeline configuration from YAML."""
         payload = yaml.safe_load(Path(path).read_text(encoding="utf-8"))
         return cls(**payload)

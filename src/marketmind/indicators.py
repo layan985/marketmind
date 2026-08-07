@@ -5,7 +5,6 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-
 INDICATOR_CATEGORIES: dict[str, str] = {
     "sma_50_200": "trend",
     "ma_100_slope": "trend",

@@ -4,7 +4,13 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from marketmind.data import DataConfig, frame_fingerprint, read_price_csv, validate_prices, write_dataset
+from marketmind.data import (
+    DataConfig,
+    frame_fingerprint,
+    read_price_csv,
+    validate_prices,
+    write_dataset,
+)
 from marketmind.mii import MarketMind, MarketMindConfig, mii_light
 from marketmind.pipeline import run_mii_pipeline
 from marketmind.synthetic import synthetic_market

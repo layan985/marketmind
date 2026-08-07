@@ -5,7 +5,6 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-
 REGIME_ORDER = ("low", "medium", "high")
 
 
@@ -61,4 +60,3 @@ def classify_regimes(
     output[["mii", "lower", "upper"]] = output[["mii", "lower", "upper"]].astype(float)
     output["regime"] = pd.Categorical(output["regime"], categories=REGIME_ORDER, ordered=True)
     return output
-

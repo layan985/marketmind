@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import numpy as np
 import pandas as pd
 from scipy.stats import f_oneway, kruskal, rankdata
 
@@ -37,4 +36,3 @@ def regime_tests(returns: pd.Series, regimes: pd.Series) -> pd.Series:
             "observations": float(len(frame)),
         }
     )
-

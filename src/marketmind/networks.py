@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from itertools import combinations
+
 import numpy as np
 import pandas as pd
 from numpy.typing import ArrayLike, NDArray
