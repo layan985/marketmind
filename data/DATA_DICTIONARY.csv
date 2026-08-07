@@ -1,0 +1,11 @@
+variable,type,unit,description,construction,missing_value_policy
+"date","date","YYYY-MM-DD","Observation date","Trading-calendar observation date","No synthetic dates"
+"market","string","identifier","Market or asset identifier","Canonical asset label used by the pipeline","Required"
+"hurst","float","index","DFA Hurst exponent estimate","Rolling detrended fluctuation analysis using the release configuration","Missing until the estimator has sufficient history"
+"fractal_dimension","float","index","Higuchi fractal-dimension estimate","Rolling Higuchi estimator using the release configuration","Missing until the estimator has sufficient history"
+"entropy","float","normalized/index","Return-distribution entropy measure","Shannon entropy using the configured binning rule","Missing until the estimator has sufficient history"
+"mutual_information","float","information","Dependence measure between configured series","Kraskov k-nearest-neighbor mutual-information estimator","Missing when aligned observations are insufficient"
+"transfer_entropy","float","information","Directed information-flow estimate","Configured transfer-entropy estimator with causal inputs only","Missing when aligned observations are insufficient"
+"network_connectivity","float","normalized/index","Aggregate financial-network connectivity measure","Derived from the configured dynamic correlation network","Missing when the network cross-section is insufficient"
+"mii","float","0-1 where applicable","Market Intelligence Index composite","Weighted composite of memory, information-flow, and connectivity components using release configuration","Missing if required components are unavailable"
+"regime","category","low|medium|high","Causal market-regime classification","Rolling thresholds learned only from information available at the classification date","Missing before sufficient threshold history exists"
