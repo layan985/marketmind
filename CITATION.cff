@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use MarketMind, please cite this software and the associated paper."
+title: "MarketMind: Multiscale Market Intelligence Research Software"
+type: software
+authors:
+  - family-names: Oraidi
+    given-names: Layan
+version: 0.1.0
+date-released: 2026-08-07
+license: BSD-3-Clause
+repository-code: "https://github.com/layan985/marketmind"
+url: "https://layan985.github.io/marketmind/"
+keywords:
+  - market regimes
+  - information theory
+  - financial networks
+  - transfer entropy
+  - fractal analysis
+preferred-citation:
+  type: article
+  title: "The Emergent Market Mind: Detecting Self-Organizing Intelligence in Financial Markets Through Multiscale Information Networks"
+  authors:
+    - family-names: Oraidi
+      given-names: Layan
+  year: 2026
+

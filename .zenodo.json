@@ -1,0 +1,28 @@
+{
+  "title": "MarketMind: Multiscale Market Intelligence Research Software",
+  "description": "A tested implementation of the Market Intelligence Index combining fractal memory, information flow, dynamic financial networks, causal regime classification, and walk-forward technical-indicator evaluation.",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "Oraidi, Layan"
+    }
+  ],
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "market regimes",
+    "information theory",
+    "financial networks",
+    "transfer entropy",
+    "fractal analysis",
+    "technical analysis"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/layan985/marketmind",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ],
+  "access_right": "open"
+}
+

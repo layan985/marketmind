@@ -1,0 +1,16 @@
+provider: yfinance
+tickers:
+  SPX: ^GSPC
+  NDX: ^NDX
+  SX5E: ^STOXX50E
+  ES: ES=F
+  VIX: ^VIX
+  XLK: XLK
+  XLF: XLF
+  XLV: XLV
+  XLE: XLE
+start: "2003-01-01"
+end: "2025-01-01"
+price_field: Close
+forward_fill_limit: 5
+

@@ -1,0 +1,17 @@
+include CHANGELOG.md
+include CITATION.cff
+include CODE_OF_CONDUCT.md
+include CONTRIBUTING.md
+include LICENSE
+include README.md
+include REPRODUCIBILITY.md
+include SECURITY.md
+include codemeta.json
+include mkdocs.yml
+include .zenodo.json
+recursive-include .github *.md *.yml
+recursive-include config *.yml
+recursive-include docs *.md
+recursive-include examples/notebooks *.ipynb
+recursive-include tests *.py
+
