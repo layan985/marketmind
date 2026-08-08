@@ -34,12 +34,16 @@ Low MII → mean reversion**. The design freezes MarketMind 0.1.0, the primary m
 signal definitions, one-session execution lag, 5-bps primary transaction-cost assumption,
 bootstrap inference, exclusions, and robustness checks before the holdout begins.
 
+**Associated OSF project:** https://osf.io/649gj (`649gj`). The final OSF registration URL
+and DOI will be added here only after OSF issues them; the associated project URL is not
+being represented as the registration DOI.
+
 The executable data request is frozen in
 [`config/preregistered-validation-2026.yml`](config/preregistered-validation-2026.yml), and
 all deviations are recorded in [`preregistration/DEVIATIONS.csv`](preregistration/DEVIATIONS.csv).
-OSF submission metadata and the final registration checklist are in
-[`preregistration/OSF_SUBMISSION_METADATA.md`](preregistration/OSF_SUBMISSION_METADATA.md).
-The OSF DOI will be added here only after the public registration is actually issued.
+OSF submission metadata and the field-by-field registration record are in
+[`preregistration/OSF_SUBMISSION_METADATA.md`](preregistration/OSF_SUBMISSION_METADATA.md) and
+[`preregistration/OSF_COPY_PASTE_FORM.md`](preregistration/OSF_COPY_PASTE_FORM.md).
 
 ## Installation
 
@@ -175,7 +179,9 @@ The example notebooks are in [`examples/notebooks`](examples/notebooks).
 ## Citation
 
 Use the repository's [`CITATION.cff`](CITATION.cff). A version-specific DOI will be added
-automatically after the first GitHub release is archived by Zenodo.
+automatically after the first GitHub release is archived by Zenodo. The associated OSF
+project for the prospective validation is https://osf.io/649gj; cite the final OSF
+registration separately once OSF assigns its registration URL/DOI.
 
 ## Scope
 
