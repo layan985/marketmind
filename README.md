@@ -12,6 +12,8 @@ MarketMind turns the methodology of Layan Oraidi's 2026 Charles H. Dow Award pap
 *The Emergent Market Mind: Detecting Self-Organizing Intelligence in Financial Markets
 Through Multiscale Information Networks*, into a tested Python package.
 
+**Author ORCID:** https://orcid.org/0009-0005-0202-2582
+
 It combines three dimensions into the Market Intelligence Index (MII):
 
 | Dimension | Measures | MII weight |
@@ -182,9 +184,9 @@ The example notebooks are in [`examples/notebooks`](examples/notebooks).
 ## Citation
 
 Use the repository's [`CITATION.cff`](CITATION.cff). A version-specific DOI will be added
-automatically after the first GitHub release is archived by Zenodo. The prospective validation
-is preregistered at https://osf.io/nyseh/overview and the associated OSF project is
-https://osf.io/649gj.
+after the first GitHub release is archived by Zenodo. Author ORCID:
+https://orcid.org/0009-0005-0202-2582. The prospective validation is preregistered at
+https://osf.io/nyseh/overview and the associated OSF project is https://osf.io/649gj.
 
 ## Scope
 
