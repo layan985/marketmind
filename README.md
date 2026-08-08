@@ -4,6 +4,7 @@
 [![Documentation](https://img.shields.io/badge/docs-MkDocs-4051b5)](https://layan985.github.io/marketmind/)
 [![PyPI](https://img.shields.io/pypi/v/marketmind.svg)](https://pypi.org/project/marketmind/)
 [![Python](https://img.shields.io/pypi/pyversions/marketmind.svg)](https://pypi.org/project/marketmind/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21844956.svg)](https://doi.org/10.5281/zenodo.21844956)
 [![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)](LICENSE)
 
 **Research software for measuring the market as a changing information network.**
@@ -13,6 +14,8 @@ MarketMind turns the methodology of Layan Oraidi's 2026 Charles H. Dow Award pap
 Through Multiscale Information Networks*, into a tested Python package.
 
 **Author ORCID:** https://orcid.org/0009-0005-0202-2582
+
+**Archived software release v0.1.0:** https://doi.org/10.5281/zenodo.21844956
 
 It combines three dimensions into the Market Intelligence Index (MII):
 
@@ -183,10 +186,14 @@ The example notebooks are in [`examples/notebooks`](examples/notebooks).
 
 ## Citation
 
-Use the repository's [`CITATION.cff`](CITATION.cff). A version-specific DOI will be added
-after the first GitHub release is archived by Zenodo. Author ORCID:
-https://orcid.org/0009-0005-0202-2582. The prospective validation is preregistered at
-https://osf.io/nyseh/overview and the associated OSF project is https://osf.io/649gj.
+The first archived software release is:
+
+> Oraidi, L. (2026). *MarketMind: Multiscale Market Intelligence Research Software* (v0.1.0). Zenodo. https://doi.org/10.5281/zenodo.21844956
+
+Use the repository's [`CITATION.cff`](CITATION.cff) for machine-readable citation metadata.
+Author ORCID: https://orcid.org/0009-0005-0202-2582. The prospective validation is
+preregistered at https://osf.io/nyseh/overview and the associated OSF project is
+https://osf.io/649gj.
 
 ## Scope
 
