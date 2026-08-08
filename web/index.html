@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#08090c" />
+  <title>MarketMind — Multiscale Market Intelligence</title>
+  <meta name="description" content="MarketMind is open research software for measuring market memory, information flow, and network connectivity, developed from the 2026 Charles H. Dow Award research by Layan Oraidi." />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="nav shell">
+    <a class="brand" href="#top">MARKETMIND<span> / MM</span></a>
+    <nav>
+      <a href="#method">Method</a><a href="#validation">Validation</a><a href="#evidence">Evidence</a><a href="https://github.com/layan985/marketmind">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero shell">
+      <div class="eyebrow">OPEN RESEARCH SOFTWARE · FINANCIAL COMPLEX SYSTEMS · 2026</div>
+      <h1>The market is not a line.<br><em>It is an information network.</em></h1>
+      <p class="lede">MarketMind measures market memory, information flow, and network connectivity in one causal, inspectable research pipeline. It translates the methodology behind the 2026 Charles H. Dow Award paper <i>The Emergent Market Mind</i> into tested open-source software.</p>
+      <div class="actions">
+        <a class="primary" href="https://github.com/layan985/marketmind">Inspect the code</a>
+        <a href="https://doi.org/10.5281/zenodo.21844956">Archived release / DOI</a>
+        <a href="https://osf.io/nyseh/overview">Preregistered validation</a>
+      </div>
+    </section>
+
+    <section class="facts shell">
+      <article><b>2026</b><span>Charles H. Dow Award</span></article>
+      <article><b>3</b><span>measurement dimensions</span></article>
+      <article><b>9</b><span>fixed signal definitions</span></article>
+      <article><b>2026–27</b><span>prospective holdout</span></article>
+    </section>
+
+    <section id="method" class="section shell">
+      <div class="section-label">01 / METHOD</div>
+      <div class="split"><div><h2>One index. Three different descriptions of market structure.</h2></div><div class="copy"><p>The Market Intelligence Index (MII) combines three dimensions. <strong>Memory</strong> measures persistence and fractal structure. <strong>Information flow</strong> measures entropy and dependence. <strong>Connectivity</strong> measures how markets organize as a network.</p><p>The default MII weights are fixed at 0.35 memory, 0.40 information flow, and 0.25 connectivity. Regimes are learned causally from trailing history rather than from future observations.</p></div></div>
+      <div class="cards">
+        <article><span>A</span><h3>Memory</h3><p>DFA Hurst exponent · Higuchi fractal dimension · absolute-return ACF decay</p></article>
+        <article><span>B</span><h3>Information flow</h3><p>Shannon entropy · Kraskov mutual information · transfer entropy</p></article>
+        <article><span>C</span><h3>Connectivity</h3><p>Correlation strength · weighted clustering · correlation-distance MST</p></article>
+      </div>
+    </section>
+
+    <section id="validation" class="section shell">
+      <div class="section-label">02 / FALSIFIABLE BY DESIGN</div>
+      <div class="split"><div><h2>The next result is allowed to fail.</h2></div><div class="copy"><p>Historical findings generated the hypothesis. They are not presented as pristine confirmation. A prospective protocol was frozen before the new holdout begins.</p><p>The confirmatory window runs from <strong>10 August 2026 through 6 August 2027</strong>. The primary hypothesis compares a regime-aware strategy with an unconditional equal-weight ensemble of the same nine fixed signals, net of a prespecified 5-basis-point turnover cost.</p></div></div>
+      <div class="protocol">
+        <div><small>PRIMARY MARKETS</small><strong>SPX · NDX · SX5E · ES</strong></div>
+        <div><small>EXECUTION</small><strong>One-session lag</strong></div>
+        <div><small>INFERENCE</small><strong>Moving-block bootstrap</strong></div>
+        <div><small>OPTIONAL STOPPING</small><strong>Not permitted</strong></div>
+      </div>
+      <p class="warning">No prospective performance result is claimed on this page. The point of the registration is to create a public test that can contradict the historical theory.</p>
+    </section>
+
+    <section id="evidence" class="section shell">
+      <div class="section-label">03 / INSPECT EVERYTHING</div>
+      <h2>Research objects, not marketing claims.</h2>
+      <div class="links">
+        <a href="https://github.com/layan985/marketmind"><b>Source repository</b><span>implementation, tests, configuration, provenance</span></a>
+        <a href="https://doi.org/10.5281/zenodo.21844956"><b>Zenodo release</b><span>archived software v0.1.0 with DOI</span></a>
+        <a href="https://osf.io/nyseh/overview"><b>OSF registration</b><span>timestamped prospective validation protocol</span></a>
+        <a href="https://github.com/layan985/marketmind/blob/main/REPRODUCIBILITY.md"><b>Reproducibility protocol</b><span>data, environment, execution and audit rules</span></a>
+        <a href="https://github.com/layan985/marketmind/blob/main/REPLICATION_CHALLENGE.md"><b>Replication challenge</b><span>independent attempts are explicitly invited</span></a>
+        <a href="https://pypi.org/project/marketmind/"><b>PyPI package</b><span>installable Python research software</span></a>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-label">04 / TRY THE RESEARCH OBJECT</div>
+      <div class="terminal"><div>$ pip install marketmind</div><div>$ marketmind demo --output artifacts/demo</div><p>The deterministic demo writes source data, a SHA-256 provenance manifest, raw and normalized metrics, MII regimes, and the exact run configuration.</p></div>
+    </section>
+  </main>
+
+  <footer class="shell"><div><b>MarketMind</b><span>Research software · not investment advice</span></div><div><a href="https://orcid.org/0009-0005-0202-2582">ORCID</a> · <a href="https://github.com/layan985/marketmind">GitHub</a> · <a href="https://doi.org/10.5281/zenodo.21844956">DOI</a></div></footer>
+</body>
+</html>

@@ -1,7 +1,6 @@
 # MarketMind
 
 [![CI](https://github.com/layan985/marketmind/actions/workflows/ci.yml/badge.svg)](https://github.com/layan985/marketmind/actions/workflows/ci.yml)
-[![Documentation](https://img.shields.io/badge/docs-MkDocs-4051b5)](https://layan985.github.io/marketmind/)
 [![PyPI](https://img.shields.io/pypi/v/marketmind.svg)](https://pypi.org/project/marketmind/)
 [![Python](https://img.shields.io/pypi/pyversions/marketmind.svg)](https://pypi.org/project/marketmind/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21844956.svg)](https://doi.org/10.5281/zenodo.21844956)
