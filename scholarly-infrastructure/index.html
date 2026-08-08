@@ -712,10 +712,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#software" class="md-nav__link">
+  <a href="#software-archive" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Software
+        Software archive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#osf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OSF
       
     </span>
   </a>
@@ -724,6 +735,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-discipline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version discipline
+      
+    </span>
+  </a>
   
 </li>
       
@@ -750,10 +772,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#release-chain" class="md-nav__link">
+  <a href="#release-chains" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Release chain
+        Release chains
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tracking
       
     </span>
   </a>
@@ -798,8 +831,9 @@
 <li><strong>Name:</strong> Layan Oraidi</li>
 <li><strong>ORCID:</strong> https://orcid.org/0009-0005-0202-2582</li>
 <li><strong>GitHub:</strong> https://github.com/layan985</li>
+<li><strong>Machine-readable graph:</strong> <code>research-graph.json</code></li>
 </ul>
-<p>The canonical scholarly name is <strong>Layan Oraidi</strong>. External identifiers must only be added after they have actually been issued. Do not publish placeholder DOI, SSRN, OSF, or Google Scholar identifiers.</p>
+<p>The canonical scholarly name is <strong>Layan Oraidi</strong>. External identifiers must only be added after they have actually been issued and verified. Do not publish placeholder DOI, RePEc, SSRN, OSF DOI, Google Scholar, or JOSS identifiers.</p>
 <p>The identity graph is:</p>
 <ol>
 <li>ORCID identifies the researcher.</li>
@@ -808,32 +842,47 @@
 <li>PyPI distributes installable software.</li>
 <li>Zenodo archives versioned software and datasets.</li>
 <li>OSF records preregistrations and research protocols.</li>
+<li>RePEc connects economics works to the author identity when indexed.</li>
 <li>SSRN distributes economics/finance working papers where appropriate.</li>
 <li>Google Scholar indexes publications and citations.</li>
 <li>The personal website acts as the canonical human-readable index.</li>
 </ol>
 <h2 id="research-output-graph">Research-output graph</h2>
-<p>MarketMind should be represented as separate but related research objects:</p>
+<p>MarketMind is represented as separate but related research objects:</p>
 <ul>
 <li><strong>Paper:</strong> <em>The Emergent Market Mind: Detecting Self-Organizing Intelligence in Financial Markets Through Multiscale Information Networks</em>.</li>
 <li><strong>Software:</strong> <em>MarketMind: Multiscale Market Intelligence Research Software</em>.</li>
 <li><strong>Dataset:</strong> <em>MarketMind Historical Market-Regime Dataset</em>.</li>
-<li><strong>Preregistration:</strong> prospective out-of-sample MarketMind validation.</li>
-<li><strong>Methods output:</strong> a citable methods paper/report describing the open framework and reproducibility protocol.</li>
+<li><strong>Preregistration:</strong> <em>Prospective Out-of-Sample Validation of the Market Intelligence Index for Regime-Conditioned Technical Analysis</em>.</li>
+<li><strong>Methods output:</strong> a future citable methods paper/report describing the open framework and reproducibility protocol.</li>
 </ul>
-<p>The paper DOI, software DOI, dataset DOI, and preregistration DOI must remain distinct. Each object should cross-link to the others with related identifiers.</p>
+<p>The paper DOI, software DOI, dataset DOI, preregistration DOI, and any future JOSS article DOI must remain distinct. Each object should cross-link to the others with related identifiers.</p>
 <h2 id="issued-identifiers">Issued identifiers</h2>
 <h3 id="researcher">Researcher</h3>
 <ul>
 <li>ORCID: <strong>0009-0005-0202-2582</strong></li>
 </ul>
-<h3 id="software">Software</h3>
+<h3 id="software-archive">Software archive</h3>
 <ul>
 <li>MarketMind archived release <strong>v0.1.0</strong></li>
 <li>Zenodo record: https://zenodo.org/records/21844956</li>
 <li>Version DOI: <strong>10.5281/zenodo.21844956</strong></li>
 </ul>
-<p>This DOI identifies the archived v0.1.0 software release. It must not be reused for a dataset, paper, preregistration, or a later software version.</p>
+<p>This DOI identifies the archived v0.1.0 software release. It must not be reused for a dataset, paper, preregistration, or later software version.</p>
+<h3 id="osf">OSF</h3>
+<ul>
+<li>Public registration URL: https://osf.io/nyseh/overview</li>
+<li>Associated project: https://osf.io/649gj</li>
+<li>Registration DOI: <strong>not populated until publicly verified</strong></li>
+</ul>
+<h2 id="version-discipline">Version discipline</h2>
+<p>The prospective 2026–2027 validation is scientifically frozen to <strong>MarketMind 0.1.0</strong> and the preregistration must continue to identify that version.</p>
+<p>The repository source metadata currently identifies <strong>0.1.1</strong> as the current software-maintenance version and includes <code>RELEASE_NOTES_v0.1.1.md</code>. This does <strong>not</strong> alter the preregistered frozen implementation. A public v0.1.1 GitHub/Zenodo release should receive its own release tag and version DOI before it is treated as an archived release in the scholarly graph.</p>
+<p>Accordingly:</p>
+<ul>
+<li><strong>0.1.0</strong> = frozen preregistered implementation + archived Zenodo software release.</li>
+<li><strong>0.1.1</strong> = later maintenance/open-science metadata state until separately released and archived.</li>
+</ul>
 <h2 id="metadata-contract">Metadata contract</h2>
 <p>Every DOI-bearing output should include, where applicable:</p>
 <ul>
@@ -856,10 +905,11 @@
 <ul>
 <li><code>CITATION.cff</code>;</li>
 <li><code>.zenodo.json</code> creator metadata;</li>
-<li><code>codemeta.json</code>.</li>
+<li><code>codemeta.json</code>;</li>
+<li><code>research-graph.json</code>.</li>
 </ul>
-<p>As new DOI-bearing software, dataset, preregistration, and publications are issued, add them to the ORCID record and cross-link them back to this repository and the canonical personal website. Prefer trusted DOI imports over duplicate manual records.</p>
-<h2 id="release-chain">Release chain</h2>
+<p>As new DOI-bearing software, datasets, registrations, and publications are issued, add them to the ORCID record and cross-link them back to this repository and the canonical personal website. Prefer trusted DOI imports over duplicate manual records.</p>
+<h2 id="release-chains">Release chains</h2>
 <p>For stable software versions:</p>
 <p><code>GitHub tag -&gt; GitHub Release -&gt; Zenodo archive -&gt; version DOI -&gt; ORCID -&gt; website</code></p>
 <p>The first completed software chain is:</p>
@@ -867,9 +917,21 @@
 <p>For datasets:</p>
 <p><code>reproducible pipeline -&gt; frozen dataset files -&gt; codebook/data dictionary -&gt; provenance -&gt; changelog -&gt; Zenodo dataset deposit -&gt; dataset DOI -&gt; ORCID -&gt; website</code></p>
 <p>For preregistration:</p>
-<p><code>frozen protocol -&gt; OSF public registration -&gt; registration DOI -&gt; ORCID -&gt; paper/software cross-links</code></p>
+<p><code>frozen protocol -&gt; OSF public registration -&gt; registration DOI when verified -&gt; ORCID -&gt; paper/software cross-links</code></p>
+<p>For discovery profiles:</p>
+<p><code>ORCID + DOI-bearing works -&gt; RePEc / Google Scholar / SSRN -&gt; verified profile URLs -&gt; personal website + research-graph.json</code></p>
+<p>For a future JOSS submission:</p>
+<p><code>stable research software -&gt; documentation -&gt; tests -&gt; external reproduction/audit -&gt; archived software release -&gt; JOSS submission -&gt; JOSS article DOI -&gt; ORCID + website</code></p>
+<h2 id="tracking">Tracking</h2>
+<ul>
+<li>Issue #1: prospective validation and OSF DOI propagation.</li>
+<li>Issue #4: external reproduction/audit gate.</li>
+<li>Issue #8/#11: historical dataset DOI pipeline.</li>
+<li>Issue #10: Google Scholar and SSRN profiles.</li>
+<li>Issue #12: RePEc, personal site, broader research identity graph, and JOSS pipeline.</li>
+</ul>
 <h2 id="no-identifier-fabrication">No identifier fabrication</h2>
-<p>A DOI must never be guessed, pre-filled, or represented as real before issuance. Metadata files should be updated immediately after the corresponding service returns the identifier.</p>
+<p>A DOI or profile identifier must never be guessed, pre-filled, or represented as real before issuance/verification. Metadata files should be updated immediately after the corresponding service returns the identifier.</p>
 
 
 
