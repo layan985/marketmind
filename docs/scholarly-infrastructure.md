@@ -2,11 +2,15 @@
 
 This repository is part of a persistent scholarly identity and research-output system for **Layan Oraidi**.
 
-## Identity policy
+## Canonical researcher identity
 
-The canonical scholarly name is **Layan Oraidi**. External identifiers must only be added after they have actually been issued. Do not publish placeholder ORCID, DOI, SSRN, OSF, or Google Scholar identifiers.
+- **Name:** Layan Oraidi
+- **ORCID:** https://orcid.org/0009-0005-0202-2582
+- **GitHub:** https://github.com/layan985
 
-The intended identity graph is:
+The canonical scholarly name is **Layan Oraidi**. External identifiers must only be added after they have actually been issued. Do not publish placeholder DOI, SSRN, OSF, or Google Scholar identifiers.
+
+The identity graph is:
 
 1. ORCID identifies the researcher.
 2. DOIs identify immutable research outputs.
@@ -35,6 +39,7 @@ The paper DOI, software DOI, dataset DOI, and preregistration DOI must remain di
 Every DOI-bearing output should include, where applicable:
 
 - Creator: Layan Oraidi
+- ORCID: 0009-0005-0202-2582
 - canonical title
 - version
 - release/publication date
@@ -43,21 +48,19 @@ Every DOI-bearing output should include, where applicable:
 - license
 - repository URL
 - DOI
-- ORCID once issued
 - related paper/software/dataset/registration identifiers
 - keywords
 - citation text
 
 ## ORCID synchronization
 
-After the ORCID iD is issued:
+The issued ORCID iD is **0009-0005-0202-2582** and is propagated to:
 
-- add it to `CITATION.cff`;
-- add it to `.zenodo.json` creator metadata;
-- add it to `codemeta.json`;
-- add it to package/website metadata where supported;
-- add DOI-bearing software, dataset, preregistration, and publications to ORCID;
-- prefer trusted imports/DOI imports over duplicate manual records.
+- `CITATION.cff`;
+- `.zenodo.json` creator metadata;
+- `codemeta.json`.
+
+As new DOI-bearing software, dataset, preregistration, and publications are issued, add them to the ORCID record and cross-link them back to this repository and the canonical personal website. Prefer trusted DOI imports over duplicate manual records.
 
 ## Release chain
 
@@ -75,4 +78,4 @@ For preregistration:
 
 ## No identifier fabrication
 
-A DOI or ORCID must never be guessed, pre-filled, or represented as real before issuance. Metadata files should be updated immediately after the corresponding service returns the identifier.
+A DOI must never be guessed, pre-filled, or represented as real before issuance. Metadata files should be updated immediately after the corresponding service returns the identifier.
