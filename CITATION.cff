@@ -5,6 +5,7 @@ type: software
 authors:
   - family-names: Oraidi
     given-names: Layan
+    orcid: "https://orcid.org/0009-0005-0202-2582"
 version: 0.1.0
 date-released: 2026-08-07
 license: BSD-3-Clause
@@ -29,4 +30,5 @@ preferred-citation:
   authors:
     - family-names: Oraidi
       given-names: Layan
+      orcid: "https://orcid.org/0009-0005-0202-2582"
   year: 2026
