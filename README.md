@@ -34,9 +34,12 @@ Low MII → mean reversion**. The design freezes MarketMind 0.1.0, the primary m
 signal definitions, one-session execution lag, 5-bps primary transaction-cost assumption,
 bootstrap inference, exclusions, and robustness checks before the holdout begins.
 
-**Associated OSF project:** https://osf.io/649gj (`649gj`). The final OSF registration URL
-and DOI will be added here only after OSF issues them; the associated project URL is not
-being represented as the registration DOI.
+**OSF preregistration:** https://osf.io/nyseh/overview (`nyseh`)
+
+**Associated OSF project:** https://osf.io/649gj (`649gj`)
+
+The OSF registration URL is now linked publicly. A DOI will be added only if and when OSF
+exposes one for the registration; no DOI is being inferred or fabricated from the OSF ID.
 
 The executable data request is frozen in
 [`config/preregistered-validation-2026.yml`](config/preregistered-validation-2026.yml), and
@@ -179,9 +182,9 @@ The example notebooks are in [`examples/notebooks`](examples/notebooks).
 ## Citation
 
 Use the repository's [`CITATION.cff`](CITATION.cff). A version-specific DOI will be added
-automatically after the first GitHub release is archived by Zenodo. The associated OSF
-project for the prospective validation is https://osf.io/649gj; cite the final OSF
-registration separately once OSF assigns its registration URL/DOI.
+automatically after the first GitHub release is archived by Zenodo. The prospective validation
+is preregistered at https://osf.io/nyseh/overview and the associated OSF project is
+https://osf.io/649gj.
 
 ## Scope
 
