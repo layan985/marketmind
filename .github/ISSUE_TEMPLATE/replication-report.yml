@@ -1,0 +1,66 @@
+name: External replication report
+description: Report an independent attempt to reproduce a MarketMind result or deterministic demo.
+title: "[Replication] "
+labels: ["replication"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for independently reproducing MarketMind. Please report successes as well as discrepancies. The purpose of this template is to make external verification auditable rather than self-certified.
+  - type: input
+    id: target
+    attributes:
+      label: Result reproduced
+      description: Name the table, figure, demo, release, or benchmark you attempted to reproduce.
+      placeholder: e.g. v0.1.0 deterministic demo / synthetic benchmark
+    validations:
+      required: true
+  - type: input
+    id: release
+    attributes:
+      label: Release / commit
+      description: Provide the MarketMind version, DOI, release tag, or commit SHA.
+      placeholder: v0.1.0 / 10.5281/zenodo.21844956
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version, installation method, and relevant dependency versions.
+    validations:
+      required: true
+  - type: textarea
+    id: commands
+    attributes:
+      label: Commands run
+      description: Paste the exact commands used to reproduce the result.
+      render: shell
+    validations:
+      required: true
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: Outcome
+      options:
+        - Exact / checksum match
+        - Numerically equivalent within tolerance
+        - Partial reproduction
+        - Discrepancy found
+        - Could not run
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and discrepancies
+      description: Include hashes, numerical comparisons, logs, screenshots, or links. If anything differs, report the smallest reproducible discrepancy.
+    validations:
+      required: true
+  - type: checkboxes
+    id: independence
+    attributes:
+      label: Independence statement
+      options:
+        - label: I performed this reproduction independently and am not reporting a run performed by the project author.
+          required: true
