@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "researcher": {
+    "name": "Layan Oraidi",
+    "orcid": "https://orcid.org/0009-0005-0202-2582",
+    "github": "https://github.com/layan985"
+  },
+  "objects": [
+    {
+      "id": "marketmind-software-v0.1.0",
+      "type": "SoftwareSourceCode",
+      "title": "MarketMind: Multiscale Market Intelligence Research Software",
+      "version": "0.1.0",
+      "repository": "https://github.com/layan985/marketmind",
+      "doi": "https://doi.org/10.5281/zenodo.21844956",
+      "zenodo_record": "https://zenodo.org/records/21844956",
+      "creator_orcid": "https://orcid.org/0009-0005-0202-2582"
+    },
+    {
+      "id": "marketmind-prospective-validation",
+      "type": "Preregistration",
+      "title": "Prospective Out-of-Sample Validation of the Market Intelligence Index for Regime-Conditioned Technical Analysis",
+      "registration_url": "https://osf.io/nyseh/overview",
+      "project_url": "https://osf.io/649gj",
+      "doi": null,
+      "creator_orcid": "https://orcid.org/0009-0005-0202-2582",
+      "frozen_software_version": "0.1.0",
+      "prospective_window": {
+        "start": "2026-08-10",
+        "end": "2027-08-06"
+      }
+    },
+    {
+      "id": "emergent-market-mind-paper",
+      "type": "ScholarlyArticle",
+      "title": "The Emergent Market Mind: Detecting Self-Organizing Intelligence in Financial Markets Through Multiscale Information Networks",
+      "doi": null,
+      "creator_orcid": "https://orcid.org/0009-0005-0202-2582"
+    },
+    {
+      "id": "marketmind-historical-regime-dataset",
+      "type": "Dataset",
+      "title": "MarketMind Historical Market-Regime Dataset",
+      "version": "1.0.0",
+      "doi": null,
+      "status": "planned",
+      "creator_orcid": "https://orcid.org/0009-0005-0202-2582"
+    }
+  ],
+  "external_profiles": {
+    "repec": null,
+    "google_scholar": null,
+    "ssrn": null,
+    "personal_site": null
+  },
+  "identifier_policy": "Only identifiers that have actually been issued and verified are populated. Null values must not be replaced with guessed identifiers."
+}
