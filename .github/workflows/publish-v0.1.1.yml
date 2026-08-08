@@ -1,0 +1,39 @@
+name: Publish MarketMind v0.1.1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-v0.1.1.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify version metadata
+        run: |
+          grep -q 'version = "0.1.1"' pyproject.toml
+          grep -q '^version: 0.1.1$' CITATION.cff
+          test -f RELEASE_NOTES_v0.1.1.md
+
+      - name: Create tag and GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view v0.1.1 >/dev/null 2>&1; then
+            echo 'v0.1.1 release already exists; nothing to do.'
+          else
+            gh release create v0.1.1 \
+              --target "${GITHUB_SHA}" \
+              --title 'MarketMind 0.1.1 — Preregistered Validation Infrastructure' \
+              --notes-file RELEASE_NOTES_v0.1.1.md \
+              --latest
+          fi
