@@ -2,7 +2,6 @@
   "title": "MarketMind: Multiscale Market Intelligence Research Software",
   "description": "Research software implementing the Market Intelligence Index (MII), combining fractal memory, information flow, dynamic financial networks, causal market-regime classification, and walk-forward technical-indicator evaluation. The software is linked to a prospective OSF preregistration testing the regime-to-signal mapping on a future 2026–2027 holdout.",
   "upload_type": "software",
-  "version": "0.1.1",
   "language": "eng",
   "creators": [
     {
