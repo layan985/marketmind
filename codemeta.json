@@ -4,7 +4,14 @@
   "name": "MarketMind",
   "version": "0.1.0",
   "description": "Multiscale market-regime research through fractal, information-theoretic, and financial-network measures.",
-  "author": [{"@type": "Person", "givenName": "Layan", "familyName": "Oraidi"}],
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Layan",
+      "familyName": "Oraidi",
+      "@id": "https://orcid.org/0009-0005-0202-2582"
+    }
+  ],
   "codeRepository": "https://github.com/layan985/marketmind",
   "license": "https://spdx.org/licenses/BSD-3-Clause",
   "programmingLanguage": "Python",
@@ -12,4 +19,3 @@
   "dateCreated": "2026-08-07",
   "keywords": ["market regimes", "information theory", "financial networks", "fractal analysis"]
 }
-
