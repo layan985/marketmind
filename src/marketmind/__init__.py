@@ -24,5 +24,4 @@ __all__ = [
     "transfer_entropy",
 ]
 
-__version__ = "0.1.0"
-
+__version__ = "0.1.1"
