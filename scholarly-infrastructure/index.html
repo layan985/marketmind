@@ -667,10 +667,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#identity-policy" class="md-nav__link">
+  <a href="#canonical-researcher-identity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Identity policy
+        Canonical researcher identity
       
     </span>
   </a>
@@ -754,9 +754,14 @@
 
 <h1 id="scholarly-infrastructure">Scholarly infrastructure</h1>
 <p>This repository is part of a persistent scholarly identity and research-output system for <strong>Layan Oraidi</strong>.</p>
-<h2 id="identity-policy">Identity policy</h2>
-<p>The canonical scholarly name is <strong>Layan Oraidi</strong>. External identifiers must only be added after they have actually been issued. Do not publish placeholder ORCID, DOI, SSRN, OSF, or Google Scholar identifiers.</p>
-<p>The intended identity graph is:</p>
+<h2 id="canonical-researcher-identity">Canonical researcher identity</h2>
+<ul>
+<li><strong>Name:</strong> Layan Oraidi</li>
+<li><strong>ORCID:</strong> https://orcid.org/0009-0005-0202-2582</li>
+<li><strong>GitHub:</strong> https://github.com/layan985</li>
+</ul>
+<p>The canonical scholarly name is <strong>Layan Oraidi</strong>. External identifiers must only be added after they have actually been issued. Do not publish placeholder DOI, SSRN, OSF, or Google Scholar identifiers.</p>
+<p>The identity graph is:</p>
 <ol>
 <li>ORCID identifies the researcher.</li>
 <li>DOIs identify immutable research outputs.</li>
@@ -782,6 +787,7 @@
 <p>Every DOI-bearing output should include, where applicable:</p>
 <ul>
 <li>Creator: Layan Oraidi</li>
+<li>ORCID: 0009-0005-0202-2582</li>
 <li>canonical title</li>
 <li>version</li>
 <li>release/publication date</li>
@@ -790,21 +796,18 @@
 <li>license</li>
 <li>repository URL</li>
 <li>DOI</li>
-<li>ORCID once issued</li>
 <li>related paper/software/dataset/registration identifiers</li>
 <li>keywords</li>
 <li>citation text</li>
 </ul>
 <h2 id="orcid-synchronization">ORCID synchronization</h2>
-<p>After the ORCID iD is issued:</p>
+<p>The issued ORCID iD is <strong>0009-0005-0202-2582</strong> and is propagated to:</p>
 <ul>
-<li>add it to <code>CITATION.cff</code>;</li>
-<li>add it to <code>.zenodo.json</code> creator metadata;</li>
-<li>add it to <code>codemeta.json</code>;</li>
-<li>add it to package/website metadata where supported;</li>
-<li>add DOI-bearing software, dataset, preregistration, and publications to ORCID;</li>
-<li>prefer trusted imports/DOI imports over duplicate manual records.</li>
+<li><code>CITATION.cff</code>;</li>
+<li><code>.zenodo.json</code> creator metadata;</li>
+<li><code>codemeta.json</code>.</li>
 </ul>
+<p>As new DOI-bearing software, dataset, preregistration, and publications are issued, add them to the ORCID record and cross-link them back to this repository and the canonical personal website. Prefer trusted DOI imports over duplicate manual records.</p>
 <h2 id="release-chain">Release chain</h2>
 <p>For stable software versions:</p>
 <p><code>GitHub tag -&gt; GitHub Release -&gt; Zenodo archive -&gt; version DOI -&gt; ORCID -&gt; website</code></p>
@@ -813,7 +816,7 @@
 <p>For preregistration:</p>
 <p><code>frozen protocol -&gt; OSF public registration -&gt; registration DOI -&gt; ORCID -&gt; paper/software cross-links</code></p>
 <h2 id="no-identifier-fabrication">No identifier fabrication</h2>
-<p>A DOI or ORCID must never be guessed, pre-filled, or represented as real before issuance. Metadata files should be updated immediately after the corresponding service returns the identifier.</p>
+<p>A DOI must never be guessed, pre-filled, or represented as real before issuance. Metadata files should be updated immediately after the corresponding service returns the identifier.</p>
 
 
 
