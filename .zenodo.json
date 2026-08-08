@@ -4,7 +4,8 @@
   "upload_type": "software",
   "creators": [
     {
-      "name": "Oraidi, Layan"
+      "name": "Oraidi, Layan",
+      "orcid": "0009-0005-0202-2582"
     }
   ],
   "license": "BSD-3-Clause",
@@ -21,8 +22,12 @@
       "identifier": "https://github.com/layan985/marketmind",
       "relation": "isSupplementTo",
       "scheme": "url"
+    },
+    {
+      "identifier": "https://osf.io/nyseh/overview",
+      "relation": "isSupplementTo",
+      "scheme": "url"
     }
   ],
   "access_right": "open"
 }
-
