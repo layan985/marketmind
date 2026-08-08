@@ -6,8 +6,8 @@ authors:
   - family-names: Oraidi
     given-names: Layan
     orcid: "https://orcid.org/0009-0005-0202-2582"
-version: 0.1.0
-date-released: 2026-08-07
+version: 0.1.1
+date-released: 2026-08-08
 license: BSD-3-Clause
 repository-code: "https://github.com/layan985/marketmind"
 url: "https://layan985.github.io/marketmind/"
@@ -24,6 +24,8 @@ keywords:
   - financial networks
   - transfer entropy
   - fractal analysis
+  - preregistration
+  - reproducible research
 preferred-citation:
   type: article
   title: "The Emergent Market Mind: Detecting Self-Organizing Intelligence in Financial Markets Through Multiscale Information Networks"
