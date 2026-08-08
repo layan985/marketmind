@@ -10,6 +10,13 @@ date-released: 2026-08-07
 license: BSD-3-Clause
 repository-code: "https://github.com/layan985/marketmind"
 url: "https://layan985.github.io/marketmind/"
+identifiers:
+  - type: other
+    value: "https://osf.io/nyseh/overview"
+    description: "OSF preregistration: Prospective Out-of-Sample Validation of the Market Intelligence Index for Regime-Conditioned Technical Analysis"
+  - type: other
+    value: "https://osf.io/649gj"
+    description: "Associated OSF project"
 keywords:
   - market regimes
   - information theory
@@ -23,4 +30,3 @@ preferred-citation:
     - family-names: Oraidi
       given-names: Layan
   year: 2026
-
