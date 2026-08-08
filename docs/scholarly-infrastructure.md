@@ -34,6 +34,20 @@ MarketMind should be represented as separate but related research objects:
 
 The paper DOI, software DOI, dataset DOI, and preregistration DOI must remain distinct. Each object should cross-link to the others with related identifiers.
 
+## Issued identifiers
+
+### Researcher
+
+- ORCID: **0009-0005-0202-2582**
+
+### Software
+
+- MarketMind archived release **v0.1.0**
+- Zenodo record: https://zenodo.org/records/21844956
+- Version DOI: **10.5281/zenodo.21844956**
+
+This DOI identifies the archived v0.1.0 software release. It must not be reused for a dataset, paper, preregistration, or a later software version.
+
 ## Metadata contract
 
 Every DOI-bearing output should include, where applicable:
@@ -67,6 +81,10 @@ As new DOI-bearing software, dataset, preregistration, and publications are issu
 For stable software versions:
 
 `GitHub tag -> GitHub Release -> Zenodo archive -> version DOI -> ORCID -> website`
+
+The first completed software chain is:
+
+`v0.1.0 -> Zenodo record 21844956 -> DOI 10.5281/zenodo.21844956`
 
 For datasets:
 
