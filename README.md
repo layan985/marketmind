@@ -1,5 +1,8 @@
 # MarketMind
 
+> **Portfolio case study:** [Contribution, public proof, claim boundaries and the next external-validation gate](docs/PORTFOLIO_CASE_STUDY.md).
+
+
 [![CI](https://github.com/layan985/marketmind/actions/workflows/ci.yml/badge.svg)](https://github.com/layan985/marketmind/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/pypi/v/marketmind.svg)](https://pypi.org/project/marketmind/)
 [![Python](https://img.shields.io/pypi/pyversions/marketmind.svg)](https://pypi.org/project/marketmind/)
