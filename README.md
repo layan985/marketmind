@@ -1,5 +1,7 @@
 # MarketMind
 
+> **Research portfolio:** [layanaloreidi.online](https://layanaloreidi.online)
+
 > **Portfolio case study:** [Contribution, public proof, claim boundaries and the next external-validation gate](docs/PORTFOLIO_CASE_STUDY.md).
 
 
