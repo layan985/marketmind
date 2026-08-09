@@ -11,7 +11,7 @@
 
 **Research software for measuring the market as a changing information network.**
 
-MarketMind turns the methodology of Layan Oraidi's 2026 Charles H. Dow Award paper,
+MarketMind turns the methodology of Layan Aloreidi's 2026 Charles H. Dow Award paper (also indexed under Layan Oraidi),
 *The Emergent Market Mind: Detecting Self-Organizing Intelligence in Financial Markets
 Through Multiscale Information Networks*, into a tested Python package.
 
