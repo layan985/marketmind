@@ -1,0 +1,78 @@
+name: Research use report
+description: Document a real external research, teaching, replication, or methods use of MarketMind.
+title: "[Research use]: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for documenting a real MarketMind use case. Successful use, partial use, confusing behavior, and negative results are all useful evidence.
+
+  - type: input
+    id: user
+    attributes:
+      label: Researcher / project
+      description: Your name, lab, course, project, or repository name if you are comfortable making it public.
+      placeholder: Example Research Lab / replication project
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: MarketMind version or commit
+      placeholder: 0.1.1 or commit SHA
+    validations:
+      required: true
+
+  - type: dropdown
+    id: use_type
+    attributes:
+      label: Type of use
+      options:
+        - Research analysis
+        - Replication / reproduction
+        - Methods notebook
+        - Teaching / coursework
+        - Preprint / paper
+        - Conference / demo
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: What were you trying to do?
+      description: State the research question or computational goal.
+    validations:
+      required: true
+
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Workflow
+      description: Give enough detail to understand how MarketMind entered the analysis, including the main commands/API calls.
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Outcome
+      description: What worked, failed, differed from expectation, or remained unclear?
+    validations:
+      required: true
+
+  - type: input
+    id: public_object
+    attributes:
+      label: Public research object
+      description: Optional repository, notebook, preprint, slides, DOI, or other durable public record.
+      placeholder: URL or DOI
+
+  - type: textarea
+    id: improvements
+    attributes:
+      label: What would make MarketMind more useful?
+      description: Prefer concrete blockers or improvements over general feature wish lists.
