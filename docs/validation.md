@@ -23,7 +23,7 @@ Target window: **9 August 2026 through 9 February 2027**.
 | Outside research project using MarketMind | 1 | 0 | Public notebook, repository, preprint, paper, teaching object, or analysis that actually imports/uses MarketMind and records the version or DOI. |
 | Prospective holdout report published | 1 | 0 | Final preregistered results published after the 6 August 2027 endpoint regardless of sign or statistical significance. |
 
-The machine-readable adoption ledger lives at [`validation/adoption-evidence.csv`](../validation/adoption-evidence.csv). External researchers can use the repository's **Research use report** or **Replication report** issue templates to create inspectable evidence.
+The machine-readable adoption ledger lives at [`validation/adoption-evidence.csv`](https://github.com/layan985/marketmind/blob/main/validation/adoption-evidence.csv). External researchers can use the repository's **Research use report** or **Replication report** issue templates to create inspectable evidence.
 
 ## Frozen prospective validation
 
@@ -35,9 +35,9 @@ The machine-readable adoption ledger lives at [`validation/adoption-evidence.csv
 - Primary markets: `^GSPC`, `^NDX`, `^STOXX50E`, `ES=F`
 - Connectivity panel additions: `^VIX`, `XLK`, `XLF`, `XLV`, `XLE`
 - Data adapter: `yfinance`
-- Frozen acquisition config: [`config/preregistered-validation-2026.yml`](../config/preregistered-validation-2026.yml)
-- Preregistration: [`preregistration/OSF_MARKETMIND_PROSPECTIVE_2026.md`](../preregistration/OSF_MARKETMIND_PROSPECTIVE_2026.md)
-- Deviation log: [`preregistration/DEVIATIONS.csv`](../preregistration/DEVIATIONS.csv)
+- Frozen acquisition config: [`config/preregistered-validation-2026.yml`](https://github.com/layan985/marketmind/blob/main/config/preregistered-validation-2026.yml)
+- Preregistration: [`preregistration/OSF_MARKETMIND_PROSPECTIVE_2026.md`](https://github.com/layan985/marketmind/blob/main/preregistration/OSF_MARKETMIND_PROSPECTIVE_2026.md)
+- Deviation log: [`preregistration/DEVIATIONS.csv`](https://github.com/layan985/marketmind/blob/main/preregistration/DEVIATIONS.csv)
 
 ### Frozen hypotheses
 
@@ -128,7 +128,7 @@ When they occur, this section will retain links to:
 - robustness results that weaken the main interpretation;
 - deviations from the preregistered protocol.
 
-A negative result may be fixed in later software versions, but the original evidence remains in the public history. The machine-readable ledger is [`validation/negative-results.csv`](../validation/negative-results.csv).
+A negative result may be fixed in later software versions, but the original evidence remains in the public history. The machine-readable ledger is [`validation/negative-results.csv`](https://github.com/layan985/marketmind/blob/main/validation/negative-results.csv).
 
 ## What counts as progress
 
