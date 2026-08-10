@@ -1,0 +1,136 @@
+name: Last Price E02-E finite feasible actions
+
+on:
+  push:
+    branches: [last-price-e02e-finite-actions-20260810]
+    paths:
+      - 'experiments/E02E_FREEZE.json'
+
+permissions:
+  contents: read
+
+jobs:
+  negotiate:
+    name: ${{ matrix.buyer_label }}-${{ matrix.product_id }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 9
+      matrix:
+        include:
+          - {buyer_label: qwen17, buyer_model: 'qwen3:1.7b', product_id: headphones}
+          - {buyer_label: qwen17, buyer_model: 'qwen3:1.7b', product_id: suitcase}
+          - {buyer_label: qwen17, buyer_model: 'qwen3:1.7b', product_id: chair}
+          - {buyer_label: gemma4, buyer_model: 'gemma3:4b', product_id: headphones}
+          - {buyer_label: gemma4, buyer_model: 'gemma3:4b', product_id: suitcase}
+          - {buyer_label: gemma4, buyer_model: 'gemma3:4b', product_id: chair}
+          - {buyer_label: llama3, buyer_model: 'llama3.2:3b', product_id: headphones}
+          - {buyer_label: llama3, buyer_model: 'llama3.2:3b', product_id: suitcase}
+          - {buyer_label: llama3, buyer_model: 'llama3.2:3b', product_id: chair}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Verify frozen commit
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          freeze = json.load(open('experiments/E02E_FREEZE.json'))
+          parent = subprocess.check_output(['git','rev-parse','HEAD^'], text=True).strip()
+          changed = subprocess.check_output(['git','diff','--name-only','HEAD^','HEAD'], text=True).splitlines()
+          if parent != freeze['frozen_commit']:
+              raise SystemExit(f"frozen parent mismatch: {parent} != {freeze['frozen_commit']}")
+          if changed != ['experiments/E02E_FREEZE.json']:
+              raise SystemExit(f"trigger commit changed unexpected files: {changed}")
+          print('E02-E frozen commit PASS', parent)
+          PY
+
+      - name: Preflight finite-menu invariants
+        env:
+          BUYER_LABEL: ${{ matrix.buyer_label }}
+          BUYER_MODEL: ${{ matrix.buyer_model }}
+          PRODUCT_ID: ${{ matrix.product_id }}
+          N_SEEDS: '3'
+        run: |
+          python - <<'PY'
+          from experiments import last_price_e02e_driver as d
+          for ratio in d.TIGHT.values():
+              for _, mult in d.STATES:
+                  cost = d.base.r2(d.P['buyer_value'] * ratio * mult)
+                  bm = d.build_menu(True, cost, None)
+                  sm = d.build_menu(False, cost, None)
+                  bo = [x['price'] for x in bm if x['action'] == 'offer']
+                  so = [x['price'] for x in sm if x['action'] == 'offer']
+                  assert bo and so
+                  assert max(bo) <= d.P['budget'] + 1e-9
+                  assert min(so) + 1e-9 >= cost
+                  assert len({x['id'] for x in bm}) == len(bm)
+                  assert len({x['id'] for x in sm}) == len(sm)
+          print('finite-menu feasibility PASS')
+          PY
+
+      - name: Install Ollama
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          ollama serve > /tmp/ollama.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:11434/api/tags >/dev/null; then break; fi
+            sleep 1
+          done
+          curl -fsS http://127.0.0.1:11434/api/tags >/dev/null
+
+      - name: Pull frozen model tags and record manifest
+        run: |
+          ollama pull qwen3:4b
+          ollama pull '${{ matrix.buyer_model }}'
+          mkdir -p 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}'
+          ollama list | tee 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}/model_registry.txt'
+          ollama show qwen3:4b --modelfile > 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}/seller_modelfile.txt'
+          ollama show '${{ matrix.buyer_model }}' --modelfile > 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}/buyer_modelfile.txt'
+          cp experiments/E02E_PROTOCOL.md 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}/E02E_PROTOCOL.md'
+          cp experiments/E02E_FREEZE.json 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}/E02E_FREEZE.json'
+          {
+            echo "trigger_commit=$(git rev-parse HEAD)"
+            echo "frozen_commit=$(git rev-parse HEAD^)"
+            sha256sum experiments/E02E_PROTOCOL.md experiments/last_price_e02e_driver.py experiments/last_price_e02e_aggregate.py .github/workflows/last-price-e02e.yml
+          } > 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}/FROZEN_MANIFEST.txt'
+
+      - name: Run frozen finite-action negotiations
+        env:
+          BUYER_LABEL: ${{ matrix.buyer_label }}
+          BUYER_MODEL: ${{ matrix.buyer_model }}
+          PRODUCT_ID: ${{ matrix.product_id }}
+          N_SEEDS: '3'
+        run: python -m experiments.last_price_e02e_driver
+
+      - name: Upload cell evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: e02e-${{ matrix.buyer_label }}-${{ matrix.product_id }}
+          path: artifacts/
+          if-no-files-found: error
+
+  aggregate:
+    name: frozen-analysis
+    needs: negotiate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: e02e-*
+          path: collected
+          merge-multiple: true
+      - run: python -m pip install --quiet scipy
+      - run: python experiments/last_price_e02e_aggregate.py
+      - run: |
+          cp experiments/E02E_PROTOCOL.md aggregate/
+          cp experiments/E02E_FREEZE.json aggregate/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: e02e-aggregate-report
+          path: aggregate/
+          if-no-files-found: error
