@@ -1,0 +1,21 @@
+{
+  "experiment_id": "last-price-e02d-constrained-schema-20260810",
+  "frozen_commit": "2cb2359f0b9aa817df20d8ade85968352e245f84",
+  "expected_episodes": 702,
+  "expected_source_cells": 9,
+  "n_seeds": 3,
+  "buyer_models": {
+    "qwen17": "qwen3:1.7b",
+    "gemma4": "gemma3:4b",
+    "llama3": "llama3.2:3b"
+  },
+  "seller_model": "qwen3:4b",
+  "primary": [
+    "P1_hidden_buyer_first_llama_minus_qwen",
+    "P2_anchor_DID_llama_minus_qwen"
+  ],
+  "technical_gate_requires_zero_schema_violations": true,
+  "structured_output_mode": "state-dependent JSON Schema via Ollama /api/chat format field",
+  "no_retries": true,
+  "no_posthoc_repair": true
+}
