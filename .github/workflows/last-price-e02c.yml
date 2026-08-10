@@ -31,17 +31,21 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-      - name: Verify frozen files
+      - name: Verify frozen commit
         run: |
           python - <<'PY'
-          import hashlib, json, pathlib
+          import json, subprocess
           freeze = json.load(open('experiments/E02C_FREEZE.json'))
-          for path, expected in freeze['sha256'].items():
-              actual = hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()
-              if actual != expected:
-                  raise SystemExit(f'hash mismatch: {path}: {actual} != {expected}')
-          print('E02-C freeze hashes PASS')
+          parent = subprocess.check_output(['git','rev-parse','HEAD^'], text=True).strip()
+          if parent != freeze['code_commit']:
+              raise SystemExit(f"code commit mismatch: {parent} != {freeze['code_commit']}")
+          changed = subprocess.check_output(['git','diff','--name-only','HEAD^','HEAD'], text=True).splitlines()
+          if changed != ['experiments/E02C_FREEZE.json']:
+              raise SystemExit(f'unexpected files in freeze commit: {changed}')
+          print('E02-C frozen commit PASS:', parent)
           PY
 
       - name: Install Ollama
@@ -56,7 +60,7 @@ jobs:
           done
           curl -fsS http://127.0.0.1:11434/api/tags >/dev/null
 
-      - name: Pull frozen model tags
+      - name: Pull frozen model tags and record manifest
         run: |
           ollama pull qwen3:4b
           ollama pull '${{ matrix.buyer_model }}'
@@ -66,6 +70,17 @@ jobs:
           ollama show '${{ matrix.buyer_model }}' --modelfile > 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}/buyer_modelfile.txt'
           cp experiments/E02C_PROTOCOL.md 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}/E02C_PROTOCOL.md'
           cp experiments/E02C_FREEZE.json 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}/E02C_FREEZE.json'
+          python - <<'PY' > 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}/sha256_manifest.json'
+          import hashlib, json, pathlib
+          paths = [
+              'experiments/E02C_PROTOCOL.md',
+              'experiments/last_price_e02c_driver.py',
+              'experiments/last_price_e02c_aggregate.py',
+              'experiments/last_price_e02a_scale.py',
+              '.github/workflows/last-price-e02c.yml',
+          ]
+          print(json.dumps({p: hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest() for p in paths}, indent=2))
+          PY
 
       - name: Run frozen protocol-robustness negotiations
         env:
