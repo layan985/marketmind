@@ -1,0 +1,27 @@
+name: Last Price live model pilot
+on:
+  workflow_dispatch:
+  push:
+    branches: [last-price-execution-20260810]
+    paths:
+      - 'experiments/last_price_live.py'
+      - '.github/workflows/last-price-live.yml'
+permissions:
+  contents: read
+  models: read
+jobs:
+  live-pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run real model negotiations
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python experiments/last_price_live.py
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: last-price-live-results
+          path: artifacts/
+          if-no-files-found: error
