@@ -1,0 +1,109 @@
+name: Last Price E02-A open-model validation
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [last-price-e02a-scale-20260810]
+    paths:
+      - 'experiments/E02A_PROTOCOL.md'
+      - 'experiments/last_price_e02a_scale.py'
+      - 'experiments/last_price_e02a_aggregate.py'
+      - '.github/workflows/last-price-e02a.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  negotiate:
+    name: ${{ matrix.buyer_label }}-${{ matrix.product_id }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    strategy:
+      fail-fast: false
+      max-parallel: 9
+      matrix:
+        include:
+          - buyer_label: qwen17
+            buyer_model: 'qwen3:1.7b'
+            product_id: headphones
+          - buyer_label: qwen17
+            buyer_model: 'qwen3:1.7b'
+            product_id: suitcase
+          - buyer_label: qwen17
+            buyer_model: 'qwen3:1.7b'
+            product_id: chair
+          - buyer_label: gemma4
+            buyer_model: 'gemma3:4b'
+            product_id: headphones
+          - buyer_label: gemma4
+            buyer_model: 'gemma3:4b'
+            product_id: suitcase
+          - buyer_label: gemma4
+            buyer_model: 'gemma3:4b'
+            product_id: chair
+          - buyer_label: llama3
+            buyer_model: 'llama3.2:3b'
+            product_id: headphones
+          - buyer_label: llama3
+            buyer_model: 'llama3.2:3b'
+            product_id: suitcase
+          - buyer_label: llama3
+            buyer_model: 'llama3.2:3b'
+            product_id: chair
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Ollama
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          ollama serve > /tmp/ollama.log 2>&1 &
+          for i in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:11434/api/tags >/dev/null && break
+            sleep 1
+          done
+
+      - name: Pull frozen model tags
+        run: |
+          ollama pull qwen3:4b
+          ollama pull '${{ matrix.buyer_model }}'
+          mkdir -p 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}'
+          ollama list | tee 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}/model_registry.txt'
+          ollama show qwen3:4b --modelfile > 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}/seller_modelfile.txt'
+          ollama show '${{ matrix.buyer_model }}' --modelfile > 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}/buyer_modelfile.txt'
+
+      - name: Run matched negotiations
+        env:
+          BUYER_LABEL: ${{ matrix.buyer_label }}
+          BUYER_MODEL: ${{ matrix.buyer_model }}
+          PRODUCT_ID: ${{ matrix.product_id }}
+          N_SEEDS: '5'
+        run: python experiments/last_price_e02a_scale.py
+
+      - name: Upload cell artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: e02a-${{ matrix.buyer_label }}-${{ matrix.product_id }}
+          path: artifacts/
+          if-no-files-found: error
+
+  aggregate:
+    name: preregistered-analysis
+    needs: negotiate
+    if: ${{ always() && !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download all E02-A artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: e02a-*
+          path: collected
+          merge-multiple: true
+      - name: Run committed analysis
+        run: python experiments/last_price_e02a_aggregate.py
+      - name: Upload aggregate evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: e02a-aggregate-report
+          path: aggregate/
+          if-no-files-found: error
