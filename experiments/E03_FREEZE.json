@@ -1,0 +1,42 @@
+{
+  "experiment_id": "last-price-e03-trade-welfare-20260810",
+  "frozen_at": "2026-08-10",
+  "frozen_commit": "33d60221a9227d242928cf16a73227d27ea72246",
+  "branch": "last-price-e03-trade-welfare-20260810",
+  "planned_episodes": 702,
+  "planned_bargaining_episodes": 648,
+  "planned_posted_controls": 54,
+  "planned_source_cells": 27,
+  "planned_matched_bargaining_blocks": 216,
+  "buyer_models": {
+    "qwen17": "qwen3:1.7b",
+    "gemma4": "gemma3:4b",
+    "llama3": "llama3.2:3b"
+  },
+  "seller_model": "qwen3:4b",
+  "products": ["headphones", "suitcase", "chair"],
+  "tightness": ["loose", "medium", "tight"],
+  "states": ["baseline", "shock_10pct"],
+  "anchors": ["shown", "hidden"],
+  "orders": ["buyer_first", "seller_first"],
+  "seeds_per_bargaining_cell": 3,
+  "max_turns": 6,
+  "primary_outcomes": [
+    "bargaining agreement",
+    "normalized unconditional realized buyer surplus"
+  ],
+  "primary_tests": {
+    "P1_trade_formation": "two-sided Cochran Q across the three matched buyer models",
+    "P2_buyer_welfare": "two-sided Friedman repeated-measures test across the three matched buyer models",
+    "familywise_correction": "Holm across P1 and P2"
+  },
+  "technical_gate_requires_complete_panel": true,
+  "post_hoc_reruns_allowed": false,
+  "finite_action_space": true,
+  "file_sha256": {
+    "experiments/E03_PROTOCOL.md": "1abee9e42ebed5759d7051410557de0486b6f16c062367dfd6f1c75cef9ebc0b",
+    "experiments/last_price_e03_driver.py": "4497c4ad9b08425ba5802dd21b92722e5b1bc0ae9cfa443b23f2de0c22d0d37e",
+    "experiments/last_price_e03_aggregate.py": "54ae2cbbbf65a9d7989084dab0ebf4fdbed65dc86cd4541767bdd69d92736db1",
+    ".github/workflows/last-price-e03.yml": "2bba1db97f10141f48aef146b04660f358876140fdc9665d036899cca6a52803"
+  }
+}
