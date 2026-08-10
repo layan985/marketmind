@@ -1,0 +1,48 @@
+{
+  "experiment_id": "last-price-e04-trade-welfare-replication-20260810",
+  "frozen_at": "2026-08-10",
+  "frozen_commit": "f2ad51f0b3c795a31b0f37624481b4a46bdcf40b",
+  "branch": "last-price-e04-trade-welfare-replication-20260810",
+  "relationship_to_e03": "independent full replication; not selective completion of missing E03 cells",
+  "planned_episodes": 702,
+  "planned_bargaining_episodes": 648,
+  "planned_posted_controls": 54,
+  "planned_source_cells": 27,
+  "planned_matched_bargaining_blocks": 216,
+  "buyer_models": {
+    "qwen17": "qwen3:1.7b",
+    "gemma4": "gemma3:4b",
+    "llama3": "llama3.2:3b"
+  },
+  "seller_model": "qwen3:4b",
+  "products": ["headphones", "suitcase", "chair"],
+  "tightness": ["loose", "medium", "tight"],
+  "states": ["baseline", "shock_10pct"],
+  "anchors": ["shown", "hidden"],
+  "orders": ["buyer_first", "seller_first"],
+  "seeds_per_bargaining_cell": 3,
+  "seed_namespace": "e04-20260812",
+  "max_turns": 6,
+  "primary_outcomes": [
+    "bargaining agreement",
+    "normalized unconditional realized buyer surplus"
+  ],
+  "primary_tests": {
+    "P1_trade_formation": "two-sided Cochran Q across the three matched buyer models",
+    "P2_buyer_welfare": "two-sided Friedman repeated-measures test across the three matched buyer models",
+    "familywise_correction": "Holm across P1 and P2"
+  },
+  "execution": {
+    "jobs": 27,
+    "episodes_per_job": 26,
+    "max_parallel": 6,
+    "timeout_minutes_per_job": 50,
+    "model_pull_attempts": 5,
+    "model_pull_retry_sleep_seconds": [5, 10, 15, 20],
+    "inference_episode_retries": 0
+  },
+  "technical_gate_requires_complete_panel": true,
+  "post_hoc_inference_reruns_allowed": false,
+  "finite_action_space": true,
+  "analysis_identity": "E03 preregistered aggregate implementation reused with only E04 experiment/output labels changed"
+}
