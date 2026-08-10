@@ -1,0 +1,169 @@
+name: Last Price E03 trade formation and welfare
+
+on:
+  push:
+    branches: [last-price-e03-trade-welfare-20260810]
+    paths:
+      - 'experiments/E03_FREEZE.json'
+
+permissions:
+  contents: read
+
+jobs:
+  negotiate:
+    name: ${{ matrix.buyer_label }}-${{ matrix.product_id }}-${{ matrix.tightness }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    strategy:
+      fail-fast: false
+      max-parallel: 9
+      matrix:
+        include:
+          - {buyer_label: qwen17, buyer_model: 'qwen3:1.7b', product_id: headphones, tightness: loose}
+          - {buyer_label: qwen17, buyer_model: 'qwen3:1.7b', product_id: headphones, tightness: medium}
+          - {buyer_label: qwen17, buyer_model: 'qwen3:1.7b', product_id: headphones, tightness: tight}
+          - {buyer_label: qwen17, buyer_model: 'qwen3:1.7b', product_id: suitcase, tightness: loose}
+          - {buyer_label: qwen17, buyer_model: 'qwen3:1.7b', product_id: suitcase, tightness: medium}
+          - {buyer_label: qwen17, buyer_model: 'qwen3:1.7b', product_id: suitcase, tightness: tight}
+          - {buyer_label: qwen17, buyer_model: 'qwen3:1.7b', product_id: chair, tightness: loose}
+          - {buyer_label: qwen17, buyer_model: 'qwen3:1.7b', product_id: chair, tightness: medium}
+          - {buyer_label: qwen17, buyer_model: 'qwen3:1.7b', product_id: chair, tightness: tight}
+          - {buyer_label: gemma4, buyer_model: 'gemma3:4b', product_id: headphones, tightness: loose}
+          - {buyer_label: gemma4, buyer_model: 'gemma3:4b', product_id: headphones, tightness: medium}
+          - {buyer_label: gemma4, buyer_model: 'gemma3:4b', product_id: headphones, tightness: tight}
+          - {buyer_label: gemma4, buyer_model: 'gemma3:4b', product_id: suitcase, tightness: loose}
+          - {buyer_label: gemma4, buyer_model: 'gemma3:4b', product_id: suitcase, tightness: medium}
+          - {buyer_label: gemma4, buyer_model: 'gemma3:4b', product_id: suitcase, tightness: tight}
+          - {buyer_label: gemma4, buyer_model: 'gemma3:4b', product_id: chair, tightness: loose}
+          - {buyer_label: gemma4, buyer_model: 'gemma3:4b', product_id: chair, tightness: medium}
+          - {buyer_label: gemma4, buyer_model: 'gemma3:4b', product_id: chair, tightness: tight}
+          - {buyer_label: llama3, buyer_model: 'llama3.2:3b', product_id: headphones, tightness: loose}
+          - {buyer_label: llama3, buyer_model: 'llama3.2:3b', product_id: headphones, tightness: medium}
+          - {buyer_label: llama3, buyer_model: 'llama3.2:3b', product_id: headphones, tightness: tight}
+          - {buyer_label: llama3, buyer_model: 'llama3.2:3b', product_id: suitcase, tightness: loose}
+          - {buyer_label: llama3, buyer_model: 'llama3.2:3b', product_id: suitcase, tightness: medium}
+          - {buyer_label: llama3, buyer_model: 'llama3.2:3b', product_id: suitcase, tightness: tight}
+          - {buyer_label: llama3, buyer_model: 'llama3.2:3b', product_id: chair, tightness: loose}
+          - {buyer_label: llama3, buyer_model: 'llama3.2:3b', product_id: chair, tightness: medium}
+          - {buyer_label: llama3, buyer_model: 'llama3.2:3b', product_id: chair, tightness: tight}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Verify frozen commit
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          freeze = json.load(open('experiments/E03_FREEZE.json'))
+          parent = subprocess.check_output(['git','rev-parse','HEAD^'], text=True).strip()
+          changed = subprocess.check_output(['git','diff','--name-only','HEAD^','HEAD'], text=True).splitlines()
+          if parent != freeze['frozen_commit']:
+              raise SystemExit(f"frozen parent mismatch: {parent} != {freeze['frozen_commit']}")
+          if changed != ['experiments/E03_FREEZE.json']:
+              raise SystemExit(f"trigger commit changed unexpected files: {changed}")
+          print('E03 frozen commit PASS', parent)
+          PY
+
+      - name: Preflight finite-menu invariants
+        env:
+          BUYER_LABEL: ${{ matrix.buyer_label }}
+          BUYER_MODEL: ${{ matrix.buyer_model }}
+          PRODUCT_ID: ${{ matrix.product_id }}
+          TIGHTNESS: ${{ matrix.tightness }}
+          N_SEEDS: '3'
+        run: |
+          python - <<'PY'
+          from experiments import last_price_e03_driver as d
+          ratio = d.TIGHT[d.TIGHTNESS]
+          for _, mult in d.STATES:
+              cost = d.base.r2(d.P['buyer_value'] * ratio * mult)
+              bm = d.build_menu(True, cost, None)
+              sm = d.build_menu(False, cost, None)
+              bo = [x['price'] for x in bm if x['action'] == 'offer']
+              so = [x['price'] for x in sm if x['action'] == 'offer']
+              assert bo and so
+              assert max(bo) <= d.P['budget'] + 1e-9
+              assert min(so) + 1e-9 >= cost
+              assert len({x['id'] for x in bm}) == len(bm)
+              assert len({x['id'] for x in sm}) == len(sm)
+          print('E03 finite-menu feasibility PASS', d.TIGHTNESS)
+          PY
+
+      - name: Install Ollama
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          ollama serve > /tmp/ollama.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:11434/api/tags >/dev/null; then break; fi
+            sleep 1
+          done
+          curl -fsS http://127.0.0.1:11434/api/tags >/dev/null
+
+      - name: Pull frozen model tags and record manifest
+        run: |
+          ollama pull qwen3:4b
+          ollama pull '${{ matrix.buyer_model }}'
+          mkdir -p 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}-${{ matrix.tightness }}'
+          ollama list | tee 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}-${{ matrix.tightness }}/model_registry.txt'
+          ollama show qwen3:4b --modelfile > 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}-${{ matrix.tightness }}/seller_modelfile.txt'
+          ollama show '${{ matrix.buyer_model }}' --modelfile > 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}-${{ matrix.tightness }}/buyer_modelfile.txt'
+          cp experiments/E03_PROTOCOL.md 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}-${{ matrix.tightness }}/E03_PROTOCOL.md'
+          cp experiments/E03_FREEZE.json 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}-${{ matrix.tightness }}/E03_FREEZE.json'
+          {
+            echo "trigger_commit=$(git rev-parse HEAD)"
+            echo "frozen_commit=$(git rev-parse HEAD^)"
+            sha256sum experiments/E03_PROTOCOL.md experiments/last_price_e03_driver.py experiments/last_price_e03_aggregate.py .github/workflows/last-price-e03.yml
+          } > 'artifacts/${{ matrix.buyer_label }}-${{ matrix.product_id }}-${{ matrix.tightness }}/FROZEN_MANIFEST.txt'
+
+      - name: Run frozen E03 negotiations
+        env:
+          BUYER_LABEL: ${{ matrix.buyer_label }}
+          BUYER_MODEL: ${{ matrix.buyer_model }}
+          PRODUCT_ID: ${{ matrix.product_id }}
+          TIGHTNESS: ${{ matrix.tightness }}
+          N_SEEDS: '3'
+        run: python -m experiments.last_price_e03_driver
+
+      - name: Upload cell evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e03-${{ matrix.buyer_label }}-${{ matrix.product_id }}-${{ matrix.tightness }}
+          path: artifacts/
+          if-no-files-found: error
+
+  aggregate:
+    name: frozen-analysis
+    needs: negotiate
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: e03-*
+          path: collected
+          merge-multiple: true
+
+      - name: Install analysis dependencies
+        run: python -m pip install --quiet scipy pandas statsmodels
+
+      - name: Run preregistered analysis
+        run: python experiments/last_price_e03_aggregate.py
+
+      - name: Add freeze evidence
+        run: |
+          cp experiments/E03_PROTOCOL.md aggregate/
+          cp experiments/E03_FREEZE.json aggregate/
+          git rev-parse HEAD > aggregate/TRIGGER_COMMIT.txt
+          git rev-parse HEAD^ > aggregate/FROZEN_COMMIT.txt
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: e03-aggregate-report
+          path: aggregate/
+          if-no-files-found: error
