@@ -1,0 +1,18 @@
+{
+  "experiment_id": "last-price-e02b-mechanism-test-20260810",
+  "frozen_at_utc": "2026-08-10",
+  "expected_total_episodes": 702,
+  "buyers": {
+    "qwen17": "qwen3:1.7b",
+    "gemma4": "gemma3:4b",
+    "llama3": "llama3.2:3b"
+  },
+  "seller": "qwen3:4b",
+  "sha256": {
+    "experiments/E02B_PROTOCOL.md": "2d99e9f56a0d2be2477f6a890ccc4365b60a00fd36563bfc13087d13cce29b0f",
+    "experiments/last_price_e02a_scale.py": "9e2fddf25c993a04ca2701f4b6ff4020479639a3",
+    "experiments/last_price_e02b_driver.py": "cf36788a7b51b098ac734c8c8d19c05ca091971245b4b67baccac51817b876e0",
+    "experiments/last_price_e02b_aggregate.py": "172a3b0b8e9c7fca7c3e35e6c884ba612e30237292ae32584369932b099e2ff7",
+    ".github/workflows/last-price-e02b.yml": "025bd90e7ed31d321031d659acce74ceb6a81160c423b29582c16fce505cd33d"
+  }
+}
