@@ -1,0 +1,23 @@
+{
+  "experiment_id": "last-price-e02c-protocol-robustness-20260810",
+  "frozen_at_utc": "2026-08-10",
+  "code_commit": "9ed4da78f4af7c5d8f94ad4cd9ea75b185230191",
+  "e02b_reference_commit": "3fdd923826e106e43d703e674fca20df616f3865",
+  "expected_total_episodes": 702,
+  "buyers": {
+    "qwen17": "qwen3:1.7b",
+    "gemma4": "gemma3:4b",
+    "llama3": "llama3.2:3b"
+  },
+  "seller": "qwen3:4b",
+  "products": ["headphones", "suitcase", "chair"],
+  "tightness": [0.45, 0.65, 0.85],
+  "states": ["baseline", "shock_10pct"],
+  "anchors": ["shown", "hidden"],
+  "orders": ["buyer_first", "seller_first"],
+  "seeds_per_bargaining_cell": 3,
+  "max_economic_turns": 6,
+  "max_retries_per_turn": 1,
+  "retry_seed_offset": 100000,
+  "correction": "PROTOCOL CORRECTION: Your previous action was illegal under the published protocol. Return exactly one legal JSON action now. Do not explain the error."
+}
