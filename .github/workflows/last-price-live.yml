@@ -22,6 +22,7 @@ jobs:
       - name: Pull frozen model tags
         run: |
           ollama pull qwen3:0.6b
+          ollama pull qwen3:1.7b
           ollama pull gemma3:1b
           ollama pull llama3.2:1b
           ollama list
