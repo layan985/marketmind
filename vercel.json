@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/last-price-exec.js": {
+      "maxDuration": 300
+    }
+  }
+}
