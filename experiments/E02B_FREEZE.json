@@ -13,6 +13,6 @@
     "experiments/last_price_e02a_scale.py": "634e1a77dff5452e4511ee38bf881748052aa5af51db302a87e9b7affa7a751c",
     "experiments/last_price_e02b_driver.py": "d17c61b09ffc1b0d34058fda32ac6733421ebb4f4f8774ba145c2f9e706ca823",
     "experiments/last_price_e02b_aggregate.py": "78d3b04b9284cf3465dbffef3e57b2b288382270f4f44c954892fc08d3cbb0b2",
-    ".github/workflows/last-price-e02b.yml": "025bd90e7ed31d321031d659acce74ceb6a81160c423b29582c16fce505cd33d"
+    ".github/workflows/last-price-e02b.yml": "14e17e090526f48e418416f3837f60c38e99ae9662d7cc86667b4eb1d556fb36"
   }
 }
