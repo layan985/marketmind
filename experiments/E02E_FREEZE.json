@@ -1,0 +1,13 @@
+{
+  "experiment_id": "last-price-e02e-finite-actions-20260810",
+  "frozen_commit": "e43fe4be36c1c6dce16a54531b0b6635fc2c365d",
+  "frozen_at_utc": "2026-08-10T14:38:00Z",
+  "episodes_expected": 702,
+  "cells_expected": 9,
+  "n_seeds": 3,
+  "buyer_offer_fractions_pct": [40,45,50,55,60,65,70,75,80,85,90,95,100],
+  "seller_markup_pct_of_cost": [100,105,110,115,120,125,130,135,140,145,150,155,160],
+  "primary": ["P1_hidden_buyer_first_llama_minus_qwen", "P2_anchor_DID_llama_minus_qwen"],
+  "technical_gate_requires_zero_menu_violations": true,
+  "technical_gate_requires_zero_realized_price_constraint_failures": true
+}
