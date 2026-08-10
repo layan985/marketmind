@@ -1,0 +1,183 @@
+name: Last Price E04 trade-welfare replication
+
+on:
+  push:
+    branches: [last-price-e04-trade-welfare-replication-20260810]
+    paths:
+      - 'experiments/E04_FREEZE.json'
+
+permissions:
+  contents: read
+
+jobs:
+  negotiate:
+    name: ${{ matrix.buyer.label }}-${{ matrix.product_id }}-${{ matrix.tightness }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        buyer:
+          - {label: qwen17, model: 'qwen3:1.7b'}
+          - {label: gemma4, model: 'gemma3:4b'}
+          - {label: llama3, model: 'llama3.2:3b'}
+        product_id: [headphones, suitcase, chair]
+        tightness: [loose, medium, tight]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Verify frozen commit
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          freeze = json.load(open('experiments/E04_FREEZE.json'))
+          parent = subprocess.check_output(['git','rev-parse','HEAD^'], text=True).strip()
+          changed = subprocess.check_output(['git','diff','--name-only','HEAD^','HEAD'], text=True).splitlines()
+          if parent != freeze['frozen_commit']:
+              raise SystemExit(f"frozen parent mismatch: {parent} != {freeze['frozen_commit']}")
+          if changed != ['experiments/E04_FREEZE.json']:
+              raise SystemExit(f"trigger commit changed unexpected files: {changed}")
+          print('E04 frozen commit PASS', parent)
+          PY
+
+      - name: Preflight finite-menu invariants
+        env:
+          BUYER_LABEL: ${{ matrix.buyer.label }}
+          BUYER_MODEL: ${{ matrix.buyer.model }}
+          PRODUCT_ID: ${{ matrix.product_id }}
+          TIGHTNESS: ${{ matrix.tightness }}
+          N_SEEDS: '3'
+        run: |
+          python - <<'PY'
+          from experiments import last_price_e03_driver as d
+          ratio = d.TIGHT[d.TIGHTNESS]
+          for _, mult in d.STATES:
+              cost = d.base.r2(d.P['buyer_value'] * ratio * mult)
+              bm = d.build_menu(True, cost, None)
+              sm = d.build_menu(False, cost, None)
+              bo = [x['price'] for x in bm if x['action'] == 'offer']
+              so = [x['price'] for x in sm if x['action'] == 'offer']
+              assert bo and so
+              assert max(bo) <= d.P['budget'] + 1e-9
+              assert min(so) + 1e-9 >= cost
+              assert len({x['id'] for x in bm}) == len(bm)
+              assert len({x['id'] for x in sm}) == len(sm)
+          print('E04 finite-menu feasibility PASS', d.TIGHTNESS)
+          PY
+
+      - name: Install Ollama
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          ollama serve > /tmp/ollama.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:11434/api/tags >/dev/null; then break; fi
+            sleep 1
+          done
+          curl -fsS http://127.0.0.1:11434/api/tags >/dev/null
+
+      - name: Prepare cell evidence directory
+        run: |
+          CELL='artifacts/${{ matrix.buyer.label }}-${{ matrix.product_id }}-${{ matrix.tightness }}'
+          mkdir -p "$CELL"
+          {
+            echo "status=setup_started"
+            echo "trigger_commit=$(git rev-parse HEAD)"
+            echo "frozen_commit=$(git rev-parse HEAD^)"
+            echo "buyer=${{ matrix.buyer.label }}"
+            echo "buyer_model=${{ matrix.buyer.model }}"
+            echo "product=${{ matrix.product_id }}"
+            echo "tightness=${{ matrix.tightness }}"
+          } > "$CELL/SETUP_STATUS.txt"
+
+      - name: Pull frozen model tags with preregistered retries
+        run: |
+          set -u
+          CELL='artifacts/${{ matrix.buyer.label }}-${{ matrix.product_id }}-${{ matrix.tightness }}'
+          pull_retry () {
+            model="$1"
+            for attempt in 1 2 3 4 5; do
+              echo "pull model=$model attempt=$attempt" | tee -a "$CELL/MODEL_PULL_LOG.txt"
+              if ollama pull "$model" 2>&1 | tee -a "$CELL/MODEL_PULL_LOG.txt"; then
+                echo "pull_success model=$model attempt=$attempt" | tee -a "$CELL/MODEL_PULL_LOG.txt"
+                return 0
+              fi
+              echo "pull_failure model=$model attempt=$attempt" | tee -a "$CELL/MODEL_PULL_LOG.txt"
+              if [ "$attempt" -lt 5 ]; then sleep $((attempt * 5)); fi
+            done
+            echo "pull_exhausted model=$model" | tee -a "$CELL/MODEL_PULL_LOG.txt"
+            return 1
+          }
+          pull_retry qwen3:4b
+          pull_retry '${{ matrix.buyer.model }}'
+          ollama list | tee "$CELL/model_registry.txt"
+          ollama show qwen3:4b --modelfile > "$CELL/seller_modelfile.txt"
+          ollama show '${{ matrix.buyer.model }}' --modelfile > "$CELL/buyer_modelfile.txt"
+          cp experiments/E04_PROTOCOL.md "$CELL/E04_PROTOCOL.md"
+          cp experiments/E04_FREEZE.json "$CELL/E04_FREEZE.json"
+          {
+            echo "trigger_commit=$(git rev-parse HEAD)"
+            echo "frozen_commit=$(git rev-parse HEAD^)"
+            sha256sum \
+              experiments/E04_PROTOCOL.md \
+              experiments/last_price_e04_driver.py \
+              experiments/last_price_e04_aggregate.py \
+              experiments/last_price_e03_driver.py \
+              experiments/last_price_e03_aggregate.py \
+              .github/workflows/last-price-e04.yml
+          } > "$CELL/FROZEN_MANIFEST.txt"
+          echo "status=models_ready" > "$CELL/SETUP_STATUS.txt"
+
+      - name: Run frozen E04 negotiations
+        env:
+          BUYER_LABEL: ${{ matrix.buyer.label }}
+          BUYER_MODEL: ${{ matrix.buyer.model }}
+          PRODUCT_ID: ${{ matrix.product_id }}
+          TIGHTNESS: ${{ matrix.tightness }}
+          N_SEEDS: '3'
+        run: python -m experiments.last_price_e04_driver
+
+      - name: Upload cell evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e04-${{ matrix.buyer.label }}-${{ matrix.product_id }}-${{ matrix.tightness }}
+          path: artifacts/
+          if-no-files-found: error
+
+  aggregate:
+    name: frozen-analysis
+    needs: negotiate
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: e04-*
+          path: collected
+          merge-multiple: true
+
+      - name: Install analysis dependencies
+        run: python -m pip install --quiet scipy pandas statsmodels
+
+      - name: Run preregistered E04 analysis
+        run: python experiments/last_price_e04_aggregate.py
+
+      - name: Add freeze evidence
+        run: |
+          cp experiments/E04_PROTOCOL.md aggregate/
+          cp experiments/E04_FREEZE.json aggregate/
+          git rev-parse HEAD > aggregate/TRIGGER_COMMIT.txt
+          git rev-parse HEAD^ > aggregate/FROZEN_COMMIT.txt
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: e04-aggregate-report
+          path: aggregate/
+          if-no-files-found: error
