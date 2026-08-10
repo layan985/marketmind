@@ -1,6 +1,6 @@
 # MarketMind public web surface
 
-This directory is a static, evidence-first landing page for the MarketMind research object. It is intentionally separate from the Python/Streamlit research dashboard and from the frozen scientific implementation used by the prospective protocol.
+This directory contains the static MarketMind website. It is separate from the Streamlit dashboard and from the code used for the prospective test.
 
 ## Vercel deployment settings
 
