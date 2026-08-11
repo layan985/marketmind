@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
+<rect width="100%" height="100%" fill="white"/>
+<text x="450" y="38" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700">E05 bargaining agreement rate</text>
+<text x="450" y="66" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14">216 matched bargaining episodes per buyer model</text>
+<line x1="120" y1="430" x2="860" y2="430" stroke="black" stroke-width="1"/>
+<line x1="120" y1="430" x2="860" y2="430" stroke="#ddd" stroke-width="1"/><text x="108" y="435" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="12">0.0%</text>
+<line x1="120" y1="346.2" x2="860" y2="346.2" stroke="#ddd" stroke-width="1"/><text x="108" y="351.2" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="12">16.2%</text>
+<line x1="120" y1="262.5" x2="860" y2="262.5" stroke="#ddd" stroke-width="1"/><text x="108" y="267.5" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="12">32.5%</text>
+<line x1="120" y1="178.8" x2="860" y2="178.8" stroke="#ddd" stroke-width="1"/><text x="108" y="183.8" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="12">48.8%</text>
+<line x1="120" y1="95" x2="860" y2="95" stroke="#ddd" stroke-width="1"/><text x="108" y="100" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="12">65.0%</text>
+<rect x="200" y="336.9" width="140" height="93.1" fill="#666" rx="3"/><text x="270" y="326.9" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700">18.1%</text><text x="270" y="460" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14">Qwen 3 1.7B</text>
+<rect x="420" y="351.3" width="140" height="78.7" fill="#666" rx="3"/><text x="490" y="341.3" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700">15.3%</text><text x="490" y="460" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14">Gemma 3 4B</text>
+<rect x="640" y="138.9" width="140" height="291.1" fill="#666" rx="3"/><text x="710" y="128.9" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700">56.5%</text><text x="710" y="460" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14">Llama 3.2 3B</text>
+</svg>
