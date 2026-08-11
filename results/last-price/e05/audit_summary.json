@@ -1,0 +1,130 @@
+{
+  "audit": {
+    "bargaining_episodes": 648,
+    "below_cost_agreements": 0,
+    "checks": {
+      "bargaining_648": true,
+      "below_cost_zero": true,
+      "duplicates_zero": true,
+      "experiment_id_exact": true,
+      "infrastructure_failures_zero": true,
+      "matched_blocks_216": true,
+      "menu_reconstruction_mismatches_zero": true,
+      "menu_violations_zero": true,
+      "over_budget_zero": true,
+      "posted_54": true,
+      "posted_price_range_zero": true,
+      "rows_702": true,
+      "source_files_27": true
+    },
+    "duplicate_episode_ids": [],
+    "episodes": 702,
+    "infrastructure_failures": 0,
+    "matched_blocks": 216,
+    "menu_reconstruction_mismatches": 0,
+    "menu_violations": 0,
+    "over_budget_agreements": 0,
+    "posted_episodes": 54,
+    "posted_price_range_failures": {},
+    "source_files": 27,
+    "technical_gate_pass": true
+  },
+  "confirmatory": {
+    "P1_trade_formation": {
+      "df": 2,
+      "holm_p": 1.6212742560215565e-26,
+      "n_matched_blocks": 216,
+      "raw_p": 1.6212742560215565e-26,
+      "statistic": 118.768,
+      "test": "Cochran Q"
+    },
+    "P2_buyer_welfare": {
+      "df": 2,
+      "holm_p": 3.775084086380412e-42,
+      "n_matched_blocks": 216,
+      "outcome": "I(trade)*(buyer_value-final_price)/buyer_value",
+      "raw_p": 1.887542043190206e-42,
+      "statistic": 192.1465968586382,
+      "test": "Friedman"
+    },
+    "by_model": {
+      "gemma4": {
+        "agreement_rate": 0.1527777777777778,
+        "agreements": 33,
+        "mean_conditional_normalized_price": 1.2657575757575759,
+        "mean_normalized_realized_buyer_surplus": 0.0,
+        "n": 216
+      },
+      "llama3": {
+        "agreement_rate": 0.5648148148148148,
+        "agreements": 122,
+        "mean_conditional_normalized_price": 0.9636065573770494,
+        "mean_normalized_realized_buyer_surplus": 0.13398148148148148,
+        "n": 216
+      },
+      "qwen17": {
+        "agreement_rate": 0.18055555555555555,
+        "agreements": 39,
+        "mean_conditional_normalized_price": 1.1812820512820512,
+        "mean_normalized_realized_buyer_surplus": 0.012499999999999999,
+        "n": 216
+      }
+    },
+    "pairwise_agreement": {
+      "gemma4_minus_llama3": {
+        "a_no_b_yes": 95,
+        "a_yes_b_no": 6,
+        "agreement_difference_pp": -41.2037037037037,
+        "discordant": 101,
+        "holm_p": 3.1967879597661998e-21,
+        "p": 1.0655959865887333e-21
+      },
+      "qwen17_minus_gemma4": {
+        "a_no_b_yes": 14,
+        "a_yes_b_no": 20,
+        "agreement_difference_pp": 2.7777777777777777,
+        "discordant": 34,
+        "holm_p": 0.39152830513194203,
+        "p": 0.39152830513194203
+      },
+      "qwen17_minus_llama3": {
+        "a_no_b_yes": 99,
+        "a_yes_b_no": 16,
+        "agreement_difference_pp": -38.425925925925924,
+        "discordant": 115,
+        "holm_p": 1.7129963566026197e-15,
+        "p": 8.564981783013099e-16
+      }
+    },
+    "pairwise_welfare": {
+      "gemma4_minus_llama3": {
+        "holm_p": 1.6913715826709061e-25,
+        "mean_welfare_difference": -0.13398148148148148,
+        "p": 5.637905275569687e-26,
+        "statistic": 0.0
+      },
+      "qwen17_minus_gemma4": {
+        "holm_p": 0.00018323743009566136,
+        "mean_welfare_difference": 0.0125,
+        "p": 0.00018323743009566136,
+        "statistic": 0.0
+      },
+      "qwen17_minus_llama3": {
+        "holm_p": 7.168588931346693e-20,
+        "mean_welfare_difference": -0.1214814814814815,
+        "p": 3.584294465673346e-20,
+        "statistic": 1527.0
+      }
+    },
+    "secondary_interaction_agreement": {
+      "interaction_wald_p": 1.1263587577942409e-05,
+      "interaction_wald_statistic": 28.21848396351747
+    },
+    "secondary_interaction_welfare": {
+      "interaction_wald_p": 0.02410321077181776,
+      "interaction_wald_statistic": 11.229410992598496
+    },
+    "status": "pass"
+  },
+  "experiment_id": "last-price-e05-trade-welfare-replication-20260811"
+}
