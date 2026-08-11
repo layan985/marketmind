@@ -27,13 +27,24 @@ The result supports the narrow experimental claim that **changing the model repr
 
 - `E05_REPORT.md` — frozen aggregate report produced by the preregistered analysis.
 - `audit_summary.json` — compact audit and confirmatory statistics.
-- `episodes.csv.gz.b64` — the complete 702-row aggregate episode CSV, gzip-compressed and Base64-encoded for a compact text-only repository archive. Decode with `base64 -d episodes.csv.gz.b64 | gunzip > episodes.csv`.
+- `data/episodes.csv.gz.b64.part01` through `part05` — the complete 702-row aggregate episode CSV, gzip-compressed, Base64-encoded, and split into five ordered text chunks for a compact repository archive.
 - `PROVENANCE.md` — run identity, the post-analysis workflow error, and why it does not alter the result.
 - `RESULTS_SECTION.md` — paper-ready results text.
 - `figures/agreement_rate.svg` — agreement-rate figure.
 - `figures/buyer_welfare.svg` — realized-welfare figure.
-- `MANIFEST.sha256` — hashes for the archived outputs.
+- `MANIFEST.sha256` — integrity hashes for the archived data and original artifact.
+
+Reconstruct the complete CSV from a checkout of this archive with:
+
+```bash
+cat data/episodes.csv.gz.b64.part* | tr -d '\n' | base64 -d | gunzip > episodes.csv
+```
+
+Integrity targets:
+
+- decoded gzip SHA-256: `7c47f8fd8baccc0de1dcaeeb53c823816db23df1a83f1169a1fec668d241d8c5`
+- reconstructed `episodes.csv` SHA-256: `1efa9666846f4e58318ce56fa145f01daad652549f220ddd9a9c93b7c1dfa1fd`
+
+The five GitHub data blobs were checked against the Git object hashes calculated directly from the source chunks before this archive was pinned.
 
 The original E05 run is not rerun or repaired. This directory is a post-run archive of the outputs produced by that run.
-
-The decoded aggregate `episodes.csv` has SHA-256 `1efa9666846f4e58318ce56fa145f01daad652549f220ddd9a9c93b7c1dfa1fd`.
