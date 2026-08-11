@@ -1,9 +1,16 @@
-90202f9de188229e6727f091f5ad308bb0c6be4aed9289de41d3b3c5c7cf85a1  E05_REPORT.md
-0e520b2b34c0ae5b2fadeed76381c45e740c3a14dcd98114bb96b0bbc6e10efc  PROVENANCE.md
-46cd6ce2ccb6ff2499cb946429c7c1119570cfc6b4772e67d94a193b88b49376  README.md
-eec5d369e4f0d876b862e1c35a9aea5a1e6c28253443111bb19708e19f2de5f3  RESULTS_SECTION.md
-59839df5a5a306dd4e253feeb1d9293f810a993540afecc872862648939f2209  audit_summary.json
-ccb411cf2a0dedb889a778938876a415787cb8d949aeb71818cbd7a9463ecbd9  episodes.csv.gz.b64
-7c47f8fd8baccc0de1dcaeeb53c823816db23df1a83f1169a1fec668d241d8c5  episodes.csv.gz (after Base64 decode)
-1efa9666846f4e58318ce56fa145f01daad652549f220ddd9a9c93b7c1dfa1fd  episodes.csv (after Base64 decode and gunzip)
-4e74a748a8046ea64ac9ed205b002b0828a5a271727f416c610b0b5641a26491  original GitHub aggregate artifact ZIP
+# SHA-256 integrity targets for the E05 frozen result archive
+
+e976e9e1139a47a87aa0fc1554c7b2264cb34d538a0aacf915e439e8b70e9673  data/episodes.csv.gz.b64.part01
+efc55aa2669aadf6c0bde69e44f1134da96a7e3942bea05ef372b26dbfb3207d  data/episodes.csv.gz.b64.part02
+19cd46e706d812309c5cde99874ed43a226a4d076529c73b88811668131077b2  data/episodes.csv.gz.b64.part03
+907068513e14942edc19468141e98fa95a9a1b907168eb3ac50089661ebfe682  data/episodes.csv.gz.b64.part04
+9f23578e88b3f08c76500a9f97ea5dac55ff71b4e87fd6f0823426a8cb57c5a3  data/episodes.csv.gz.b64.part05
+
+# After concatenating the five chunks with newlines removed and Base64-decoding:
+7c47f8fd8baccc0de1dcaeeb53c823816db23df1a83f1169a1fec668d241d8c5  episodes.csv.gz
+
+# After gunzip:
+1efa9666846f4e58318ce56fa145f01daad652549f220ddd9a9c93b7c1dfa1fd  episodes.csv
+
+# Original GitHub Actions aggregate artifact ZIP from run 31439894595:
+4e74a748a8046ea64ac9ed205b002b0828a5a271727f416c610b0b5641a26491  e05-aggregate-report.zip
