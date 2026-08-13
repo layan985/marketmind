@@ -12,10 +12,10 @@ The public terminal is not a trading-signal showroom. It is an evidence system: 
 | --- | ---: | --- | --- | --- |
 | Earlier regime rows changed after future-only perturbation | **0 / 350** | `SYNTHETIC` | The controlled perturbation did not alter earlier regime assignments | Exhaustive absence of every possible leakage mechanism |
 | Known directional-information separation | **+1.218 nats** | `SYNTHETIC` | The known source→target direction separates from the reverse direction in the controlled test | Predictive profitability in real markets |
-| Hash-verified result artifacts | **4 / 4** | implementation evidence | Frozen result files match their recorded hashes | External validity |
-| Controlled research audit | **7 / 7 checks passed** | implementation evidence | The current controlled audit suite passes | Independent reproduction |
-| CI source tests | **29 passing** | implementation evidence | Current tested implementation passes the repository test suite | Economic truth |
-| Branch-aware test coverage | **83.06%** | implementation evidence | Current branch-aware coverage under the documented environment | Complete behavioral coverage |
+| Hash-verified result artifacts | **4 / 4** | `PENDING VALIDATION` | Frozen result files match their recorded hashes | External validity |
+| Controlled research audit | **7 / 7 checks passed** | `PENDING VALIDATION` | The current controlled audit suite passes | Independent reproduction |
+| CI source tests | **29 passing** | `PENDING VALIDATION` | Current tested implementation passes the repository test suite | Economic truth |
+| Branch-aware test coverage | **83.06%** | `PENDING VALIDATION` | Current branch-aware coverage under the documented environment | Complete behavioral coverage |
 | Prospective holdout result | **SEALED** | `PENDING VALIDATION` | Interim outcome is deliberately unavailable under the registered design | Any claim about prospective performance |
 
 The prospective holdout began **10 August 2026** and is registered to end **6 August 2027**. No interim performance result should appear here before the registered end condition.
@@ -46,6 +46,14 @@ The public research terminal is organized around these report objects:
 **choose market → choose window → memory → information flow → connectivity → network → regime → uncertainty → diagnostics → validation → export report**
 
 Every chart should expose **SOURCE / N / WINDOW / FILTER / STATUS / LIMITATION / DOWNLOAD DATA**. Public proxies are labeled as public proxies; controlled synthetic tests are not marketed as real-market results; and the prospective holdout remains visibly sealed.
+
+## Canonical claim labels
+
+Every important public number uses only one or more of these labels:
+
+`OFFICIAL SOURCE` · `REAL PUBLIC DATA` · `PROVIDER TEST` · `SYNTHETIC` · `RANDOMIZED SYNTHETIC` · `PRODUCTION CLIENT DATA` · `EXTERNAL REVIEW` · `INDEPENDENT REPRODUCTION` · `PENDING VALIDATION`
+
+Internal tests and audits are described by their source, code and status fields; they do not receive a substitute public evidence badge.
 
 ## What would falsify or materially weaken MarketMind?
 
