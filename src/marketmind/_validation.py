@@ -45,8 +45,7 @@ def validate_frame(frame: pd.DataFrame, *, minimum_columns: int = 1) -> pd.DataF
         raise ValueError(f"data must contain at least {minimum_columns} columns")
     if frame.index.has_duplicates:
         raise ValueError("data index must not contain duplicate timestamps")
-    result = frame.sort_index().apply(pd.to_numeric, errors="coerce")
+    result = pd.DataFrame(frame.sort_index().apply(pd.to_numeric, errors="coerce"))
     if result.dropna(how="all").empty:
         raise ValueError("data contains no numeric observations")
-    return result.astype(float)
-
+    return pd.DataFrame(result.astype(float))

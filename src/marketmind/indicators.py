@@ -74,8 +74,10 @@ def price_above_ema(close: pd.Series, span: int = 100) -> pd.Series:
 def rsi_reversion(close: pd.Series, period: int = 14) -> pd.Series:
     """Enter below RSI 30 and exit above RSI 50."""
     oscillator = rsi(close, period)
-    return _entry_exit_position(oscillator < 30, oscillator > 50).where(oscillator.notna()).rename(
-        "rsi_14_reversion"
+    return (
+        _entry_exit_position(oscillator < 30, oscillator > 50)
+        .where(oscillator.notna())
+        .rename("rsi_14_reversion")
     )
 
 
@@ -126,7 +128,11 @@ def average_true_range(
         low_values = _series(low, "low").reindex(price.index)
         previous = price.shift(1)
         true_range = pd.concat(
-            [high_values - low_values, (high_values - previous).abs(), (low_values - previous).abs()],
+            [
+                high_values - low_values,
+                (high_values - previous).abs(),
+                (low_values - previous).abs(),
+            ],
             axis=1,
         ).max(axis=1)
     return true_range.ewm(alpha=1 / period, adjust=False, min_periods=period).mean().rename("atr")

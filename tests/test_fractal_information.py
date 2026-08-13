@@ -68,4 +68,3 @@ def test_information_validation() -> None:
         mutual_information(np.arange(5), np.arange(4))
     with pytest.raises(ValueError):
         transfer_entropy(np.arange(10), np.arange(10), source_history=0)
-

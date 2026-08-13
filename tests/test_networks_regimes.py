@@ -67,4 +67,3 @@ def test_regime_classification_is_past_only() -> None:
 def test_regime_validation() -> None:
     with pytest.raises(ValueError):
         classify_regimes(pd.Series([1.0, 2.0]), lookback=1, min_history=2)
-

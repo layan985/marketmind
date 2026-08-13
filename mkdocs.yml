@@ -35,6 +35,7 @@ nav:
   - Methodology: methodology.md
   - Data and reproducibility: data.md
   - Walk-forward evaluation: evaluation.md
+  - Controlled research audit: research-audit.md
   - Validation: validation.md
   - Dashboard: dashboard.md
   - API:
@@ -43,6 +44,7 @@ nav:
       - Information theory: api/information.md
       - Networks: api/networks.md
       - Indicators and backtests: api/evaluation.md
+      - Prospective study: api/study.md
       - Data pipeline: api/data.md
 
 plugins:

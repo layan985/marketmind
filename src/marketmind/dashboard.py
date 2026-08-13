@@ -12,8 +12,12 @@ def launch() -> int:
     try:
         import streamlit  # noqa: F401
     except ImportError as error:
-        raise ImportError("Install the dashboard extra: pip install 'marketmind[dashboard]'") from error
-    return subprocess.call([sys.executable, "-m", "streamlit", "run", str(Path(__file__).resolve())])
+        raise ImportError(
+            "Install the dashboard extra: pip install 'marketmind[dashboard]'"
+        ) from error
+    return subprocess.call(
+        [sys.executable, "-m", "streamlit", "run", str(Path(__file__).resolve())]
+    )
 
 
 def app() -> None:
@@ -39,7 +43,9 @@ def app() -> None:
         run = st.button("Estimate market intelligence", type="primary")
     uploaded = None
     if source == "Upload wide CSV":
-        uploaded = st.file_uploader("CSV: date column followed by positive price columns", type="csv")
+        uploaded = st.file_uploader(
+            "CSV: date column followed by positive price columns", type="csv"
+        )
     if not run:
         st.info("Choose data and estimate. The demo is deterministic and needs no external API.")
         return
@@ -56,7 +62,9 @@ def app() -> None:
     else:
         prices = synthetic_market(periods=1800)
     with st.spinner("Estimating rolling fractal, entropy, and network states…"):
-        result = MarketMind(MarketMindConfig(window=int(window), step=int(step))).fit_transform(prices)
+        result = MarketMind(MarketMindConfig(window=int(window), step=int(step))).fit_transform(
+            prices
+        )
     latest = result.to_frame().dropna(subset=["mii"]).iloc[-1]
     columns = st.columns(4)
     columns[0].metric("MII", f"{latest['mii']:.3f}")

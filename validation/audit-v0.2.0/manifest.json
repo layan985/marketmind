@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "artifacts": {
+    "AUDIT.md": {
+      "bytes": 2135,
+      "sha256": "d83dd6cc10c77398382bfdd18d0ad6ef486320deb85b829f9771a4a731ec493a"
+    },
+    "audit.json": {
+      "bytes": 3106,
+      "sha256": "dff0a6211d3fba9b91ca2c0c2549bc6ef90e0662fb9c53ea40c4372681b09391"
+    },
+    "latent_connectivity_tracking.csv": {
+      "bytes": 6841,
+      "sha256": "29a7c24ef836769d2c4e7685b1afc24a80e29b22d88847691925e84587cdb062"
+    }
+  }
+}

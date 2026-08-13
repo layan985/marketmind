@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "summary": {
+    "passed": 7,
+    "total": 7
+  },
+  "settings": {
+    "package": "marketmind",
+    "version": "0.2.0",
+    "python": "3.12.13",
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "scipy": "1.18.0",
+    "seed": 42,
+    "periods": 2000,
+    "assets": 9,
+    "window": 252,
+    "step": 21,
+    "scope": "controlled implementation audit; prospective outcomes remain sealed"
+  },
+  "checks": [
+    {
+      "identifier": "deterministic_replay",
+      "title": "Seeded synthetic replay",
+      "passed": true,
+      "statistic": {
+        "sha256": "a10ed7912f197c4dab98c34879b7557503a5e0d51661542909a40e3956a20432"
+      },
+      "criterion": "identical frame fingerprints",
+      "scope": "Reproducibility of the controlled input generator."
+    },
+    {
+      "identifier": "latent_connectivity_tracking",
+      "title": "Known-structure recovery",
+      "passed": true,
+      "statistic": {
+        "mean_correlation": 0.889022,
+        "clustering": 0.878759,
+        "mst_coherence": 0.901451
+      },
+      "criterion": "every connectivity measure correlates at least 0.75 with trailing latent coherence",
+      "scope": "Construct validity on disclosed synthetic structure; not a return forecast."
+    },
+    {
+      "identifier": "feature_future_invariance",
+      "title": "Feature look-ahead audit",
+      "passed": true,
+      "statistic": {
+        "max_abs_difference": 0.0
+      },
+      "criterion": "future perturbation changes no earlier raw metric beyond 1e-12",
+      "scope": "Trailing feature windows and network snapshots."
+    },
+    {
+      "identifier": "regime_future_invariance",
+      "title": "Threshold look-ahead audit",
+      "passed": true,
+      "statistic": {
+        "unchanged_rows": 350
+      },
+      "criterion": "future MII perturbation changes zero prior thresholds or labels",
+      "scope": "Rolling, monthly refreshed regime classification."
+    },
+    {
+      "identifier": "information_direction",
+      "title": "Directional information recovery",
+      "passed": true,
+      "statistic": {
+        "source_to_target": 1.240758,
+        "target_to_source": 0.022778,
+        "margin": 1.21798
+      },
+      "criterion": "known causal direction exceeds reverse transfer entropy by at least 0.15 nats",
+      "scope": "KSG conditional-mutual-information transfer entropy."
+    },
+    {
+      "identifier": "confirmatory_contract",
+      "title": "Preregistered strategy contract",
+      "passed": true,
+      "statistic": {
+        "max_family_selection_error": 0.0,
+        "same_session_position": 0.0
+      },
+      "criterion": "exact High/Medium/Low family mapping and no same-session execution",
+      "scope": "Executable H1/H2/H3 exposure construction."
+    },
+    {
+      "identifier": "artifact_integrity",
+      "title": "Result-bundle integrity",
+      "passed": true,
+      "statistic": {
+        "verified_files": 4
+      },
+      "criterion": "every declared byte count and SHA-256 digest matches",
+      "scope": "Raw metrics, normalized metrics, MII regimes, and run metadata."
+    }
+  ]
+}

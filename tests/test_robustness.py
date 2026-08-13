@@ -36,4 +36,3 @@ def test_reality_check_and_deflated_sharpe() -> None:
     assert len(result.bootstrap_statistics) == 100
     probability = deflated_sharpe_probability(returns["edge"], n_trials=9)
     assert 0 <= probability <= 1
-

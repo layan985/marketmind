@@ -57,4 +57,3 @@ def test_regime_statistical_tests() -> None:
     regimes = pd.Series(np.repeat(["low", "medium", "high"], 80))
     tests = regime_tests(returns, regimes)
     assert tests["kruskal_pvalue"] < 0.01
-

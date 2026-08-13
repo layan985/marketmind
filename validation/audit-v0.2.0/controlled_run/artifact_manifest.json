@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "package": "marketmind",
+  "version": "0.2.0",
+  "artifacts": {
+    "raw_metrics.csv": {
+      "bytes": 15249,
+      "sha256": "f26110f23fc846269ff3b13824b2600489a5536a892291c3216b6ab21b8e7e3f"
+    },
+    "normalized_metrics.csv": {
+      "bytes": 13156,
+      "sha256": "633c797c1a0415b481b68cc71ec40881e175478172897d38f2f5f3b40d0a96f4"
+    },
+    "mii_regimes.csv": {
+      "bytes": 214683,
+      "sha256": "ae7ac8432774bd257f9fce1cacbad42dde1c9e50808782099e7e6eb7d8ee8bf8"
+    },
+    "run_metadata.json": {
+      "bytes": 556,
+      "sha256": "e6e04ca5aa0eace07f6a03878f6818ad266393c3a1db8cb4020d67b80b59f6f0"
+    }
+  }
+}

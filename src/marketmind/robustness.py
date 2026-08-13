@@ -88,7 +88,9 @@ def block_bootstrap_interval(
     needed = int(np.ceil(len(values) / block_size))
     for iteration in range(n_bootstrap):
         chosen = rng.choice(starts, size=needed, replace=True)
-        sample = np.concatenate([values[start : start + block_size] for start in chosen])[: len(values)]
+        sample = np.concatenate([values[start : start + block_size] for start in chosen])[
+            : len(values)
+        ]
         metrics = performance_metrics(pd.Series(sample))
         if statistic not in metrics:
             raise ValueError(f"unknown performance statistic: {statistic}")
@@ -118,7 +120,9 @@ def white_reality_check(
     statistics = np.empty(n_bootstrap)
     for iteration in range(n_bootstrap):
         chosen = rng.choice(starts, size=blocks_needed, replace=True)
-        sample = np.concatenate([centered[start : start + block_size] for start in chosen], axis=0)[:n]
+        sample = np.concatenate([centered[start : start + block_size] for start in chosen], axis=0)[
+            :n
+        ]
         statistics[iteration] = np.sqrt(n) * np.max(np.mean(sample, axis=0))
     pvalue = float((1 + np.sum(statistics >= observed)) / (n_bootstrap + 1))
     return RealityCheckResult(observed, pvalue, statistics)
@@ -149,11 +153,8 @@ def deflated_sharpe_probability(
         )
     skewness = float(skew(values, bias=False))
     kurt = float(kurtosis(values, fisher=False, bias=False))
-    denominator = np.sqrt(
-        max(1e-12, 1.0 - skewness * observed + (kurt - 1.0) * observed**2 / 4.0)
-    )
+    denominator = np.sqrt(max(1e-12, 1.0 - skewness * observed + (kurt - 1.0) * observed**2 / 4.0))
     statistic = (observed - expected_max) * np.sqrt(len(values) - 1) / denominator
     # Annualization cancels because both observed and benchmark are daily, retained for API clarity.
     _ = annualization
     return float(norm.cdf(statistic))
-

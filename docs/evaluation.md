@@ -33,3 +33,18 @@ drawdown, profit factor, total and annualized return, volatility, exposure, and 
 
 These checks reduce overstatement; none turns an observational backtest into a live-trading guarantee.
 
+## Preregistered study engine
+
+`marketmind.study` turns the registered design into an executable contract:
+
+- `family_exposures` requires all nine frozen signals and averages exactly three per family;
+- `strategy_exposures` selects trend in High MII, breakout in Medium MII, and mean
+  reversion in Low MII;
+- `confirmatory_market_returns` applies the same execution lag and cost model to every
+  candidate and comparator;
+- `paired_sharpe_block_bootstrap` resamples candidate and comparator with identical block
+  indices inside each market and recomputes the cross-market study statistic;
+- `mechanism_block_bootstrap` estimates H2a–H2c jointly and applies Holm correction.
+
+This engine does not expose interim prospective outcomes. It makes the frozen analysis
+executable for the scheduled final analysis.

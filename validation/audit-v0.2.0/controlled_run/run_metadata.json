@@ -1,0 +1,22 @@
+{
+  "package": "marketmind",
+  "version": "0.2.0",
+  "config": {
+    "window": 252,
+    "step": 21,
+    "entropy_bins": 20,
+    "knn_k": 3,
+    "higuchi_k_max": 20,
+    "acf_max_lag": 20,
+    "network_threshold": 0.3,
+    "memory_weight": 0.35,
+    "information_weight": 0.4,
+    "connectivity_weight": 0.25,
+    "regime_lookback": 756,
+    "regime_min_history": 252,
+    "development_end": null,
+    "normalization": "expanding"
+  },
+  "input_sha256": "a10ed7912f197c4dab98c34879b7557503a5e0d51661542909a40e3956a20432",
+  "controlled_synthetic_seed": 42
+}

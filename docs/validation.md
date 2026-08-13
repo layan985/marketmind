@@ -104,11 +104,23 @@ These assumptions are frozen for the confirmatory analysis:
 | --- | --- |
 | Holdout start | 10 August 2026 |
 | Holdout end | 6 August 2027 |
-| Status as of 9 August 2026 | **Pre-start / protocol frozen** |
-| Eligible confirmatory observations collected | 0 |
+| Status as of 13 August 2026 | **Active / protocol frozen / outcomes sealed** |
+| Eligible confirmatory observations collected | Not reported during the sealed holdout |
 | Registered deviations | 0 |
 | Interim H1/H2/H3 performance | **Sealed — not computed** |
 | Final results commitment | Publish regardless of favorable, null, or adverse outcome |
+
+## Controlled implementation audit
+
+The prospective outcome is sealed, but implementation invariants can be tested without
+touching that outcome. The frozen v0.2.0 controlled audit passes 7/7 checks covering
+deterministic replay, recovery of disclosed synthetic coherence, feature and threshold
+look-ahead perturbations, directional information recovery, exact signal-family selection,
+next-session execution, and SHA-256 artifact integrity.
+
+The full [audit report](https://github.com/layan985/marketmind/blob/main/validation/audit-v0.2.0/AUDIT.md)
+publishes each acceptance criterion and observed statistic. These checks do not test
+whether the prospective trading hypothesis succeeds.
 
 After the holdout closes, this table will be replaced or extended with the preregistered point estimates, confidence intervals, observation counts, exposure, turnover, drawdowns, multiplicity-adjusted H2 inference, and benchmark comparisons. The result will remain public even if MarketMind fails its primary hypothesis.
 

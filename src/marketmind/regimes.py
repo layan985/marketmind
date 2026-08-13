@@ -37,7 +37,13 @@ def classify_regimes(
     lower = upper = np.nan
     previous_month: tuple[int, int] | None = None
     for position, (date, value) in enumerate(values.items()):
-        month = (date.year, date.month) if hasattr(date, "year") else None
+        year_value = getattr(date, "year", None)
+        month_value = getattr(date, "month", None)
+        month = (
+            (int(year_value), int(month_value))
+            if year_value is not None and month_value is not None
+            else None
+        )
         refresh = not monthly or month != previous_month
         if refresh:
             history = values.iloc[max(0, position - lookback) : position].dropna()
@@ -48,7 +54,7 @@ def classify_regimes(
         output.at[date, "lower"] = lower
         output.at[date, "upper"] = upper
         if not np.isfinite(value) or not np.isfinite(lower) or not np.isfinite(upper):
-            regime: object = pd.NA
+            regime: str | None = None
         elif value < lower:
             regime = "low"
         elif value > upper:

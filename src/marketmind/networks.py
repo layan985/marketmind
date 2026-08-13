@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from dataclasses import dataclass, field
 from itertools import combinations
+from typing import Literal, cast, overload
 
 import numpy as np
 import pandas as pd
@@ -32,7 +34,7 @@ def correlation_distance(correlation: ArrayLike) -> NDArray[np.float64]:
         raise ValueError("correlation must be a square matrix")
     distance = np.sqrt(2.0 * (1.0 - np.clip(rho, -1.0, 1.0)))
     np.fill_diagonal(distance, 0.0)
-    return distance
+    return cast(NDArray[np.float64], distance)
 
 
 @dataclass
@@ -42,7 +44,7 @@ class WeightedGraph:
     _nodes: list[object] = field(default_factory=list)
     _edges: dict[frozenset[object], dict[str, float]] = field(default_factory=dict)
 
-    def add_nodes_from(self, nodes: list[object]) -> None:
+    def add_nodes_from(self, nodes: Sequence[object]) -> None:
         for node in nodes:
             if node not in self._nodes:
                 self._nodes.append(node)
@@ -60,12 +62,23 @@ class WeightedGraph:
     def nodes(self) -> tuple[object, ...]:
         return tuple(self._nodes)
 
-    def edges(self, data: bool = False) -> list[object]:
+    @overload
+    def edges(self, data: Literal[False] = False) -> list[tuple[object, object]]: ...
+
+    @overload
+    def edges(self, data: Literal[True]) -> list[tuple[object, object, dict[str, float]]]: ...
+
+    def edges(
+        self, data: bool = False
+    ) -> list[tuple[object, object]] | list[tuple[object, object, dict[str, float]]]:
         result: list[object] = []
         for key, attributes in self._edges.items():
             left, right = tuple(key)
             result.append((left, right, attributes) if data else (left, right))
-        return result
+        return cast(
+            list[tuple[object, object]] | list[tuple[object, object, dict[str, float]]],
+            result,
+        )
 
     def neighbors(self, node: object) -> list[object]:
         neighbors: list[object] = []
@@ -121,7 +134,7 @@ def correlation_network(
     graph.add_nodes_from(list(corr.columns))
     for i, left in enumerate(corr.columns):
         for right in corr.columns[i + 1 :]:
-            raw = float(corr.loc[left, right])
+            raw = float(cast(float, corr.loc[left, right]))
             strength = abs(raw) if absolute else raw
             if strength >= threshold:
                 graph.add_edge(left, right, weight=max(0.0, strength), correlation=raw)
@@ -131,7 +144,7 @@ def correlation_network(
 def minimum_spanning_tree(correlation: pd.DataFrame | ArrayLike) -> WeightedGraph:
     """Construct an MST on the complete correlation-distance graph."""
     if isinstance(correlation, pd.DataFrame):
-        labels = list(correlation.columns)
+        labels: list[object] = list(correlation.columns)
         if list(correlation.index) != labels:
             raise ValueError("correlation DataFrame index and columns must match")
         rho = correlation.to_numpy(dtype=float)

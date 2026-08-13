@@ -13,7 +13,7 @@ from marketmind.data import (
 )
 from marketmind.mii import MarketMind, MarketMindConfig, mii_light
 from marketmind.pipeline import run_mii_pipeline
-from marketmind.synthetic import synthetic_market
+from marketmind.synthetic import synthetic_market, synthetic_market_scenario
 
 
 def small_config() -> MarketMindConfig:
@@ -41,7 +41,10 @@ def test_marketmind_end_to_end_and_no_future_contamination() -> None:
     second = MarketMind(small_config()).fit_transform(changed)
     cutoff = prices.index[319]
     pd.testing.assert_frame_equal(
-        first.raw_metrics.loc[:cutoff], second.raw_metrics.loc[:cutoff], check_exact=False, rtol=1e-12
+        first.raw_metrics.loc[:cutoff],
+        second.raw_metrics.loc[:cutoff],
+        check_exact=False,
+        rtol=1e-12,
     )
 
 
@@ -49,7 +52,9 @@ def test_development_normalization_and_mii_light() -> None:
     prices = synthetic_market(periods=360, assets=4, seed=31)
     development_end = str(prices.index[220].date())
     config = small_config()
-    config = MarketMindConfig(**{**config.__dict__, "normalization": "development", "development_end": development_end})
+    config = MarketMindConfig(
+        **{**config.__dict__, "normalization": "development", "development_end": development_end}
+    )
     result = MarketMind(config).fit_transform(prices)
     assert result.normalized_metrics.min().min() >= 0
     assert result.normalized_metrics.max().max() <= 1
@@ -83,6 +88,23 @@ def test_pipeline_writes_audit_files(tmp_path) -> None:
     assert len(result.mii) > 0
     assert (tmp_path / "output" / "raw_metrics.csv").exists()
     assert (tmp_path / "output" / "run_metadata.json").exists()
+    assert (tmp_path / "output" / "artifact_manifest.json").exists()
+    metadata = json.loads((tmp_path / "output" / "run_metadata.json").read_text())
+    assert metadata["version"] == "0.2.0"
+
+
+def test_synthetic_scenario_discloses_ground_truth_without_changing_prices() -> None:
+    scenario = synthetic_market_scenario(periods=200, assets=4, seed=34)
+    plain = synthetic_market(periods=200, assets=4, seed=34)
+    pd.testing.assert_frame_equal(scenario.prices, plain)
+    assert list(scenario.latent) == [
+        "phase",
+        "coherence",
+        "volatility",
+        "drift",
+        "return_persistence",
+    ]
+    assert scenario.latent["coherence"].between(0, 1).all()
 
 
 def test_data_validation_errors() -> None:

@@ -12,7 +12,10 @@ Import `layan985/marketmind` into a dedicated Vercel project with:
 - **Output Directory:** leave empty / repository root for this static directory
 - **Install Command:** leave empty
 
-The directory contains `index.html`, `styles.css`, and `vercel.json`; no secrets or environment variables are required.
+The directory contains the public homepage (`index.html`), research dossier
+(`research.html`), validation ledger (`validation.html`), shared stylesheet, and Vercel
+configuration. Clean URLs expose the two detail pages as `/research` and `/validation`.
+No secrets or environment variables are required.
 
 ## Deployment boundary
 
@@ -23,7 +26,8 @@ Do not point the existing `marketpulse-live` production alias at this repository
 Before sharing the production URL externally:
 
 1. confirm the page title is `MarketMind — Multiscale Market Intelligence`;
-2. confirm GitHub, DOI, OSF, PyPI, reproducibility, and replication-challenge links resolve correctly;
+2. confirm `/research` and `/validation` load and their GitHub, DOI, OSF, PyPI, audit,
+   reproducibility, and replication-challenge links resolve correctly;
 3. verify desktop and mobile layouts;
 4. confirm no prospective performance result is claimed;
 5. confirm the page says research software / not investment advice;

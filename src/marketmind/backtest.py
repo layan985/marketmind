@@ -24,10 +24,20 @@ def performance_metrics(returns: pd.Series, *, annualization: int = 252) -> dict
     """Compute paper-aligned return, risk, and trade-day statistics."""
     values = pd.to_numeric(returns, errors="coerce").dropna()
     if values.empty:
-        return {name: float("nan") for name in (
-            "average_return", "median_return", "hit_rate", "sharpe", "max_drawdown",
-            "profit_factor", "total_return", "annualized_return", "annualized_volatility",
-        )} | {"observations": 0.0}
+        return {
+            name: float("nan")
+            for name in (
+                "average_return",
+                "median_return",
+                "hit_rate",
+                "sharpe",
+                "max_drawdown",
+                "profit_factor",
+                "total_return",
+                "annualized_return",
+                "annualized_volatility",
+            )
+        } | {"observations": 0.0}
     mean = float(values.mean())
     volatility = float(values.std(ddof=1))
     sharpe = mean / volatility * np.sqrt(annualization) if volatility > 0 else float("nan")
@@ -37,7 +47,11 @@ def performance_metrics(returns: pd.Series, *, annualization: int = 252) -> dict
     losses = float(-values[values < 0].sum())
     total_return = float(equity.iloc[-1] - 1.0)
     years = len(values) / annualization
-    annualized_return = float((1.0 + total_return) ** (1.0 / years) - 1.0) if years > 0 and total_return > -1 else -1.0
+    annualized_return = (
+        float((1.0 + total_return) ** (1.0 / years) - 1.0)
+        if years > 0 and total_return > -1
+        else -1.0
+    )
     return {
         "average_return": mean,
         "median_return": float(values.median()),
@@ -66,14 +80,22 @@ def cost_adjusted_returns(
     if execution_lag < 1:
         raise ValueError("execution_lag must be at least one session")
     returns = pd.to_numeric(asset_returns, errors="coerce").sort_index()
-    observed = pd.to_numeric(signal, errors="coerce").reindex(returns.index).fillna(0.0).clip(0.0, 1.0)
+    observed = (
+        pd.to_numeric(signal, errors="coerce").reindex(returns.index).fillna(0.0).clip(0.0, 1.0)
+    )
     position = observed.shift(execution_lag).fillna(0.0)
     turnover = position.diff().abs().fillna(position.abs())
     gross = position * returns
     cost_rate = (cost_bps + slippage_bps) / 10_000.0
     net = gross - cost_rate * turnover
     return pd.DataFrame(
-        {"asset_return": returns, "position": position, "turnover": turnover, "gross": gross, "net": net}
+        {
+            "asset_return": returns,
+            "position": position,
+            "turnover": turnover,
+            "gross": gross,
+            "net": net,
+        }
     )
 
 
@@ -129,7 +151,11 @@ class WalkForwardEvaluator:
             if regimes is not None:
                 labels.extend(str(value) for value in pd.unique(known_regime.dropna()))
             for label in labels:
-                mask = pd.Series(True, index=returns.index) if label == "all" else known_regime.astype("string") == label
+                mask = (
+                    pd.Series(True, index=returns.index)
+                    if label == "all"
+                    else known_regime.astype("string") == label
+                )
                 # Preserve flat days so daily Sharpe and drawdown are not inflated by
                 # conditioning on the strategy being active.
                 selected = audit.loc[mask, "net"]

@@ -8,20 +8,40 @@
 
 A market-regime test can look predictive when its normalization bounds, regime thresholds, or trading rules are chosen with knowledge of the evaluation period. MarketMind puts those choices into code so their timing can be inspected and the same rules can be run again.
 
-The package implements the Market Intelligence Index (MII) from my 2026 Charles H. Dow Award paper, *The Emergent Market Mind*. The paper argues that market organization can be studied through changes in memory, information flow, and cross-market connectivity.
+The package implements the Market Intelligence Index (MII) from my [2026 Charles H. Dow Award](https://cmtassociation.org/association/award-recognizing/charles-h-dow-award/) paper, *The Emergent Market Mind*. The paper argues that market organization can be studied through changes in memory, information flow, and cross-market connectivity.
 
 ## Current status
 
-As of 10 August 2026:
+As of 13 August 2026:
 
-- version 0.1.0 is available from PyPI and archived at [Zenodo](https://doi.org/10.5281/zenodo.21844956);
-- the estimators, rolling thresholds, signal rules, transaction costs, and synthetic examples are tested in CI;
-- a prospective test began on 10 August 2026 and ends on 6 August 2027;
+- version 0.1.0 remains the frozen release used by the preregistration; v0.2.0 adds the controlled audit and executable study engine without altering that freeze;
+- 29 tests pass with 83.06% branch-aware coverage in the current source environment;
+- the controlled v0.2.0 research audit passes 7/7 checks, including future-perturbation, known-structure, directional-information, execution-timing, and artifact-integrity tests;
+- the prospective test is active from 10 August 2026 through 6 August 2027, while all confirmatory performance remains sealed;
 - no result from that holdout exists yet;
 - the public-data pipeline is not a numerical reproduction of the paper because the Bloomberg and Refinitiv histories used in the paper cannot be redistributed;
 - no independent reproduction or outside research use is recorded yet.
 
 See [RESULTS.md](RESULTS.md) for the result status and [preregistration/DEVIATIONS.csv](preregistration/DEVIATIONS.csv) for changes made after registration.
+
+## Verification snapshot
+
+| Controlled check | Frozen v0.2.0 result |
+| --- | ---: |
+| Connectivity metrics vs. disclosed trailing latent coherence | 0.879–0.901 correlation |
+| Earlier raw-metric change after a future-only perturbation | 0.0 max absolute difference |
+| Earlier regime rows changed after a future-only perturbation | 0 / 350 |
+| Known source→target minus reverse transfer entropy | +1.218 nats |
+| Same-session position under the confirmatory contract | 0.0 |
+| Hash-verified result files | 4 / 4 |
+
+Reproduce the complete evidence pack:
+
+```bash
+marketmind audit --output artifacts/research-audit
+```
+
+The committed [audit report](validation/audit-v0.2.0/AUDIT.md) states the acceptance rule, observed statistic, environment, and interpretation boundary for every check. It is controlled implementation evidence—not a profitability claim.
 
 ## Method
 
@@ -72,6 +92,8 @@ The registered hypothesis maps high MII to trend signals, medium MII to breakout
 - Executable configuration: [config/preregistered-validation-2026.yml](config/preregistered-validation-2026.yml)
 
 The paper's award and development-sample results are not treated as confirmation of this prospective hypothesis.
+
+The registered analysis is executable rather than prose-only. `marketmind.study` constructs the three signal families, the regime-aware and unconditional exposures, one-session-lagged net returns, paired cross-market Sharpe bootstraps for H1/H3, and Holm-corrected mechanism tests for H2a–H2c. Interim holdout outcomes are not exposed.
 
 ## Data limitation
 

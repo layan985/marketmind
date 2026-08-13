@@ -100,9 +100,7 @@ def conditional_mutual_information(
     nxz = _neighbor_counts(np.column_stack([x_array, z_array]), radii)
     nyz = _neighbor_counts(np.column_stack([y_array, z_array]), radii)
     nz = _neighbor_counts(z_array, radii)
-    estimate = digamma(k) + np.mean(
-        digamma(nz + 1) - digamma(nxz + 1) - digamma(nyz + 1)
-    )
+    estimate = digamma(k) + np.mean(digamma(nz + 1) - digamma(nxz + 1) - digamma(nyz + 1))
     return float(max(0.0, estimate))
 
 
@@ -130,10 +128,12 @@ def transfer_entropy(
 
     target_future = y[start:, None]
     source_past = np.column_stack(
-        [x[start - source_lag - offset : x.size - source_lag - offset] for offset in range(source_history)]
+        [
+            x[start - source_lag - offset : x.size - source_lag - offset]
+            for offset in range(source_history)
+        ]
     )
     target_past = np.column_stack(
         [y[start - offset : y.size - offset] for offset in range(1, target_history + 1)]
     )
     return conditional_mutual_information(source_past, target_future, target_past, k=k)
-

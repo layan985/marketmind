@@ -126,7 +126,9 @@ class MarketMind:
         records: list[dict[str, object]] = []
         for end in range(config.window, len(returns) + 1, config.step):
             sample = returns.iloc[end - config.window : end].dropna(axis=1, how="all")
-            usable = [column for column in sample if sample[column].dropna().size >= config.window // 2]
+            usable = [
+                column for column in sample if sample[column].dropna().size >= config.window // 2
+            ]
             sample = sample[usable].dropna(how="any")
             if sample.shape[0] < config.window // 2 or sample.shape[1] < 2:
                 continue
@@ -213,8 +215,8 @@ class MarketMind:
         if input_type == "prices":
             if (frame <= 0).any().any() or (network_frame <= 0).any().any():
                 raise ValueError("prices must be strictly positive")
-            returns = np.log(frame).diff().dropna(how="all")
-            network_returns = np.log(network_frame).diff().dropna(how="all")
+            returns = frame.apply(np.log).diff().dropna(how="all")
+            network_returns = network_frame.apply(np.log).diff().dropna(how="all")
         elif input_type == "returns":
             returns = frame
             network_returns = network_frame
@@ -230,8 +232,12 @@ class MarketMind:
 
         components_at_steps = pd.DataFrame(index=normalized.index)
         components_at_steps["memory"] = normalized[list(self.MEMORY_FEATURES)].mean(axis=1)
-        components_at_steps["information"] = normalized[list(self.INFORMATION_FEATURES)].mean(axis=1)
-        components_at_steps["connectivity"] = normalized[list(self.CONNECTIVITY_FEATURES)].mean(axis=1)
+        components_at_steps["information"] = normalized[list(self.INFORMATION_FEATURES)].mean(
+            axis=1
+        )
+        components_at_steps["connectivity"] = normalized[list(self.CONNECTIVITY_FEATURES)].mean(
+            axis=1
+        )
         mii_at_steps = (
             self.config.memory_weight * components_at_steps["memory"]
             + self.config.information_weight * components_at_steps["information"]

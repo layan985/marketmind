@@ -67,3 +67,33 @@ report.summary.xs("high", level="regime")
 
 Signals are observed at a close and applied no earlier than the next session. Reported
 returns therefore respect an explicit execution lag.
+
+## Execute the preregistered strategy contract
+
+```python
+from marketmind import confirmatory_market_returns
+
+study_market = confirmatory_market_returns(
+    prices["SPX"].pct_change(),
+    signals,
+    result.regimes["regime"],
+    cost_bps=5,
+    execution_lag=1,
+)
+
+study_market.net_returns[["regime_aware", "unconditional", "buy_and_hold"]]
+```
+
+Use `paired_sharpe_block_bootstrap` on a mapping of market names to
+`ConfirmatoryMarketResult` objects for the preregistered H1/H3 study-level comparison.
+Use `mechanism_block_bootstrap` for H2a–H2c and Holm-corrected family-wise inference.
+
+## Run the controlled audit
+
+```bash
+marketmind audit --output artifacts/research-audit
+```
+
+The audit is a controlled implementation test, not a performance backtest. It writes
+human- and machine-readable results plus hash manifests and fails closed when an
+acceptance rule is violated.

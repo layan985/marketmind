@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#08090c">
+  <title>Research dossier — MarketMind</title>
+  <meta name="description" content="The executable research dossier for MarketMind: architecture, controlled validation, preregistered inference, evidence boundaries, and a five-minute reviewer path.">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="nav shell">
+    <a class="brand" href="/">MARKETMIND<span> / RESEARCH DOSSIER</span></a>
+    <nav>
+      <a href="#architecture">Architecture</a><a href="#verification">Verification</a><a href="#review">Review path</a><a href="https://github.com/layan985/marketmind">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero shell dossier-hero">
+      <div class="eyebrow">FROM AWARD-WINNING PAPER → EXECUTABLE METHOD → SEALED PROSPECTIVE TEST</div>
+      <h1>The paper became<br><em>a system you can challenge.</em></h1>
+      <p class="lede">MarketMind turns <i>The Emergent Market Mind</i> into an inspectable chain: nine structural estimators, causal normalization, point-in-time regimes, nine fixed signals, costed next-session execution, synchronized study-level inference, and a public null-results commitment.</p>
+      <div class="actions">
+        <a class="primary" href="#review">Start the five-minute review</a>
+        <a href="https://cmtassociation.org/association/award-recognizing/charles-h-dow-award/">Official CMT award record</a>
+        <a href="https://github.com/layan985/marketmind/blob/main/validation/audit-v0.2.0/AUDIT.md">Controlled audit</a>
+        <a href="https://osf.io/nyseh/overview">Frozen OSF protocol</a>
+      </div>
+    </section>
+
+    <section class="facts shell dossier-facts">
+      <article><b>9</b><span>structural submetrics</span></article>
+      <article><b>3</b><span>signal families</span></article>
+      <article><b>7 / 7</b><span>controlled checks passed</span></article>
+      <article><b>83.06%</b><span>branch-aware test coverage</span></article>
+    </section>
+
+    <section id="architecture" class="section shell">
+      <div class="section-label">01 / EXECUTABLE RESEARCH ARCHITECTURE</div>
+      <div class="split"><div><h2>Every conceptual claim resolves to a testable object.</h2></div><div class="copy"><p>The point is not to make an index with an impressive name. The point is to preserve the timing and evidentiary boundary of every decision—from raw observations to a final study-level contrast.</p><p>The frozen v0.1.0 estimators remain the prospective implementation. The current source adds an explicit analysis engine around that freeze; it does not rewrite it.</p></div></div>
+      <div class="research-flow">
+        <article><small>01</small><strong>TRAILING DATA</strong><span>fingerprinted price panels and bounded missing-data handling</span></article>
+        <article><small>02</small><strong>STRUCTURE</strong><span>memory · information flow · network connectivity</span></article>
+        <article><small>03</small><strong>CAUSAL STATE</strong><span>frozen or expanding normalization · prior-only thresholds</span></article>
+        <article><small>04</small><strong>EXECUTION</strong><span>fixed family map · t+1 position · costs on turnover</span></article>
+        <article><small>05</small><strong>INFERENCE</strong><span>paired blocks · four-market statistic · public outcome</span></article>
+      </div>
+    </section>
+
+    <section id="verification" class="section shell">
+      <div class="section-label">02 / CONTROLLED VERIFICATION</div>
+      <div class="split"><div><h2>Seven attempts to falsify the implementation.</h2></div><div class="copy"><p>The audit uses a disclosed synthetic process so there is known structure to recover and a known future to perturb. Each check has a numerical acceptance rule. The command exits nonzero if one fails.</p><p>No controlled check is labeled “proof of profitability.” That question belongs to future data and remains sealed.</p></div></div>
+      <div class="verification-grid">
+        <article><small>REPLAY</small><strong>Exact fingerprint match</strong><p>Seed 42 regenerates the same 2,000 × 9 price panel.</p></article>
+        <article><small>KNOWN STRUCTURE</small><strong>0.879–0.901</strong><p>All three connectivity measures track trailing latent coherence.</p></article>
+        <article><small>FEATURE LEAKAGE</small><strong>0.000000</strong><p>Maximum earlier raw-metric change after a future-only perturbation.</p></article>
+        <article><small>THRESHOLD LEAKAGE</small><strong>350 / 350</strong><p>Earlier threshold and regime rows remain identical.</p></article>
+        <article><small>DIRECTION</small><strong>+1.218 nats</strong><p>Known source→target transfer entropy margin over the reverse direction.</p></article>
+        <article><small>STUDY CONTRACT</small><strong>0 selection error</strong><p>Exact High→trend, Medium→breakout, Low→reversion map; t position is zero.</p></article>
+        <article><small>INTEGRITY</small><strong>4 / 4 hashes</strong><p>Raw, normalized, regime, and metadata artifacts verify byte-for-byte.</p></article>
+      </div>
+      <p class="warning"><strong>Interpretation boundary:</strong> the audit validates controlled implementation behavior. It does not establish a positive Sharpe ratio, investability, or confirmation of the paper's historical mapping.</p>
+    </section>
+
+    <section id="inference" class="section shell">
+      <div class="section-label">03 / PREREGISTERED INFERENCE ENGINE</div>
+      <div class="split"><div><h2>The final analysis is code, not future discretion.</h2></div><div class="copy"><p>The source now constructs the exact three-signal family averages, regime-aware exposure, unconditional nine-signal comparator, and buy-and-hold comparator. Candidate and comparator are executed with the same lag and cost model.</p><p>Study-level inference resamples paired strategy returns with synchronized moving blocks inside each market, recomputes each market Sharpe difference, then averages across SPX, NDX, SX5E, and ES. H2a–H2c are estimated jointly with Holm family-wise correction.</p></div></div>
+      <div class="protocol protocol-three">
+        <div><small>H1 · PRIMARY</small><strong>Regime-aware vs. unconditional nine-signal ensemble</strong></div>
+        <div><small>H2A–C · MECHANISM</small><strong>Each family in its preregistered MII state</strong></div>
+        <div><small>H3 · SECONDARY</small><strong>Regime-aware vs. buy-and-hold</strong></div>
+      </div>
+      <div class="terminal code-wide"><div>$ marketmind audit --output artifacts/research-audit</div><div>$ pytest</div><p>Primary inference: 20-session synchronized blocks · 10,000 replications · seed 20260807 · 5 bps per unit turnover · one-session lag · no optional stopping.</p></div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-label">04 / EVIDENCE MATURITY</div>
+      <h2>What is earned, what is active, and what is still missing.</h2>
+      <table class="maturity-table">
+        <caption>MarketMind evidence maturity</caption>
+        <thead><tr><th>Layer</th><th>Status</th><th>Inspectable record</th></tr></thead>
+        <tbody>
+          <tr><td>External recognition</td><td><strong class="earned">EARNED</strong></td><td><a href="https://cmtassociation.org/association/award-recognizing/charles-h-dow-award/">2026 Charles H. Dow Award ↗</a></td></tr>
+          <tr><td>Installable software</td><td><strong class="earned">PUBLIC</strong></td><td><a href="https://pypi.org/project/marketmind/">PyPI v0.1.0 ↗</a></td></tr>
+          <tr><td>Immutable archive</td><td><strong class="earned">DOI</strong></td><td><a href="https://doi.org/10.5281/zenodo.21844956">Zenodo 10.5281/zenodo.21844956 ↗</a></td></tr>
+          <tr><td>Controlled implementation audit</td><td><strong class="earned">7 / 7</strong></td><td><a href="https://github.com/layan985/marketmind/blob/main/validation/audit-v0.2.0/AUDIT.md">Statistics + acceptance rules ↗</a></td></tr>
+          <tr><td>Prospective confirmation</td><td><strong class="active">ACTIVE</strong></td><td><a href="https://osf.io/nyseh/overview">Outcome sealed until Aug 2027 ↗</a></td></tr>
+          <tr><td>Independent reproduction</td><td><strong class="missing">NOT YET</strong></td><td><a href="https://github.com/layan985/marketmind/blob/main/REPLICATION_CHALLENGE.md">Open replication challenge ↗</a></td></tr>
+          <tr><td>Outside research use</td><td><strong class="missing">NOT YET</strong></td><td><a href="/validation">Public adoption ledger →</a></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="review" class="section shell review-path">
+      <div class="section-label">05 / FIVE-MINUTE REVIEW PATH</div>
+      <h2>Inspect the strongest claim first. Then inspect its boundary.</h2>
+      <div class="review-steps">
+        <a href="https://cmtassociation.org/association/award-recognizing/charles-h-dow-award/"><b>01</b><strong>Verify the research origin</strong><span>Official CMT Association award record</span></a>
+        <a href="https://osf.io/nyseh/overview"><b>02</b><strong>Read the frozen test</strong><span>Timestamped prospective protocol</span></a>
+        <a href="https://github.com/layan985/marketmind/blob/main/validation/audit-v0.2.0/AUDIT.md"><b>03</b><strong>Challenge the implementation</strong><span>Seven checks, thresholds, statistics</span></a>
+        <a href="https://github.com/layan985/marketmind/tree/main/src/marketmind"><b>04</b><strong>Trace prose into code</strong><span>Estimators, execution, inference</span></a>
+        <a href="https://github.com/layan985/marketmind/blob/main/REPLICATION_CHALLENGE.md"><b>05</b><strong>Attempt independent reproduction</strong><span>Successes and failures both count</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell"><div><b>MarketMind</b><span>Research software · not investment advice</span></div><div><a href="/">Home</a> · <a href="/validation">Validation</a> · <a href="https://github.com/layan985/marketmind">GitHub</a> · <a href="https://doi.org/10.5281/zenodo.21844956">DOI</a></div></footer>
+</body>
+</html>

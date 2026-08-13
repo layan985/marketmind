@@ -44,9 +44,7 @@ def dfa_hurst(
     upper = min(x.size // 4, max_scale or x.size // 4)
     if upper <= min_scale:
         raise ValueError("series is too short for the requested DFA scales")
-    scales = np.unique(
-        np.floor(np.geomspace(min_scale, upper, num=n_scales)).astype(int)
-    )
+    scales = np.unique(np.floor(np.geomspace(min_scale, upper, num=n_scales)).astype(int))
     profile = np.cumsum(x - np.mean(x))
     fluctuations: list[float] = []
     valid_scales: list[int] = []
@@ -141,4 +139,3 @@ def absolute_return_acf_decay(values: ArrayLike, *, max_lag: int = 20) -> float:
 def hurst_from_fractal_dimension(dimension: float) -> float:
     """Return the self-affine Hurst equivalent ``H = 2 - D``."""
     return float(2.0 - dimension)
-
