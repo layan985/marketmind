@@ -402,7 +402,7 @@ def run_benchmark_bundle(
     source.setdefault("provider", "caller-supplied")
 
     input_fingerprint = frame_fingerprint(clean)
-    reference_prices = cast(pd.Series, clean[config.reference_asset])
+    reference_prices = clean[config.reference_asset]
     returns = reference_prices.pct_change(fill_method=None).dropna()
     signals = all_signals(reference_prices).reindex(returns.index)
     evaluator = WalkForwardEvaluator(
@@ -413,7 +413,7 @@ def run_benchmark_bundle(
     )
 
     mii_result = MarketMind(mii_config or MarketMindConfig()).fit_transform(clean)
-    regimes = cast(pd.Series, mii_result.regimes["regime"]).reindex(returns.index)
+    regimes = mii_result.regimes["regime"].reindex(returns.index)
 
     evaluated = evaluator.evaluate(returns, signals, regimes=regimes)
     benchmark_summary = _summary_for_population(evaluated.summary, "fixed_signal")
@@ -421,7 +421,7 @@ def run_benchmark_bundle(
 
     baseline_signals = naive_baselines(
         returns,
-        cast(pd.Series, signals["sma_50_200"]),
+        signals["sma_50_200"],
         random_state=config.random_state,
     )
     baseline_evaluated = evaluator.evaluate(returns, baseline_signals, regimes=regimes)
