@@ -1,6 +1,8 @@
 [
+  {"id":"MM-BENCH-SYN-001","title":"Synthetic Known-Latent-Regime Benchmark","status":"released","updated":"2026-08-16","dataset":"MM-DATA-001","result":{"metric":"exact_latent_regime_classification_accuracy_after_warmup","value":0.497},"evidence_type":"SYNTHETIC"},
   {"id":"MM-BENCH-001","title":"Multiscale Regime Discrimination","status":"specified","updated":"2026-08-16"},
   {"id":"MM-BENCH-002","title":"Leakage Resistance Laboratory","status":"specified","updated":"2026-08-16"},
   {"id":"MM-BENCH-003","title":"Network Metric Stability and Redundancy","status":"specified","updated":"2026-08-16"},
-  {"id":"MM-BENCH-004","title":"Directional Information Validation","status":"specified","updated":"2026-08-16"}
+  {"id":"MM-BENCH-004","title":"Directional Information Validation","status":"specified","updated":"2026-08-16"},
+  {"id":"MM-BENCH-INST-001","title":"Institutional Public Benchmark Evidence Bundle","status":"executable-protocol-and-engine","updated":"2026-08-16","code":"marketmind.benchmark.run_benchmark_bundle","configuration":"config/institutional-public-benchmark.yml","result_status":"no REAL PUBLIC DATA result asserted until a provider run is frozen"}
 ]

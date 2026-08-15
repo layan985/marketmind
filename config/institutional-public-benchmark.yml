@@ -1,0 +1,37 @@
+provider: yfinance
+purpose: institutional_public_benchmark
+status: historical_public_data_only
+reference_asset: SPY
+start: "2010-01-01"
+end: "2026-01-01"
+price_field: Adj Close
+forward_fill_limit: 3
+tickers:
+  SPY: SPY
+  QQQ: QQQ
+  IWM: IWM
+  EFA: EFA
+  EEM: EEM
+  TLT: TLT
+  GLD: GLD
+  XLK: XLK
+  XLF: XLF
+  XLE: XLE
+benchmark:
+  evidence_label: REAL PUBLIC DATA
+  cost_bps: 5.0
+  slippage_bps: 1.0
+  execution_lag: 1
+  annualization: 252
+  block_size: 20
+  n_bootstrap: 1000
+  random_state: 20260815
+  cost_grid_bps: [0.0, 5.0, 10.0, 25.0, 50.0]
+claim_boundary:
+  - historical diagnostics only
+  - adjusted-close public-provider history
+  - not official-source certification
+  - not external review
+  - not independent reproduction
+  - not production client data
+  - not prospective holdout evidence

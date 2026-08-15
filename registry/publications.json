@@ -1,9 +1,5 @@
 [
-  {
-    "id": "MM-PUB-ORIGIN-001",
-    "title": "The Emergent Market Mind",
-    "status": "originating-award-paper",
-    "updated": "2026-08-16",
-    "note": "Originating research; retrospective development-sample evidence is not prospective confirmation."
-  }
+  {"id":"MM-PUB-ORIGIN-001","title":"The Emergent Market Mind: Detecting Self-Organizing Intelligence in Financial Markets Through Multiscale Information Networks","status":"revised-manuscript-after-editorial-review","updated":"2026-08-16","external_recognition":"2026 Charles H. Dow Award","publication_doi":null,"note":"Originating historical research; retrospective evidence is not prospective confirmation."},
+  {"id":"MM-MN-001","title":"MarketMind: A Preregistered Causal Protocol for Prospective Validation of Regime-Conditioned Technical Analysis","status":"completed-methods-and-reproducibility-note-v1.0","updated":"2026-08-16","version":"1.0","prospective_results_reported":false,"registration":"https://osf.io/nyseh/overview"},
+  {"id":"MM-VAL-001","title":"MarketMind v0.2.0 Controlled Research Audit","status":"released-validation-report","updated":"2026-08-16","path":"validation/audit-v0.2.0/AUDIT.md","checks_passed":"7/7","evidence_boundary":"controlled implementation evidence; not profitability or prospective confirmation"}
 ]
