@@ -43,6 +43,8 @@ jobs:
         run: ruff check .
       - name: Type check
         run: mypy src/marketmind
+      - name: Validate research registry
+        run: python tools/validate_research_registry.py
       - name: Validate public HTML
         run: npx --yes html-validate@11.6.2 web/*.html
       - name: Run controlled research audit

@@ -1,0 +1,15 @@
+[
+  {
+    "id": "MM-REL-0.1.0",
+    "title": "MarketMind 0.1.0",
+    "status": "frozen-prospective",
+    "updated": "2026-08-16"
+  },
+  {
+    "id": "MM-REL-0.2.0",
+    "title": "MarketMind 0.2.0",
+    "status": "current-research-implementation",
+    "updated": "2026-08-16",
+    "controlled_audit": "7/7"
+  }
+]

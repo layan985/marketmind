@@ -1,0 +1,6 @@
+[
+  {"id":"MM-BENCH-001","title":"Multiscale Regime Discrimination","status":"specified","updated":"2026-08-16"},
+  {"id":"MM-BENCH-002","title":"Leakage Resistance Laboratory","status":"specified","updated":"2026-08-16"},
+  {"id":"MM-BENCH-003","title":"Network Metric Stability and Redundancy","status":"specified","updated":"2026-08-16"},
+  {"id":"MM-BENCH-004","title":"Directional Information Validation","status":"specified","updated":"2026-08-16"}
+]

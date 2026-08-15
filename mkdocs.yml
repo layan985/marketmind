@@ -1,5 +1,5 @@
-site_name: MarketMind
-site_description: Multiscale market intelligence research software
+site_name: MarketMind Research
+site_description: Open research infrastructure for market organization, regimes, and information dynamics
 site_url: https://layan985.github.io/marketmind/
 repo_url: https://github.com/layan985/marketmind
 repo_name: layan985/marketmind
@@ -31,21 +31,27 @@ theme:
 
 nav:
   - Overview: index.md
-  - Quickstart: quickstart.md
-  - Methodology: methodology.md
-  - Data and reproducibility: data.md
-  - Walk-forward evaluation: evaluation.md
-  - Controlled research audit: research-audit.md
-  - Validation: validation.md
-  - Dashboard: dashboard.md
-  - API:
-      - MII: api/mii.md
-      - Fractal measures: api/fractal.md
-      - Information theory: api/information.md
-      - Networks: api/networks.md
-      - Indicators and backtests: api/evaluation.md
-      - Prospective study: api/study.md
-      - Data pipeline: api/data.md
+  - Research program: research-program.md
+  - Benchmarks: benchmarks.md
+  - Validation:
+      - Controlled research audit: research-audit.md
+      - Validation methods: validation.md
+      - Governance: governance.md
+  - Software:
+      - Quickstart: quickstart.md
+      - Methodology: methodology.md
+      - Data and reproducibility: data.md
+      - Walk-forward evaluation: evaluation.md
+      - Dashboard: dashboard.md
+      - API:
+          - MII: api/mii.md
+          - Fractal measures: api/fractal.md
+          - Information theory: api/information.md
+          - Networks: api/networks.md
+          - Indicators and backtests: api/evaluation.md
+          - Prospective study: api/study.md
+          - Data pipeline: api/data.md
+  - Institutional research: institutional-work.md
 
 plugins:
   - search
