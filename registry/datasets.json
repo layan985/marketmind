@@ -1,1 +1,4 @@
-[]
+[
+  {"id":"MM-DATA-001","title":"MarketMind Synthetic Regime Benchmark Dataset","status":"complete-release-archive","updated":"2026-08-16","version":"1.0.0","release_date":"2026-08-08","evidence_type":"SYNTHETIC","business_days":4000,"series":9,"seed":42,"start_date":"2010-01-04","feature_window":252,"evaluation_step":21,"threshold_lookback_evaluations":36,"mii_weights":{"memory":0.35,"information_flow":0.40,"connectivity":0.25},"exact_regime_accuracy_after_warmup":0.497,"integrity":"SHA256SUMS included in release archive","public_dataset_doi":null,"related_software_doi":"10.5281/zenodo.21844956","note":"Deterministic synthetic benchmark with known latent regimes; not live-market performance."},
+  {"id":"MM-DATA-HIST-001","title":"MarketMind Historical Market-Regime Dataset","status":"planned-public-derived-release","updated":"2026-08-16","version":"1.0.0","note":"Distinct from MM-DATA-001; public-proxy derived release remains a separate publication task."}
+]

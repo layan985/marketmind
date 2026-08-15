@@ -1,14 +1,4 @@
 [
-  {
-    "id": "MM-STUDY-PROSPECTIVE-2026",
-    "title": "Prospective Out-of-Sample Validation of the Market Intelligence Index for Regime-Conditioned Technical Analysis",
-    "status": "sealed",
-    "updated": "2026-08-16",
-    "start": "2026-08-10",
-    "end": "2027-08-06",
-    "frozen_release": "0.1.0",
-    "frozen_commit": "ad1b13da2f7ea02ee24ae6097d8451a634e4ee97",
-    "primary_hypothesis": "H1",
-    "result_available": false
-  }
+  {"id":"MM-STUDY-PROSPECTIVE-2026","title":"Prospective Out-of-Sample Validation of the Market Intelligence Index for Regime-Conditioned Technical Analysis","status":"sealed","updated":"2026-08-16","start":"2026-08-10","end":"2027-08-06","frozen_release":"0.1.0","frozen_commit":"ad1b13da2f7ea02ee24ae6097d8451a634e4ee97","primary_hypothesis":"H1","registration":"https://osf.io/nyseh/overview","result_available":false},
+  {"id":"MM-VAL-001-STUDY","title":"MarketMind v0.2.0 Controlled Known-Structure Research Audit","status":"completed","updated":"2026-08-16","report":"validation/audit-v0.2.0/AUDIT.md","checks":7,"checks_passed":7}
 ]
