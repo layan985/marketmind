@@ -39,6 +39,12 @@ def test_proof_ledger_does_not_introduce_ambiguous_badges() -> None:
         assert f"`{badge}`" not in ledger, f"ambiguous evidence badge detected: {badge}"
 
 
+def test_dashboard_does_not_reintroduce_legacy_evidence_badges() -> None:
+    dashboard = (ROOT / "src" / "marketmind" / "dashboard.py").read_text(encoding="utf-8")
+    for badge in LEGACY_OR_AMBIGUOUS_BADGES:
+        assert badge not in dashboard, f"legacy evidence badge detected in dashboard: {badge}"
+
+
 def test_buyer_room_exposes_assurance_and_risk_controls() -> None:
     buyer_room = (ROOT / "BUYER_ROOM_INDEX.md").read_text(encoding="utf-8")
     required_links = {
@@ -55,6 +61,9 @@ def test_buyer_room_exposes_assurance_and_risk_controls() -> None:
 
 def test_assurance_protocol_preserves_evidence_escalation_boundary() -> None:
     protocol = (ROOT / "CLIENT_ASSURANCE_PROTOCOL.md").read_text(encoding="utf-8")
+    section = protocol.split("## 7. Evidence escalation path", maxsplit=1)[1].split(
+        "## 8. Stop conditions", maxsplit=1
+    )[0]
     ordered_levels = [
         "implementation invariant",
         "controlled known-structure synthetic recovery",
@@ -64,9 +73,9 @@ def test_assurance_protocol_preserves_evidence_escalation_boundary() -> None:
         "production-client evidence",
         "prospective confirmatory result",
     ]
-    positions = [protocol.index(level) for level in ordered_levels]
+    positions = [section.index(level) for level in ordered_levels]
     assert positions == sorted(positions)
-    assert "Passing one level does not silently grant the next." in protocol
+    assert "Passing one level does not silently grant the next." in section
 
 
 def test_client_checklist_contains_blocking_integrity_controls() -> None:
