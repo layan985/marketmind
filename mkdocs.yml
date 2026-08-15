@@ -31,15 +31,19 @@ theme:
 
 nav:
   - Overview: index.md
-  - Research program: research-program.md
+  - Research: research-program.md
+  - Software: software.md
   - Benchmarks: benchmarks.md
   - Validation:
+      - Validation register: validation.md
       - Controlled research audit: research-audit.md
-      - Validation methods: validation.md
-      - Governance: governance.md
-  - Software:
+  - Datasets: datasets.md
+  - Experiments: experiments.md
+  - Applications: applications.md
+  - Publications: publications.md
+  - Methods: methodology.md
+  - Documentation:
       - Quickstart: quickstart.md
-      - Methodology: methodology.md
       - Data and reproducibility: data.md
       - Walk-forward evaluation: evaluation.md
       - Dashboard: dashboard.md
@@ -51,7 +55,9 @@ nav:
           - Indicators and backtests: api/evaluation.md
           - Prospective study: api/study.md
           - Data pipeline: api/data.md
-  - Institutional research: institutional-work.md
+  - People: people.md
+  - Institutional Work: institutional-work.md
+  - Governance: governance.md
 
 plugins:
   - search
