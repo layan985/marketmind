@@ -6,10 +6,33 @@ MarketMind is research software for inspectable market-regime analysis. This ind
 - [Client assurance protocol](CLIENT_ASSURANCE_PROTOCOL.md)
 - [Client delivery checklist](CLIENT_DELIVERY_CHECKLIST.md)
 - [Model risk register](MODEL_RISK_REGISTER.md)
+- [Public benchmark protocol](PUBLIC_BENCHMARK_PROTOCOL.md)
 - [Proof ledger](PROOF_LEDGER.md)
 - [Results status](RESULTS.md)
 - [Reproducibility](REPRODUCIBILITY.md)
 - [Replication challenge](REPLICATION_CHALLENGE.md)
+
+## Executable benchmark
+
+The branch contains an institutional benchmark engine at `marketmind.benchmark.run_benchmark_bundle` plus the frozen specification `config/institutional-public-benchmark.yml`.
+
+Given a supplied price panel, the engine produces a 14-artifact evidence bundle containing:
+
+- fixed nine-signal benchmark results;
+- buy-and-hold, cash, lagged-sign and exposure-matched-shuffle comparators;
+- transaction-cost sweeps;
+- moving-block Sharpe intervals;
+- a family-level White-style reality check;
+- deflated-Sharpe diagnostics;
+- MII/regime outputs;
+- input fingerprint and source metadata;
+- QA and limitations reports;
+- machine-readable claim register;
+- run metadata;
+- SHA-256 artifact manifest;
+- client decision memo.
+
+CI exercises the same bundle generator on a controlled fixture labeled `SYNTHETIC`. A public-provider run may be labeled `REAL PUBLIC DATA` only when the source record and exact analytical frame support that label. Tests do not manufacture public-data claims.
 
 ## Technical evidence
 - [Research terminal specification](RESEARCH_TERMINAL_SPEC.md)
@@ -35,6 +58,8 @@ The latest frozen evidence snapshot records:
 - zero completed external methodological/code reviews;
 - zero recorded outside research uses;
 - zero disclosed production-client datasets.
+
+The benchmark machinery added on the assurance branch does not alter those frozen counts. A new historical public-data run becomes a new ledger entry only after the run actually exists and its artifacts are frozen.
 
 These counts are deliberately not upgraded by internal reruns, informal feedback, repository traffic, stars, or client interest. The proof ledger is the authoritative claim register.
 
