@@ -4,7 +4,7 @@ status: historical_public_data_only
 reference_asset: SPY
 start: "2010-01-01"
 end: "2026-01-01"
-price_field: Close
+price_field: Adj Close
 forward_fill_limit: 3
 tickers:
   SPY: SPY
@@ -29,6 +29,8 @@ benchmark:
   cost_grid_bps: [0.0, 5.0, 10.0, 25.0, 50.0]
 claim_boundary:
   - historical diagnostics only
+  - adjusted-close public-provider history
+  - not official-source certification
   - not external review
   - not independent reproduction
   - not production client data
