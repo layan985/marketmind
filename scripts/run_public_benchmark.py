@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 from dataclasses import fields
+from datetime import datetime, timezone
 from pathlib import Path
 
 import yaml
@@ -23,7 +25,8 @@ def main() -> None:
     args = parser.parse_args()
 
     path = Path(args.config)
-    payload = yaml.safe_load(path.read_text(encoding="utf-8"))
+    config_bytes = path.read_bytes()
+    payload = yaml.safe_load(config_bytes)
     benchmark_payload = dict(payload.pop("benchmark"))
     claim_boundary = payload.pop("claim_boundary", [])
     purpose = payload.pop("purpose", "institutional_public_benchmark")
@@ -33,6 +36,7 @@ def main() -> None:
     data_fields = {field.name for field in fields(DataConfig)}
     data_payload = {key: value for key, value in payload.items() if key in data_fields}
     data_config = DataConfig(**data_payload)
+    retrieved_at_utc = datetime.now(timezone.utc).isoformat()
     prices = download_yfinance(data_config)
 
     benchmark_config = BenchmarkConfig(
@@ -46,6 +50,10 @@ def main() -> None:
         "requested_start": data_config.start,
         "requested_end": data_config.end,
         "price_field": data_config.price_field,
+        "adjustment_convention": "provider adjusted close; yfinance auto_adjust=False",
+        "retrieved_at_utc": retrieved_at_utc,
+        "config_path": str(path),
+        "config_sha256": hashlib.sha256(config_bytes).hexdigest(),
         "purpose": purpose,
         "status": status,
         "claim_boundary": claim_boundary,
@@ -59,6 +67,8 @@ def main() -> None:
     print(f"bundle={bundle.output_directory}")
     print(f"input_fingerprint={bundle.input_fingerprint}")
     print(f"evidence_label={bundle.evidence_label}")
+    print(f"retrieved_at_utc={retrieved_at_utc}")
+    print(f"config_sha256={source_metadata['config_sha256']}")
 
 
 if __name__ == "__main__":
