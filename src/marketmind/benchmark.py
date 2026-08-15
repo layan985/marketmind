@@ -1,8 +1,9 @@
 """Institutional benchmark and client-evidence bundle generation.
 
-This module evaluates MarketMind-related technical signals on a supplied real or
-controlled price panel while preserving an explicit evidence boundary. It does not
-fetch data itself and it never labels a result as externally validated.
+The benchmark evaluates a fixed signal family and explicit baselines on a supplied
+price panel. Evidence labels are supplied by the caller and are never inferred from
+performance. Historical benchmark evidence stays separate from the sealed prospective
+MarketMind study.
 """
 
 from __future__ import annotations
@@ -14,7 +15,7 @@ from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from importlib.metadata import version as distribution_version
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import numpy as np
 import pandas as pd
@@ -79,7 +80,7 @@ class BenchmarkConfig:
 
 @dataclass(frozen=True)
 class BenchmarkBundle:
-    """Paths and high-level state for a generated evidence bundle."""
+    """High-level state returned with a generated evidence bundle."""
 
     output_directory: Path
     benchmark_summary: pd.DataFrame
@@ -105,10 +106,34 @@ def _manifest_record(path: Path) -> dict[str, object]:
     return {"bytes": path.stat().st_size, "sha256": _sha256(path)}
 
 
+def _scalar_float(value: object) -> float:
+    """Extract one numeric scalar from pandas' deliberately broad scalar types."""
+    if isinstance(value, pd.Series):
+        if len(value) != 1:
+            raise ValueError("expected one scalar value")
+        value = value.iloc[0]
+    return float(cast(Any, value))
+
+
+def _frame_xs(summary: pd.DataFrame, key: str, *, level: str) -> pd.DataFrame:
+    """Return a cross-section while making the DataFrame contract explicit to type checkers."""
+    result = summary.xs(key, level=level)
+    if not isinstance(result, pd.DataFrame):
+        raise TypeError("expected a DataFrame cross-section")
+    return result.copy()
+
+
 def _summary_for_population(summary: pd.DataFrame, population: str) -> pd.DataFrame:
-    overall = summary.xs("all", level="regime").copy()
+    overall = _frame_xs(summary, "all", level="regime")
     overall.insert(0, "population", population)
     return overall
+
+
+def _inference_value(inference: pd.DataFrame, diagnostic: str) -> float:
+    matches = inference.loc[inference.index == diagnostic, "value"]
+    if not isinstance(matches, pd.Series) or len(matches) != 1:
+        raise ValueError(f"expected exactly one inference row for {diagnostic}")
+    return _scalar_float(matches.iloc[0])
 
 
 def _qa_report(
@@ -120,8 +145,7 @@ def _qa_report(
     source_metadata: dict[str, Any],
 ) -> str:
     index = prices.index
-    duplicate_rows = int(index.duplicated().sum())
-    missing = {column: int(prices[column].isna().sum()) for column in prices}
+    missing = {str(column): int(prices[column].isna().sum()) for column in prices.columns}
     return "\n".join(
         [
             "# MarketMind benchmark QA report",
@@ -132,7 +156,7 @@ def _qa_report(
             f"**Assets:** {prices.shape[1]}",
             f"**First observation:** {index.min()}",
             f"**Last observation:** {index.max()}",
-            f"**Duplicate timestamps:** {duplicate_rows}",
+            f"**Duplicate timestamps:** {int(index.duplicated().sum())}",
             f"**Input frame fingerprint:** `{input_fingerprint}`",
             "",
             "## Missing observations after bounded validation",
@@ -164,15 +188,15 @@ def _limitations() -> str:
             "# Limitations register",
             "",
             "1. Historical performance is not a prospective result and is not evidence of future profitability.",
-            "2. Public-provider data can be revised, adjusted or unavailable on rerun; the input fingerprint identifies the exact analytical frame used.",
-            "3. Close-to-close daily data does not model intraday execution, bid-ask spread dynamics, market impact, borrow constraints or venue-specific fills.",
-            "4. The benchmark uses a fixed family of long-only technical signals; it does not represent the full strategy-design universe a researcher might search.",
-            "5. Transaction costs are proportional approximations. Client execution economics may be materially different.",
-            "6. The White-style reality check and deflated-Sharpe diagnostic address selection risk only under their stated assumptions; they do not eliminate data-mining risk.",
+            "2. Public-provider data can be revised; the input fingerprint identifies the exact analytical frame used.",
+            "3. Close-to-close daily data does not model intraday fills, spreads, market impact, borrow or venue effects.",
+            "4. The benchmark uses a fixed family of nine long-only technical signals rather than the full conceivable strategy universe.",
+            "5. Transaction costs and slippage are proportional approximations and can differ materially from client execution economics.",
+            "6. Reality-check and deflated-Sharpe diagnostics address selection risk only under their stated assumptions.",
             "7. Moving-block bootstrap intervals depend on the chosen block length and sample regime.",
-            "8. MII regime labels are descriptive state estimates. They are not, by themselves, trade recommendations.",
-            "9. Cross-asset panels can contain calendar, currency, stale-price and instrument-structure differences that require engagement-specific review.",
-            "10. `REAL PUBLIC DATA` means the analytical input was obtained from a publicly accessible source. It does not mean official-source certification, external review, independent reproduction or production-client validation.",
+            "8. MII regime labels are descriptive state estimates, not trade recommendations.",
+            "9. Cross-asset panels can contain calendar, currency, stale-price and instrument-structure differences requiring review.",
+            "10. `REAL PUBLIC DATA` does not imply official-source certification, external review, independent reproduction or production-client validation.",
             "",
         ]
     )
@@ -187,10 +211,10 @@ def _claim_register(
     input_fingerprint: str,
 ) -> pd.DataFrame:
     best_signal = str(benchmark_summary["sharpe"].idxmax())
-    best_row = benchmark_summary.loc[best_signal]
-    buy_hold = baseline_summary.loc["buy_and_hold"]
-    reality_pvalue = float(inference.loc["family_reality_check", "value"])
-    rows = [
+    best_sharpe = _scalar_float(benchmark_summary.at[best_signal, "sharpe"])
+    buy_hold_sharpe = _scalar_float(baseline_summary.at["buy_and_hold", "sharpe"])
+    reality_pvalue = _inference_value(inference, "family_reality_check")
+    rows: list[dict[str, object]] = [
         {
             "claim": "exact benchmark input frame",
             "number": input_fingerprint,
@@ -198,12 +222,12 @@ def _claim_register(
             "source": "input_manifest.json",
             "code_record": "marketmind.benchmark.run_benchmark_bundle",
             "reproducible": "yes with identical input",
-            "limitation": "upstream public provider can revise history",
+            "limitation": "upstream provider can revise history",
             "status": "observed",
         },
         {
             "claim": "highest historical signal Sharpe in the fixed nine-signal family",
-            "number": float(best_row["sharpe"]),
+            "number": best_sharpe,
             "evidence_label": config.evidence_label,
             "source": "benchmark_summary.csv",
             "code_record": best_signal,
@@ -213,7 +237,7 @@ def _claim_register(
         },
         {
             "claim": "buy-and-hold historical Sharpe under the same daily return convention",
-            "number": float(buy_hold["sharpe"]),
+            "number": buy_hold_sharpe,
             "evidence_label": config.evidence_label,
             "source": "baseline_summary.csv",
             "code_record": "buy_and_hold",
@@ -228,11 +252,11 @@ def _claim_register(
             "source": "inference.csv",
             "code_record": "marketmind.robustness.white_reality_check",
             "reproducible": "yes with identical input, config and seed",
-            "limitation": "bootstrap conclusion depends on dependence and search-set assumptions",
+            "limitation": "depends on dependence and search-set assumptions",
             "status": "diagnostic",
         },
     ]
-    return pd.DataFrame.from_records(rows)
+    return pd.DataFrame(rows)
 
 
 def _decision_memo(
@@ -245,9 +269,9 @@ def _decision_memo(
 ) -> str:
     ranking = benchmark_summary.sort_values("sharpe", ascending=False)
     best_name = str(ranking.index[0])
-    best = ranking.iloc[0]
-    buy_hold = baseline_summary.loc["buy_and_hold"]
-    reality_pvalue = float(inference.loc["family_reality_check", "value"])
+    best_sharpe = _scalar_float(ranking.iloc[0]["sharpe"])
+    buy_hold_sharpe = _scalar_float(baseline_summary.at["buy_and_hold", "sharpe"])
+    reality_pvalue = _inference_value(inference, "family_reality_check")
     return "\n".join(
         [
             "# MarketMind institutional benchmark memo",
@@ -260,13 +284,13 @@ def _decision_memo(
             "## Decision summary",
             "",
             f"The strongest historical member of the fixed nine-signal family is `{best_name}` with "
-            f"a net daily Sharpe of {float(best['sharpe']):.3f}. The same-sample buy-and-hold "
-            f"baseline Sharpe is {float(buy_hold['sharpe']):.3f}. The family-level White-style "
-            f"reality-check p-value is {reality_pvalue:.4f}.",
+            f"a net daily Sharpe of {best_sharpe:.3f}. The same-sample buy-and-hold baseline "
+            f"Sharpe is {buy_hold_sharpe:.3f}. The family-level White-style reality-check p-value "
+            f"is {reality_pvalue:.4f}.",
             "",
-            "These are historical diagnostics. They are deliberately not promoted to a claim that "
-            "MarketMind predicts returns, beats buy-and-hold prospectively, or has been independently "
-            "validated. The prospective MarketMind holdout remains a separate sealed evidence stream.",
+            "These are historical diagnostics. They are not promoted to a claim that MarketMind "
+            "predicts returns, beats buy-and-hold prospectively, or has been independently validated. "
+            "The prospective MarketMind holdout remains a separate sealed evidence stream.",
             "",
             "## What the client can audit",
             "",
@@ -281,12 +305,78 @@ def _decision_memo(
             "",
             "## Delivery interpretation",
             "",
-            "A client should use this bundle to inspect robustness, assumptions and failure modes. "
-            "Any deployment decision still requires client-specific data licensing, execution, market "
-            "impact, governance and risk review.",
+            "The bundle supports audit of assumptions, robustness and failure modes. Deployment still "
+            "requires client-specific data licensing, execution, market-impact, governance and risk review.",
             "",
         ]
     )
+
+
+def _signal_inference(
+    evaluated_returns: pd.DataFrame,
+    benchmark_summary: pd.DataFrame,
+    *,
+    config: BenchmarkConfig,
+) -> pd.DataFrame:
+    reality = white_reality_check(
+        evaluated_returns,
+        block_size=min(config.block_size, len(evaluated_returns)),
+        n_bootstrap=config.n_bootstrap,
+        random_state=config.random_state,
+    )
+    rows: list[dict[str, object]] = [
+        {
+            "diagnostic": "family_reality_check",
+            "signal": "fixed_nine_signal_family",
+            "value": reality.pvalue,
+            "lower": np.nan,
+            "upper": np.nan,
+            "assumption": f"moving blocks; block_size={min(config.block_size, len(evaluated_returns))}",
+        }
+    ]
+    trial_count = len(evaluated_returns.columns)
+    for raw_name in evaluated_returns.columns:
+        name = str(raw_name)
+        series = pd.to_numeric(evaluated_returns[raw_name], errors="coerce").dropna()
+        observed_sharpe = _scalar_float(benchmark_summary.at[name, "sharpe"])
+        finite = series[np.isfinite(series)]
+        if len(finite) >= config.block_size and float(finite.std(ddof=1)) > 0:
+            lower, upper = block_bootstrap_interval(
+                finite,
+                statistic="sharpe",
+                block_size=min(config.block_size, len(finite)),
+                n_bootstrap=config.n_bootstrap,
+                confidence=0.95,
+                random_state=config.random_state,
+            )
+            deflated = deflated_sharpe_probability(
+                finite,
+                n_trials=trial_count,
+                annualization=config.annualization,
+            )
+        else:
+            lower, upper, deflated = float("nan"), float("nan"), float("nan")
+        rows.extend(
+            [
+                {
+                    "diagnostic": "sharpe_block_interval",
+                    "signal": name,
+                    "value": observed_sharpe,
+                    "lower": lower,
+                    "upper": upper,
+                    "assumption": f"95% moving-block interval; block_size={config.block_size}",
+                },
+                {
+                    "diagnostic": "deflated_sharpe_probability",
+                    "signal": name,
+                    "value": deflated,
+                    "lower": np.nan,
+                    "upper": np.nan,
+                    "assumption": f"n_trials={trial_count} fixed signal family",
+                },
+            ]
+        )
+    return pd.DataFrame(rows).set_index("diagnostic")
 
 
 def run_benchmark_bundle(
@@ -297,12 +387,7 @@ def run_benchmark_bundle(
     source_metadata: dict[str, Any] | None = None,
     mii_config: MarketMindConfig | None = None,
 ) -> BenchmarkBundle:
-    """Generate an auditable benchmark and evidence bundle from a supplied price panel.
-
-    The caller is responsible for truthfully choosing ``evidence_label``. The function
-    records the label but does not infer that public, production, external-review or
-    independent-reproduction status from the data itself.
-    """
+    """Generate an auditable benchmark and evidence bundle from a supplied price panel."""
     clean = validate_prices(prices)
     if config.reference_asset not in clean.columns:
         raise ValueError(f"reference asset '{config.reference_asset}' is not present")
@@ -317,8 +402,9 @@ def run_benchmark_bundle(
     source.setdefault("provider", "caller-supplied")
 
     input_fingerprint = frame_fingerprint(clean)
-    returns = clean[config.reference_asset].pct_change(fill_method=None).dropna()
-    signals = all_signals(clean[config.reference_asset]).reindex(returns.index)
+    reference_prices = cast(pd.Series, clean[config.reference_asset])
+    returns = reference_prices.pct_change(fill_method=None).dropna()
+    signals = all_signals(reference_prices).reindex(returns.index)
     evaluator = WalkForwardEvaluator(
         cost_bps=config.cost_bps,
         slippage_bps=config.slippage_bps,
@@ -326,9 +412,8 @@ def run_benchmark_bundle(
         annualization=config.annualization,
     )
 
-    mii_settings = mii_config or MarketMindConfig()
-    mii_result = MarketMind(mii_settings).fit_transform(clean)
-    regimes = mii_result.regimes["regime"].reindex(returns.index)
+    mii_result = MarketMind(mii_config or MarketMindConfig()).fit_transform(clean)
+    regimes = cast(pd.Series, mii_result.regimes["regime"]).reindex(returns.index)
 
     evaluated = evaluator.evaluate(returns, signals, regimes=regimes)
     benchmark_summary = _summary_for_population(evaluated.summary, "fixed_signal")
@@ -336,7 +421,7 @@ def run_benchmark_bundle(
 
     baseline_signals = naive_baselines(
         returns,
-        signals["sma_50_200"],
+        cast(pd.Series, signals["sma_50_200"]),
         random_state=config.random_state,
     )
     baseline_evaluated = evaluator.evaluate(returns, baseline_signals, regimes=regimes)
@@ -349,83 +434,40 @@ def run_benchmark_bundle(
         returns, baseline_signals, config.cost_grid_bps
     ).reset_index()
     baseline_costs.insert(0, "population", "baseline")
-    cost_sweep = pd.concat([signal_costs, baseline_costs], ignore_index=True)
-    cost_sweep.to_csv(output / "cost_sweep.csv", index=False)
-
-    reality = white_reality_check(
-        evaluated.net_returns,
-        block_size=min(config.block_size, len(returns)),
-        n_bootstrap=config.n_bootstrap,
-        random_state=config.random_state,
+    pd.concat([signal_costs, baseline_costs], ignore_index=True).to_csv(
+        output / "cost_sweep.csv", index=False
     )
-    inference_rows: list[dict[str, object]] = [
-        {
-            "diagnostic": "family_reality_check",
-            "signal": "fixed_nine_signal_family",
-            "value": reality.pvalue,
-            "lower": np.nan,
-            "upper": np.nan,
-            "assumption": f"moving blocks; block_size={min(config.block_size, len(returns))}",
-        }
-    ]
-    for name in evaluated.net_returns:
-        series = evaluated.net_returns[name]
-        lower, upper = block_bootstrap_interval(
-            series,
-            statistic="sharpe",
-            block_size=min(config.block_size, int(series.notna().sum())),
-            n_bootstrap=config.n_bootstrap,
-            confidence=0.95,
-            random_state=config.random_state,
-        )
-        inference_rows.append(
-            {
-                "diagnostic": "sharpe_block_interval",
-                "signal": name,
-                "value": float(benchmark_summary.loc[name, "sharpe"]),
-                "lower": lower,
-                "upper": upper,
-                "assumption": f"95% moving-block interval; block_size={config.block_size}",
-            }
-        )
-        inference_rows.append(
-            {
-                "diagnostic": "deflated_sharpe_probability",
-                "signal": name,
-                "value": deflated_sharpe_probability(
-                    series,
-                    n_trials=len(signals.columns),
-                    annualization=config.annualization,
-                ),
-                "lower": np.nan,
-                "upper": np.nan,
-                "assumption": f"n_trials={len(signals.columns)} fixed signal family",
-            }
-        )
-    inference = pd.DataFrame.from_records(inference_rows).set_index("diagnostic")
+
+    inference = _signal_inference(
+        evaluated.net_returns,
+        benchmark_summary,
+        config=config,
+    )
     inference.to_csv(output / "inference.csv")
 
     mii_result.to_frame().to_csv(output / "mii_regimes.csv")
     evaluated.net_returns.to_csv(output / "signal_net_returns.csv")
     baseline_evaluated.net_returns.to_csv(output / "baseline_net_returns.csv")
 
-    input_manifest = {
+    input_manifest: dict[str, object] = {
         "schema_version": 1,
         "evidence_label": config.evidence_label,
         "reference_asset": config.reference_asset,
         "rows": len(clean),
-        "columns": list(clean.columns),
+        "columns": [str(column) for column in clean.columns],
         "first_observation": str(clean.index.min()),
         "last_observation": str(clean.index.max()),
         "frame_fingerprint": input_fingerprint,
-        "missing_observations": {column: int(clean[column].isna().sum()) for column in clean},
+        "missing_observations": {
+            str(column): int(clean[column].isna().sum()) for column in clean.columns
+        },
         "source_metadata": source,
     }
     (output / "input_manifest.json").write_text(
         json.dumps(input_manifest, indent=2, sort_keys=True, default=str), encoding="utf-8"
     )
 
-    run_metadata = {
+    run_metadata: dict[str, object] = {
         "schema_version": 1,
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "package": "marketmind",
@@ -464,17 +506,16 @@ def run_benchmark_bundle(
         ),
         encoding="utf-8",
     )
-    claims = _claim_register(
+    _claim_register(
         benchmark_summary=benchmark_summary,
         baseline_summary=baseline_summary,
         inference=inference,
         config=config,
         input_fingerprint=input_fingerprint,
-    )
-    claims.to_csv(output / "CLAIM_REGISTER.csv", index=False)
+    ).to_csv(output / "CLAIM_REGISTER.csv", index=False)
 
     manifest_files = sorted(path for path in output.iterdir() if path.is_file())
-    artifact_manifest = {
+    artifact_manifest: dict[str, object] = {
         "schema_version": 1,
         "input_fingerprint": input_fingerprint,
         "artifacts": {path.name: _manifest_record(path) for path in manifest_files},
