@@ -1,10 +1,26 @@
+<div class="mm-hero">
+  <span class="mm-kicker">Market structure / information flow / regime research</span>
+  <div class="mm-title">MARKETS HAVE <span>MEMORY.</span></div>
+  <div class="mm-deck">MarketMind is the open research implementation of Layan Oraidi's 2026 Charles H. Dow Award work. It treats markets as adaptive information networks and measures memory, directional information flow, connectivity, regime structure and validation state without turning controlled tests into trading claims.</div>
+  <div class="mm-actions">
+    <a href="research-program/">Open research program</a>
+    <a href="validation/">Inspect validation</a>
+    <a href="quickstart/">Run the software</a>
+  </div>
+</div>
+
+<div class="mm-strip">
+  <div><strong>0 / 350</strong><span>earlier regime rows changed after a future-only perturbation</span><i class="mm-pill">SYNTHETIC</i></div>
+  <div><strong>+1.218 nats</strong><span>known directional-information separation in the controlled test</span><i class="mm-pill">SYNTHETIC</i></div>
+  <div><strong>7 / 7</strong><span>controlled research-audit checks currently passing</span><i class="mm-pill">PENDING VALIDATION</i></div>
+  <div><strong>SEALED</strong><span>prospective holdout remains unopened until its registered end condition</span><i class="mm-pill">PENDING VALIDATION</i></div>
+</div>
+
 # MarketMind Research Terminal
 
 **AWARD-WINNING THEORY. OPEN IMPLEMENTATION. FROZEN PROSPECTIVE TEST.**
 
-MarketMind is the research implementation of Layan Oraidi's 2026 Charles H. Dow Award paper, *The Emergent Market Mind*. It treats markets as adaptive information networks and estimates changing structural coherence through memory, information flow and connectivity.
-
-The public terminal is not a trading-signal showroom. It is an evidence system: choose a market and window, inspect memory, information flow, connectivity, network structure, regime state, uncertainty, validation and reproducibility, then export the evidence trail.
+The public terminal is an evidence system rather than a signal showroom. Choose a market and window, inspect memory, information flow, connectivity, network structure, regime state, uncertainty and validation, then export the evidence trail.
 
 ## Evidence console
 
@@ -20,9 +36,9 @@ The public terminal is not a trading-signal showroom. It is an evidence system: 
 
 The prospective holdout began **10 August 2026** and is registered to end **6 August 2027**. No interim performance result should appear here before the registered end condition.
 
-## Research terminal modules
+<div class="mm-pixel-break"></div>
 
-The public research terminal is organized around these report objects:
+## Research terminal modules
 
 - **Market Regime Report** — regime state, persistence, transition context and uncertainty.
 - **Memory Diagnostics** — DFA Hurst, Higuchi dimension and volatility-memory decay.
@@ -49,8 +65,6 @@ Every chart should expose **SOURCE / N / WINDOW / FILTER / STATUS / LIMITATION /
 
 ## Canonical claim labels
 
-Every important public number uses only one or more of these labels:
-
 `OFFICIAL SOURCE` · `REAL PUBLIC DATA` · `PROVIDER TEST` · `SYNTHETIC` · `RANDOMIZED SYNTHETIC` · `PRODUCTION CLIENT DATA` · `EXTERNAL REVIEW` · `INDEPENDENT REPRODUCTION` · `PENDING VALIDATION`
 
 Internal tests and audits are described by their source, code and status fields; they do not receive a substitute public evidence badge.
@@ -67,15 +81,6 @@ A serious falsification standard is part of the product. Evidence would weaken t
 6. an independent reproduction identifies a material methodological or implementation error.
 
 A failed test is not hidden; it becomes part of the release record.
-
-## Design principles
-
-- **Causal by construction.** Rolling features, scalers, regimes and orders use no future data.
-- **Scientifically explicit.** Ambiguities become named configuration choices.
-- **Auditable.** Pipeline runs retain metrics, configuration and input/artifact hashes.
-- **Data-source honest.** Public proxies are not presented as licensed-vendor reproductions.
-- **Hard to fool.** Costs, naive baselines, resampling and multiple-testing corrections are first-class APIs.
-- **Validation-aware.** Controlled implementation evidence, external review, independent reproduction and prospective evidence are kept distinct.
 
 ## Core capabilities
 
