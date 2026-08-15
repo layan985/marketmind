@@ -1,6 +1,6 @@
 site_name: MarketMind Research
 site_description: Open research infrastructure for market organization, regimes, and information dynamics
-site_url: https://layan985.github.io/marketmind/
+site_url: https://marketmind-hazel.vercel.app/
 repo_url: https://github.com/layan985/marketmind
 repo_name: layan985/marketmind
 copyright: Copyright © 2026 Layan Oraidi
@@ -16,18 +16,21 @@ theme:
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
-      accent: cyan
+      primary: black
+      accent: pink
       toggle:
         icon: material/weather-night
         name: Dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
-      accent: cyan
+      primary: black
+      accent: green
       toggle:
         icon: material/weather-sunny
         name: Light mode
+
+extra_css:
+  - stylesheets/pixel.css
 
 nav:
   - Overview: index.md
