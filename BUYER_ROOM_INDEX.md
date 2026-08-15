@@ -1,12 +1,17 @@
 # MarketMind Buyer Room Index
 
-MarketMind is research software for inspectable market-regime analysis. This index groups the existing evidence a buyer, reviewer, or institutional user should inspect.
+MarketMind is research software for inspectable market-regime analysis. This index is the assurance room a buyer, reviewer, or institutional user should inspect before relying on a MarketMind deliverable.
 
-## Evidence
+## Assurance controls
+- [Client assurance protocol](CLIENT_ASSURANCE_PROTOCOL.md)
+- [Client delivery checklist](CLIENT_DELIVERY_CHECKLIST.md)
+- [Model risk register](MODEL_RISK_REGISTER.md)
 - [Proof ledger](PROOF_LEDGER.md)
 - [Results status](RESULTS.md)
 - [Reproducibility](REPRODUCIBILITY.md)
 - [Replication challenge](REPLICATION_CHALLENGE.md)
+
+## Technical evidence
 - [Research terminal specification](RESEARCH_TERMINAL_SPEC.md)
 - [Methodology](docs/methodology.md)
 - [Codebook](data/CODEBOOK.md)
@@ -14,16 +19,31 @@ MarketMind is research software for inspectable market-regime analysis. This ind
 - [Prospective protocol](preregistration/OSF_MARKETMIND_PROSPECTIVE_2026.md)
 - [Deviations log](preregistration/DEVIATIONS.csv)
 
-## Current status
-- 29 passing tests.
-- 83.06% branch-aware coverage.
-- Controlled research audit: 7/7 checks pass.
-- Future-only perturbation: 0/350 earlier regime rows changed.
-- Known directional-information test: +1.218 nats.
-- Artifact integrity: 4/4 result files hash verified.
-- Prospective holdout active through 6 August 2027.
-- No holdout result exists yet.
-- No independent reproduction or outside research use is recorded yet.
+## Current public evidence state
 
-## Commercial use
-Suitable paid work includes custom market diagnostics, data adapters, reproducible research builds, methods audits, and institutional workshops. Historical and controlled evidence must remain separate from future prospective confirmation.
+The latest frozen evidence snapshot records:
+
+- 29 passing implementation tests on the recorded v0.2.0 environment;
+- 83.06% branch-aware coverage on that recorded environment;
+- controlled research audit: 7/7 checks pass;
+- future-only perturbation: 0/350 earlier regime rows changed;
+- known directional-information test: +1.218 nats;
+- artifact integrity: 4/4 declared result files hash verified;
+- prospective holdout active through 6 August 2027;
+- no public holdout result yet;
+- zero recorded independent reproductions;
+- zero completed external methodological/code reviews;
+- zero recorded outside research uses;
+- zero disclosed production-client datasets.
+
+These counts are deliberately not upgraded by internal reruns, informal feedback, repository traffic, stars, or client interest. The proof ledger is the authoritative claim register.
+
+## What a client receives
+
+A high-assurance engagement is not a dashboard screenshot. The expected bundle includes a decision memo, claim register, input manifest, frozen configuration, run metadata, QA report, baseline matrix, sensitivity matrix, model-risk register, limitations, machine-readable outputs, hash manifest, reproducibility instructions and a delivery-to-delivery change log where applicable.
+
+Every applicable acceptance gate in the client assurance protocol must pass before a result is marked `READY`. Critical integrity failures block a decision-ready delivery; they are not hidden by changing thresholds or removing adverse outputs.
+
+## Commercial boundary
+
+Suitable paid work includes custom market diagnostics, data adapters, reproducible research builds, methods audits and institutional workshops. MarketMind does not sell a promise of profitability. Historical, synthetic, prospective, externally reviewed, independently reproduced and production-client evidence remain separate evidence classes.
