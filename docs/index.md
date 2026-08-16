@@ -6,6 +6,7 @@
     <a href="research-program/">Open research program</a>
     <a href="validation/">Inspect validation</a>
     <a href="quickstart/">Run the software</a>
+    <a href="institutional-work/">Research integrity audit</a>
   </div>
 </div>
 
@@ -21,6 +22,10 @@
 **AWARD-WINNING THEORY. OPEN IMPLEMENTATION. FROZEN PROSPECTIVE TEST.**
 
 The public terminal is an evidence system rather than a signal showroom. Choose a market and window, inspect memory, information flow, connectivity, network structure, regime state, uncertainty and validation, then export the evidence trail.
+
+## Commercial use: Quant Research Integrity Audit
+
+MarketMind itself remains public research software. The commercial offer is a bounded **US$2,000–5,000 research-integrity audit** for teams that need an external check on leakage, timing, transaction-cost assumptions, holdout design, robustness and reproducibility. The audit does not sell signals, licenses or performance promises. [Inspect scope and deliverables →](institutional-work.md)
 
 ## Evidence console
 
