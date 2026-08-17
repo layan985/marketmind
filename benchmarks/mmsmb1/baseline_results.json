@@ -1,0 +1,11 @@
+{
+  "version": "MMSMB-1-v0.1",
+  "baseline": "60-day average absolute correlation",
+  "high_connectivity_auc": 0.9118374423170079,
+  "metric_latent_connectivity_correlation": 0.6441353852528992,
+  "observed_missing_fraction": 0.005185185185185185,
+  "outlier_events": 2,
+  "structural_breaks": 1,
+  "n_sessions": 1800,
+  "n_assets": 9
+}
