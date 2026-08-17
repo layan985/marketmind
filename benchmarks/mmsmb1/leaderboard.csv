@@ -1,0 +1,7 @@
+method,author,code,version,accuracy,ARI,NMI,notes
+Realized volatility,Layan Oraidi / reference suite,https://github.com/layan985/marketmind/blob/main/benchmarks/run_mm_bench_001_003.py,MMSMB-1-v0.1,0.715,0.446,0.400,63-session realized-volatility states; dev-only label mapping
+Gaussian mixture,Layan Oraidi / reference suite,https://github.com/layan985/marketmind/blob/main/benchmarks/run_mm_bench_001_003.py,MMSMB-1-v0.1,0.677,0.344,0.291,reference comparator
+Gaussian HMM,Layan Oraidi / reference suite,https://github.com/layan985/marketmind/blob/main/benchmarks/run_mm_bench_001_003.py,MMSMB-1-v0.1,0.662,0.222,0.260,diagonal Gaussian HMM
+k-means,Layan Oraidi / reference suite,https://github.com/layan985/marketmind/blob/main/benchmarks/run_mm_bench_001_003.py,MMSMB-1-v0.1,0.576,0.198,0.253,reference comparator
+MarketMind MII,Layan Oraidi / reference suite,https://github.com/layan985/marketmind/blob/main/benchmarks/run_mm_bench_001_003.py,MMSMB-1-v0.1,0.483,0.081,0.145,"included as a benchmark entry, not privileged"
+Trend × volatility,Layan Oraidi / reference suite,https://github.com/layan985/marketmind/blob/main/benchmarks/run_mm_bench_001_003.py,MMSMB-1-v0.1,0.279,0.437,0.433,accuracy low after fixed mapping; clustering similarity remains non-zero
