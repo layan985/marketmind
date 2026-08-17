@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#08090c">
+  <title>MarketMind Lab — Controlled Experiments</title>
+  <meta name="description" content="Controlled MarketMind experiments with known synthetic truth: leakage, common-driver confounding, network perturbation and outlier sensitivity.">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="status-rail"><div class="shell status-inner"><span><i></i> LAB-v0.1 · GENERATED 17 AUG 2026</span><span>SYNTHETIC GROUND TRUTH</span><span>PROSPECTIVE HOLDOUT UNTOUCHED</span></div></div>
+  <header class="nav shell"><a class="brand" href="/">MARKETMIND<span> / LAB</span></a><nav><a href="/">Home</a><a href="/benchmarks">Benchmarks</a><a href="/research">Research</a><a href="/validation">Validation</a><a href="https://github.com/layan985/marketmind/tree/main/experiments">Reproduce ↗</a></nav></header>
+  <main>
+    <section class="hero shell dossier-hero"><div class="eyebrow">CONTROLLED EXPERIMENTS · KNOWN TRUTH · FAILURE MODES</div><h1>Before asking whether a method is clever,<br><em>ask how it breaks.</em></h1><p class="lede">MarketMind Lab constructs synthetic systems where causal structure, timing and latent state are known. LAB-v0.1 contains four deterministic experiments. No prospective trading outcome or return-predictability claim is computed.</p><div class="actions"><a class="primary" href="#leakage">Start with the Leakage Machine</a><a href="https://github.com/layan985/marketmind/tree/main/experiments">Code + JSON ↗</a><a href="/failures">Failure register</a></div></section>
+
+    <section class="facts shell"><article><b>4</b><span>executed experiments</span></article><article><b>100</b><span>leakage replications</span></article><article><b>30 × 5</b><span>common-driver trials across strengths</span></article><article><b>0</b><span>prospective outcomes touched</span></article></section>
+
+    <section id="leakage" class="section shell experiment">
+      <div class="experiment-head"><div><span>LAB-002</span><h2>How Much Alpha Can a Bug Manufacture?</h2></div><b>RUN / PASS</b></div>
+      <div class="split"><div class="copy"><p><strong>Truth:</strong> the return series is IID Gaussian noise. There is no signal to discover.</p><p><strong>Design:</strong> 100 replications of 4,000 observations. Compare a causal trailing signal with four deliberate research mistakes: centered windows, same-session execution, retrospective threshold selection and survivorship selection across 50 noise signals.</p></div><div class="result-callout"><small>KEY RESULT</small><strong>21.02</strong><span>mean annualized Sharpe under same-session execution on pure noise</span></div></div>
+      <div class="result-table"><div class="thead"><span>ARM</span><span>MEAN ANN. SHARPE</span><span>INTERPRETATION</span></div><div><span>Causal trailing control</span><b>0.019</b><em>near zero, as expected</em></div><div><span>Centered rolling window</span><b>2.796</b><em>future observations leak into the feature</em></div><div><span>Same-session execution</span><b>21.017</b><em>trade is allowed to see the return it earns</em></div><div><span>Retrospective threshold</span><b>0.191</b><em>best threshold chosen on realized noise</em></div><div><span>Best of 50 noise signals</span><b>0.555</b><em>selection bias alone creates apparent edge</em></div></div>
+      <p class="warning"><strong>Boundary:</strong> this quantifies contamination in one disclosed synthetic design. It does not estimate how much bias any specific published strategy contains.</p>
+    </section>
+
+    <section id="common-driver" class="section shell experiment">
+      <div class="experiment-head"><div><span>LAB-001</span><h2>The Common Driver Trap</h2></div><b>RUN / FRAGILITY FOUND</b></div>
+      <div class="split"><div class="copy"><p><strong>Truth:</strong> A drives both B and C. There is no direct B → C causal path.</p><p><strong>Question:</strong> does a discrete transfer-entropy estimate report apparent B → C directionality anyway, and does conditioning on A reduce it?</p></div><div class="graph-card"><div class="node">A</div><div class="arrows">↙ &nbsp; ↘</div><div class="node-row"><span>B</span><span>C</span></div><small>NO B → C PATH</small></div></div>
+      <div class="result-table"><div class="thead"><span>COMMON-DRIVER STRENGTH</span><span>NAIVE TE B→C</span><span>CONDITIONED TE B→C | A</span></div><div><span>0.0</span><b>0.00145</b><em>0.00461</em></div><div><span>0.3</span><b>0.00296</b><em>0.00466</em></div><div><span>0.6</span><b>0.00965</b><em>0.00527</em></div><div><span>0.9</span><b>0.01511</b><em>0.00618</em></div><div><span>1.2</span><b>0.01754</b><em>0.00725</em></div></div>
+      <p class="warning">At strength 1.2, conditioning cuts the estimate by about 59%. At low driver strength the finite-sample plug-in estimator has a visible positive floor, so “conditioning fixes it” would itself be an overclaim.</p>
+    </section>
+
+    <section id="amputation" class="section shell experiment">
+      <div class="experiment-head"><div><span>LAB-003</span><h2>Network Amputation</h2></div><b>RUN / SENSITIVITY FOUND</b></div>
+      <div class="split"><div class="copy"><p><strong>Truth:</strong> a seven-asset synthetic market alternates between lower- and higher-coherence latent regimes. One asset is designed as the dominant hub.</p><p><strong>Question:</strong> can an aggregate connectivity series look nearly unchanged while state labels still move?</p></div><div class="result-callout"><small>HUB REMOVAL</small><strong>7.2%</strong><span>of fixed-threshold state labels changed</span></div></div>
+      <div class="protocol"><div><small>FULL AUC</small><strong>0.864</strong></div><div><small>REMOVE HUB AUC</small><strong>0.850</strong></div><div><small>FULL↔HUB METRIC CORR</small><strong>0.995</strong></div><div><small>RANDOM REMOVAL LABEL CHANGE</small><strong>1.9%</strong></div></div>
+      <p class="warning">High correlation between metric series is not the same as classification invariance. MM-BENCH-006 generalizes this into a universe-stability study.</p>
+    </section>
+
+    <section id="outlier" class="section shell experiment">
+      <div class="experiment-head"><div><span>LAB-004</span><h2>One Outlier, Different Market</h2></div><b>RUN / ROBUSTNESS GAP</b></div>
+      <div class="split"><div class="copy"><p>Inject one extreme return into one asset and re-estimate average cross-asset dependence across 100 replications. In this design, the mean absolute change in the Pearson statistic is <strong>0.00436</strong> versus <strong>0.000356</strong> for Spearman.</p><p>The resulting sensitivity ratio is <strong>12.26×</strong>. This is a prompt to report robust dependence alternatives, not a claim that rank correlation is universally superior.</p></div><div class="ratio-object"><span>PEARSON</span><b>12.26×</b><span>SPEARMAN SENSITIVITY</span></div></div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-label">05 / NEXT CONTROLLED WORLDS</div><div class="cards"><article><span>05</span><h3>The Regime Mirage</h3><p>Constant expected return, changing volatility. Which detectors infer a richer state than the generator contains?</p></article><article><span>06</span><h3>Direction Without Prediction</h3><p>Recover information direction while deliberately preventing exploitable return forecasting.</p></article><article><span>07</span><h3>Sampling Frequency</h3><p>Hold latent dynamics fixed and ask whether daily versus weekly measurement changes inferred state.</p></article></div>
+    </section>
+  </main>
+  <footer class="shell"><div><b>MarketMind Lab</b><span>Synthetic controlled experiments · not investment advice</span></div><div><a href="/">Home</a> · <a href="/benchmarks">Benchmarks</a> · <a href="https://github.com/layan985/marketmind/tree/main/experiments">Reproduce</a></div></footer>
+</body>
+</html>
