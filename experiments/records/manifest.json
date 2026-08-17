@@ -1,0 +1,17 @@
+{
+  "version": "LAB-v0.2-records",
+  "generated": "2026-08-17",
+  "prospective_holdout": "untouched",
+  "files": {
+    "LAB-001_runs.csv": {"sha256": "10d833e2ab8d6f0ab08bc4e9001d1180cc571752c78849966f68442a464a2bef", "bytes": 10903, "publication": "generated_run_record"},
+    "LAB-001_summary.csv": {"sha256": "b493615d168c77e1b7b3d283daa456c795da75153de791f2037031e2911d6649", "bytes": 505, "publication": "public"},
+    "LAB-002_runs.csv": {"sha256": "18ae0b4d57b93045affde23cf2e959b15c3942970522ea8d45e6e18b6f960f08", "bytes": 25881, "publication": "generated_run_record"},
+    "LAB-002_summary.csv": {"sha256": "a77a29ece04fe2cacaeb5782a40d6f5848dfd8a9cbdfbc750ab16192a24dd6cd", "bytes": 677, "publication": "public"},
+    "LAB-003_summary.csv": {"sha256": "8e33bf95a41ad755db08b8ddd9f2fd2034273e7b1dae49fa66580cc06bf36fa6", "bytes": 277, "publication": "public"},
+    "LAB-003_timeseries.csv": {"sha256": "96efc58898ef92be7d66bd5ae75a50e6048a2d89398db2d2e13acb6f576b1e4b", "bytes": 109459, "publication": "generated_run_record"},
+    "LAB-004_runs.csv": {"sha256": "84cbd3da1ab081c37f34cc89bd8991860c6f2e7b7b4d72eee88da682559d3644", "bytes": 11440, "publication": "generated_run_record"},
+    "LAB-004_summary.csv": {"sha256": "f8d2e508820c12bd0d0d1924f3d82a10acd19da89c7833fcfec661ca8a816ba4", "bytes": 183, "publication": "public"},
+    "environment.json": {"sha256": "db1c4f19cb14d61d978110b533cdfce7281ed39999dfc1af9a8b25c7e3b4bd45", "bytes": 246, "publication": "public"}
+  },
+  "record_builder_sha256": "3ff5d426011df17224e9f02182bf1c20ea294c20b3362d39f620198abf63f03d"
+}
