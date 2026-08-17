@@ -1,0 +1,5 @@
+comparator,pearson_with_connectivity_component,state_assignment_agreement,state_ari
+average absolute correlation,0.980795,0.953281,0.850692
+weighted clustering,0.967064,0.953281,0.880224
+MST coherence,0.974921,1.000000,1.000000
+leading-eigenvalue concentration,0.981355,0.953281,0.850692
