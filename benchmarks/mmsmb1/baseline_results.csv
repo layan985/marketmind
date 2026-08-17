@@ -1,0 +1,2 @@
+version,baseline,high_connectivity_auc,metric_latent_connectivity_correlation,observed_missing_fraction,outlier_events,structural_breaks,n_sessions,n_assets
+MMSMB-1-v0.1,60-day average absolute correlation,0.9118374423,0.6441353853,0.0051851852,2,1,1800,9
