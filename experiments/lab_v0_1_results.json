@@ -1,0 +1,42 @@
+{
+  "version": "LAB-v0.1",
+  "generated": "2026-08-17",
+  "interpretation_boundary": "Synthetic controlled experiments only. No prospective trading outcome or return-predictability claim is computed.",
+  "common_driver_trap": {
+    "replications": 30,
+    "sample_size": 4000,
+    "rows": [
+      {"strength": 0.0, "naive_te_mean": 0.0014448582168042957, "conditional_te_mean": 0.004612967125364116},
+      {"strength": 0.3, "naive_te_mean": 0.0029578578885726806, "conditional_te_mean": 0.004661129550477719},
+      {"strength": 0.6, "naive_te_mean": 0.009654293778820388, "conditional_te_mean": 0.0052708481778552555},
+      {"strength": 0.9, "naive_te_mean": 0.01510557214210204, "conditional_te_mean": 0.006183393015864088},
+      {"strength": 1.2, "naive_te_mean": 0.01754137337718454, "conditional_te_mean": 0.0072530959674495556}
+    ]
+  },
+  "leakage_machine": {
+    "replications": 100,
+    "sample_size": 4000,
+    "mean_annualized_sharpe": {
+      "control": 0.019143420021946193,
+      "centered_window": 2.796393637577942,
+      "same_session": 21.016873194328603,
+      "retrospective_threshold": 0.19145993261700903,
+      "survivorship_selection_50": 0.5545675148499443
+    }
+  },
+  "network_amputation": {
+    "auc_full": 0.8644585297282413,
+    "auc_remove_hub": 0.8501985384958173,
+    "auc_remove_random": 0.8608545850436748,
+    "corr_full_hub": 0.9950891674990778,
+    "corr_full_random": 0.9959598772275853,
+    "label_disagree_remove_hub": 0.07213578500707214,
+    "label_disagree_remove_random": 0.01933050447901933
+  },
+  "one_outlier_different_market": {
+    "replications": 100,
+    "pearson_abs_change_mean": 0.004362615572129114,
+    "spearman_abs_change_mean": 0.0003558940292904014,
+    "pearson_to_spearman_sensitivity_ratio": 12.258187025018392
+  }
+}
