@@ -1,0 +1,13 @@
+{
+  "version": "MMSMB-1-v0.1",
+  "pre_break_edges": [
+    {"source": "A01", "target": "A02", "lag": 1, "coefficient": 0.24},
+    {"source": "A03", "target": "A04", "lag": 1, "coefficient": 0.18}
+  ],
+  "post_break_edges": [
+    {"source": "A05", "target": "A06", "lag": 1, "coefficient": 0.26},
+    {"source": "A07", "target": "A09", "lag": 1, "coefficient": 0.2}
+  ],
+  "break_index": 900,
+  "break_date": "2022-06-15"
+}
