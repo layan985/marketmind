@@ -1,0 +1,5 @@
+period,source,target,lag,coefficient
+pre_break,A01,A02,1,0.24
+pre_break,A03,A04,1,0.18
+post_break,A05,A06,1,0.26
+post_break,A07,A09,1,0.20
