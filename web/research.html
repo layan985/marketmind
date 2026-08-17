@@ -1,110 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#08090c">
-  <title>Research dossier — MarketMind</title>
-  <meta name="description" content="The executable research dossier for MarketMind: architecture, controlled validation, preregistered inference, evidence boundaries, and a five-minute reviewer path.">
-  <link rel="stylesheet" href="/styles.css">
-</head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#08090c"><title>Research Program — MarketMind</title><meta name="description" content="MarketMind research program: field comparison, ablations, research notes, applications, tutorials and literature map."><link rel="stylesheet" href="/styles.css"></head>
 <body>
-  <header class="nav shell">
-    <a class="brand" href="/">MARKETMIND<span> / RESEARCH DOSSIER</span></a>
-    <nav>
-      <a href="#architecture">Architecture</a><a href="#verification">Verification</a><a href="#review">Review path</a><a href="https://github.com/layan985/marketmind">GitHub ↗</a>
-    </nav>
-  </header>
-
-  <main id="top">
-    <section class="hero shell dossier-hero">
-      <div class="eyebrow">FROM AWARD-WINNING PAPER → EXECUTABLE METHOD → SEALED PROSPECTIVE TEST</div>
-      <h1>The paper became<br><em>a system you can challenge.</em></h1>
-      <p class="lede">MarketMind turns <i>The Emergent Market Mind</i> into an inspectable chain: nine structural estimators, causal normalization, point-in-time regimes, nine fixed signals, costed next-session execution, synchronized study-level inference, and a public null-results commitment.</p>
-      <div class="actions">
-        <a class="primary" href="#review">Start the five-minute review</a>
-        <a href="https://cmtassociation.org/association/award-recognizing/charles-h-dow-award/">Official CMT award record</a>
-        <a href="https://github.com/layan985/marketmind/blob/main/validation/audit-v0.2.0/AUDIT.md">Controlled audit</a>
-        <a href="https://osf.io/nyseh/overview">Frozen OSF protocol</a>
-      </div>
-    </section>
-
-    <section class="facts shell dossier-facts">
-      <article><b>9</b><span>structural submetrics</span></article>
-      <article><b>3</b><span>signal families</span></article>
-      <article><b>7 / 7</b><span>controlled checks passed</span></article>
-      <article><b>83.06%</b><span>branch-aware test coverage</span></article>
-    </section>
-
-    <section id="architecture" class="section shell">
-      <div class="section-label">01 / EXECUTABLE RESEARCH ARCHITECTURE</div>
-      <div class="split"><div><h2>Every conceptual claim resolves to a testable object.</h2></div><div class="copy"><p>The point is not to make an index with an impressive name. The point is to preserve the timing and evidentiary boundary of every decision—from raw observations to a final study-level contrast.</p><p>The frozen v0.1.0 estimators remain the prospective implementation. The current source adds an explicit analysis engine around that freeze; it does not rewrite it.</p></div></div>
-      <div class="research-flow">
-        <article><small>01</small><strong>TRAILING DATA</strong><span>fingerprinted price panels and bounded missing-data handling</span></article>
-        <article><small>02</small><strong>STRUCTURE</strong><span>memory · information flow · network connectivity</span></article>
-        <article><small>03</small><strong>CAUSAL STATE</strong><span>frozen or expanding normalization · prior-only thresholds</span></article>
-        <article><small>04</small><strong>EXECUTION</strong><span>fixed family map · t+1 position · costs on turnover</span></article>
-        <article><small>05</small><strong>INFERENCE</strong><span>paired blocks · four-market statistic · public outcome</span></article>
-      </div>
-    </section>
-
-    <section id="verification" class="section shell">
-      <div class="section-label">02 / CONTROLLED VERIFICATION</div>
-      <div class="split"><div><h2>Seven attempts to falsify the implementation.</h2></div><div class="copy"><p>The audit uses a disclosed synthetic process so there is known structure to recover and a known future to perturb. Each check has a numerical acceptance rule. The command exits nonzero if one fails.</p><p>No controlled check is labeled “proof of profitability.” That question belongs to future data and remains sealed.</p></div></div>
-      <div class="verification-grid">
-        <article><small>REPLAY</small><strong>Exact fingerprint match</strong><p>Seed 42 regenerates the same 2,000 × 9 price panel.</p></article>
-        <article><small>KNOWN STRUCTURE</small><strong>0.879–0.901</strong><p>All three connectivity measures track trailing latent coherence.</p></article>
-        <article><small>FEATURE LEAKAGE</small><strong>0.000000</strong><p>Maximum earlier raw-metric change after a future-only perturbation.</p></article>
-        <article><small>THRESHOLD LEAKAGE</small><strong>350 / 350</strong><p>Earlier threshold and regime rows remain identical.</p></article>
-        <article><small>DIRECTION</small><strong>+1.218 nats</strong><p>Known source→target transfer entropy margin over the reverse direction.</p></article>
-        <article><small>STUDY CONTRACT</small><strong>0 selection error</strong><p>Exact High→trend, Medium→breakout, Low→reversion map; t position is zero.</p></article>
-        <article><small>INTEGRITY</small><strong>4 / 4 hashes</strong><p>Raw, normalized, regime, and metadata artifacts verify byte-for-byte.</p></article>
-      </div>
-      <p class="warning"><strong>Interpretation boundary:</strong> the audit validates controlled implementation behavior. It does not establish a positive Sharpe ratio, investability, or confirmation of the paper's historical mapping.</p>
-    </section>
-
-    <section id="inference" class="section shell">
-      <div class="section-label">03 / PREREGISTERED INFERENCE ENGINE</div>
-      <div class="split"><div><h2>The final analysis is code, not future discretion.</h2></div><div class="copy"><p>The source now constructs the exact three-signal family averages, regime-aware exposure, unconditional nine-signal comparator, and buy-and-hold comparator. Candidate and comparator are executed with the same lag and cost model.</p><p>Study-level inference resamples paired strategy returns with synchronized moving blocks inside each market, recomputes each market Sharpe difference, then averages across SPX, NDX, SX5E, and ES. H2a–H2c are estimated jointly with Holm family-wise correction.</p></div></div>
-      <div class="protocol protocol-three">
-        <div><small>H1 · PRIMARY</small><strong>Regime-aware vs. unconditional nine-signal ensemble</strong></div>
-        <div><small>H2A–C · MECHANISM</small><strong>Each family in its preregistered MII state</strong></div>
-        <div><small>H3 · SECONDARY</small><strong>Regime-aware vs. buy-and-hold</strong></div>
-      </div>
-      <div class="terminal code-wide"><div>$ marketmind audit --output artifacts/research-audit</div><div>$ pytest</div><p>Primary inference: 20-session synchronized blocks · 10,000 replications · seed 20260807 · 5 bps per unit turnover · one-session lag · no optional stopping.</p></div>
-    </section>
-
-    <section class="section shell">
-      <div class="section-label">04 / EVIDENCE MATURITY</div>
-      <h2>What is earned, what is active, and what is still missing.</h2>
-      <table class="maturity-table">
-        <caption>MarketMind evidence maturity</caption>
-        <thead><tr><th>Layer</th><th>Status</th><th>Inspectable record</th></tr></thead>
-        <tbody>
-          <tr><td>External recognition</td><td><strong class="earned">EARNED</strong></td><td><a href="https://cmtassociation.org/association/award-recognizing/charles-h-dow-award/">2026 Charles H. Dow Award ↗</a></td></tr>
-          <tr><td>Installable software</td><td><strong class="earned">PUBLIC</strong></td><td><a href="https://pypi.org/project/marketmind/">PyPI v0.1.0 ↗</a></td></tr>
-          <tr><td>Immutable archive</td><td><strong class="earned">DOI</strong></td><td><a href="https://doi.org/10.5281/zenodo.21844956">Zenodo 10.5281/zenodo.21844956 ↗</a></td></tr>
-          <tr><td>Controlled implementation audit</td><td><strong class="earned">7 / 7</strong></td><td><a href="https://github.com/layan985/marketmind/blob/main/validation/audit-v0.2.0/AUDIT.md">Statistics + acceptance rules ↗</a></td></tr>
-          <tr><td>Prospective confirmation</td><td><strong class="active">ACTIVE</strong></td><td><a href="https://osf.io/nyseh/overview">Outcome sealed until Aug 2027 ↗</a></td></tr>
-          <tr><td>Independent reproduction</td><td><strong class="missing">NOT YET</strong></td><td><a href="https://github.com/layan985/marketmind/blob/main/REPLICATION_CHALLENGE.md">Open replication challenge ↗</a></td></tr>
-          <tr><td>Outside research use</td><td><strong class="missing">NOT YET</strong></td><td><a href="/validation">Public adoption ledger →</a></td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section id="review" class="section shell review-path">
-      <div class="section-label">05 / FIVE-MINUTE REVIEW PATH</div>
-      <h2>Inspect the strongest claim first. Then inspect its boundary.</h2>
-      <div class="review-steps">
-        <a href="https://cmtassociation.org/association/award-recognizing/charles-h-dow-award/"><b>01</b><strong>Verify the research origin</strong><span>Official CMT Association award record</span></a>
-        <a href="https://osf.io/nyseh/overview"><b>02</b><strong>Read the frozen test</strong><span>Timestamped prospective protocol</span></a>
-        <a href="https://github.com/layan985/marketmind/blob/main/validation/audit-v0.2.0/AUDIT.md"><b>03</b><strong>Challenge the implementation</strong><span>Seven checks, thresholds, statistics</span></a>
-        <a href="https://github.com/layan985/marketmind/tree/main/src/marketmind"><b>04</b><strong>Trace prose into code</strong><span>Estimators, execution, inference</span></a>
-        <a href="https://github.com/layan985/marketmind/blob/main/REPLICATION_CHALLENGE.md"><b>05</b><strong>Attempt independent reproduction</strong><span>Successes and failures both count</span></a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="shell"><div><b>MarketMind</b><span>Research software · not investment advice</span></div><div><a href="/">Home</a> · <a href="/validation">Validation</a> · <a href="https://github.com/layan985/marketmind">GitHub</a> · <a href="https://doi.org/10.5281/zenodo.21844956">DOI</a></div></footer>
-</body>
-</html>
+<div class="status-rail"><div class="shell status-inner"><span><i></i> ACTIVE RESEARCH PROGRAM</span><span>SOFTWARE · BENCHMARKS · NOTES · APPLICATIONS</span><span>JOSS AFTER EVIDENCE</span></div></div>
+<header class="nav shell"><a class="brand" href="/">MARKETMIND<span> / RESEARCH</span></a><nav><a href="/">Home</a><a href="/benchmarks">Benchmarks</a><a href="/lab">Lab</a><a href="/validation">Validation</a><a href="https://github.com/layan985/marketmind">GitHub ↗</a></nav></header>
+<main>
+<section class="hero shell dossier-hero"><div class="eyebrow">FROM AWARD-WINNING PAPER → ACTIVE RESEARCH PROGRAM</div><h1>Measure markets.<br><em>Then measure the measurement.</em></h1><p class="lede">The research question is no longer “can we build a complicated index?” It is whether memory, information and network structure are stable, distinct, reproducible and useful enough to survive comparison with simpler models.</p><div class="actions"><a class="primary" href="#field">State of the field</a><a href="#notes">Research notes</a><a href="#tutorials">Tutorials</a><a href="/validation#change-mind">Falsification register</a></div></section>
+<section id="field" class="section shell"><div class="section-label">01 / STATE OF THE FIELD</div><h2>What MarketMind competes against.</h2><div class="field-table">
+<div class="thead"><span>METHOD</span><span>WHAT IT MEASURES</span><span>WHAT MARKETMIND ADDS</span><span>WHEN THE SIMPLER METHOD MAY WIN</span></div>
+<div><b>Gaussian HMM</b><span>latent probabilistic states</span><span>explicit multiscale structural features + causal feature timing</span><span>compact state dynamics are sufficient and stable</span></div>
+<div><b>Markov switching</b><span>parameter changes across latent states</span><span>nonparametric structural descriptors across multiple domains</span><span>economic parameter interpretation matters more than structural breadth</span></div>
+<div><b>Volatility regimes</b><span>changes in dispersion / risk</span><span>memory, information direction and topology beyond variance</span><span>other components add no stable separation</span></div>
+<div><b>Change-point detection</b><span>discrete structural breaks</span><span>continuous multivariate state description</span><span>the scientific question is transition timing, not persistent state labeling</span></div>
+<div><b>PCA / eigenvalues</b><span>common-factor concentration</span><span>directionality and graph structure</span><span>a few eigenvalues explain the same state map</span></div>
+<div><b>Correlation networks / MST</b><span>dependence topology</span><span>memory + information layers alongside topology</span><span>topology is redundant with average correlation</span></div>
+<div><b>Hurst / fractal</b><span>persistence and scaling</span><span>joint measurement with information and networks</span><span>memory alone carries the stable signal</span></div>
+<div><b>Entropy / mutual information</b><span>uncertainty and nonlinear dependence</span><span>directionality, topology and combined state construction</span><span>extra structure increases variance without adding information</span></div>
+<div><b>Transfer entropy</b><span>directed predictive information</span><span>conditioning and explicit failure-mode benchmarking</span><span>small samples or common drivers make direction unstable</span></div>
+<div><b>Trend × volatility rules</b><span>simple observable state taxonomy</span><span>structural variables not reducible to trend or variance</span><span>classification agreement is high enough to make complexity unnecessary</span></div>
+</div></section>
+<section id="ablation" class="section shell"><div class="section-label">02 / MM-BENCH-005 · ABLATE MII</div><div class="split"><div><h2>The weights are a hypothesis.</h2></div><div class="copy"><p>Displayed MII weights are memory 0.35, information 0.40 and connectivity 0.25. The ablation program will test M only, I only, C only, each pair, equal weighting, current weighting, PCA combination, rank aggregation and a random plausible weight simplex.</p><p><strong>Status:</strong> protocol specified; no ablation result is claimed yet.</p></div></div><div class="artifact-strip"><span>M</span><span>I</span><span>C</span><span>M + I</span><span>M + C</span><span>I + C</span><span>EQUAL</span><span>PCA</span><span>RANK</span><span>RANDOM SIMPLEX</span></div><div class="protocol"><div><small>OUTCOME 01</small><strong>regime stability</strong></div><div><small>OUTCOME 02</small><strong>classification agreement</strong></div><div><small>OUTCOME 03</small><strong>future-vol separation</strong></div><div><small>OUTCOME 04</small><strong>perturbation sensitivity</strong></div></div></section>
+<section id="notes" class="section shell"><div class="section-label">03 / MARKETMIND RESEARCH NOTES</div><div class="split"><div><h2>3–8 pages. One question. One result.</h2></div><div class="copy"><p>The note registry exists before publication so titles do not become post-hoc marketing. A note moves to PUBLIC only after its underlying study is reproducible and its limitations are written beside the result.</p></div></div><div class="note-list">
+<a><b>MM-RN-001</b><span>What Is a Market Regime? Five Models Give Five Answers</span><i>PLANNED</i></a><a><b>MM-RN-002</b><span>The Complexity Tax: When Multiscale Measurement Adds Nothing</span><i>PLANNED</i></a><a class="active-note" href="/lab#leakage"><b>MM-RN-003</b><span>How Much Alpha Can Look-Ahead Bias Manufacture?</span><i>LAB EVIDENCE READY</i></a><a class="active-note" href="/lab#common-driver"><b>MM-RN-004</b><span>When Transfer Entropy Lies</span><i>LAB EVIDENCE READY</i></a><a class="active-note" href="/lab#amputation"><b>MM-RN-005</b><span>Removing One Asset Can Change the Market</span><i>LAB EVIDENCE READY</i></a><a><b>MM-RN-006</b><span>Does Market Memory Survive a Change in Sampling Frequency?</span><i>PLANNED</i></a><a><b>MM-RN-007</b><span>The Same Market, Three Different Networks</span><i>PLANNED</i></a><a><b>MM-RN-008</b><span>State Persistence or Threshold Inertia?</span><i>PLANNED</i></a><a><b>MM-RN-009</b><span>When Network Connectivity Is Just Average Correlation Wearing Better Clothes</span><i>PLANNED</i></a><a><b>MM-RN-010</b><span>A Regime Changed. Did the Market?</span><i>PLANNED</i></a><a><b>MM-RN-011</b><span>Structural Complexity Without Trading Edge</span><i>PLANNED</i></a><a><b>MM-RN-012</b><span>Measuring Markets Without Predicting Them</span><i>PLANNED</i></a>
+</div></section>
+<section id="applications" class="section shell"><div class="section-label">04 / REAL RESEARCH APPLICATIONS</div><div class="split"><div><h2>Applications are questions, not testimonials.</h2></div><div class="copy"><p>The application registry distinguishes author-led studies from external adoption. The four studies below are open application specifications; they do not count toward the external-user scorecard until another researcher produces an inspectable record.</p></div></div><div class="cards"><article><span>01</span><h3>2020 liquidity shock</h3><p>Cross-asset structure during the COVID liquidity episode.</p></article><article><span>02</span><h3>2022 inflation shock</h3><p>Equity–rates–commodity information transmission.</p></article><article><span>03</span><h3>2023 regional banks</h3><p>Market-network concentration around the regional-bank episode.</p></article><article><span>04</span><h3>US vs Europe</h3><p>Structural comparison of US and European equity regimes.</p></article></div></section>
+<section id="tutorials" class="section shell"><div class="section-label">05 / DOCUMENTATION AS TEACHING</div><h2>Every tutorial ends with an epistemic boundary.</h2><div class="tutorial-grid"><article><b>01</b><strong>Measuring market memory</strong><span>interpretation + failure modes</span></article><article><b>02</b><strong>Estimating information flow without fooling yourself</strong><span>conditioning + sample limits</span></article><article><b>03</b><strong>Building a financial network</strong><span>dependence choices + robustness</span></article><article><b>04</b><strong>Comparing regime detectors</strong><span>state alignment + disagreement</span></article><article><b>05</b><strong>Performing a leakage audit</strong><span>timestamps + execution + selection</span></article><article><b>06</b><strong>Creating a reproducible MarketMind study</strong><span>freeze → run → archive</span></article><article><b>07</b><strong>Reproducing MM-BENCH-001</strong><span>from raw data to benchmark table</span></article></div><div class="epistemic"><div><b>WHAT YOU CAN CONCLUDE</b><p>Only the property directly tested under the documented data, timing, estimator and perturbation design.</p></div><div><b>WHAT YOU CANNOT CONCLUDE</b><p>Profitability, causality, generalization or institutional usefulness unless those were separately identified and tested.</p></div></div></section>
+<section id="literature" class="section shell"><div class="section-label">06 / LITERATURE GRAPH</div><div class="split"><div><h2>MarketMind is a junction, not a new universe.</h2></div><div class="copy"><p>The conceptual map ties implementation choices to the literatures they came from and makes non-claims explicit.</p></div></div><div class="literature-graph"><div class="center-node">MARKETMIND</div><article><b>LONG MEMORY</b><span>Hurst</span><span>DFA</span><span>fractal-market work</span></article><article><b>INFORMATION THEORY</b><span>Shannon</span><span>mutual information</span><span>transfer entropy</span></article><article><b>COMPLEX NETWORKS</b><span>correlation networks</span><span>MST</span><span>clustering</span></article><article><b>REGIME MODELS</b><span>Markov switching</span><span>HMM</span><span>clustering / change points</span></article><article><b>TECHNICAL ANALYSIS</b><span>trend</span><span>breakout</span><span>mean reversion</span></article></div></section>
+<section class="section shell"><div class="section-label">07 / RESEARCH ORIGIN</div><div class="split"><div><h2>From an award-winning paper to a program that can contradict it.</h2></div><div class="copy"><p>MarketMind originated in <i>The Emergent Market Mind</i>, recognized with the 2026 Charles H. Dow Award. The award remains important external recognition; the project is now judged by reproducibility, comparative benchmarks, adverse results, external use and future data.</p><div class="actions"><a href="https://cmtassociation.org/association/award-recognizing/charles-h-dow-award/">Official award record ↗</a><a href="https://doi.org/10.5281/zenodo.21844956">Archived release ↗</a><a href="https://osf.io/nyseh/overview">Prospective protocol ↗</a></div></div></div></section>
+</main><footer class="shell"><div><b>MarketMind Research</b><span>Open research software · not investment advice</span></div><div><a href="/benchmarks">Benchmarks</a> · <a href="/failures">Failures</a> · <a href="/validation">Validation</a></div></footer>
+</body></html>
