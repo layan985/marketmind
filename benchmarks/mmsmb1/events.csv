@@ -1,0 +1,6 @@
+index,event,asset,magnitude_sigma,date
+350,outlier,A01,11.0,2020-05-06
+900,structural_break,ALL,0.0,2022-06-15
+1230,outlier,A06,-9.0,2023-09-20
+1450,missing_block_start,A08,0.0,2024-07-24
+1464,missing_block_end,A08,0.0,2024-08-13
