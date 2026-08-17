@@ -1,0 +1,10 @@
+{
+  "release": "MM-RN-003-v1.0",
+  "published": "2026-08-18",
+  "research_note": "/mm-rn-003",
+  "pdf": "/api/mm-rn-003-pdf",
+  "notes_feed": "/notes",
+  "challenge": "/challenge",
+  "archive_branch": "archive/mm-rn-003-v1.0",
+  "prospective_holdout": "untouched"
+}
