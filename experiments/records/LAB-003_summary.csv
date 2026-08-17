@@ -1,0 +1,2 @@
+seed,sample_size,window,threshold,auc_full,auc_remove_hub,auc_remove_random,corr_full_hub,corr_full_random,label_disagree_remove_hub,label_disagree_remove_random
+42,2200,80,0.2897747456,0.8644585297,0.8501985385,0.8608545850,0.9950891675,0.9959598772,0.0721357850,0.0193305045
