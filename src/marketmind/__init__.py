@@ -2,6 +2,7 @@
 
 from marketmind._version import __version__
 from marketmind.backtest import EvaluationResult, WalkForwardEvaluator
+from marketmind.benchmark import BenchmarkBundle, BenchmarkConfig, run_benchmark_bundle
 from marketmind.fractal import dfa_hurst, higuchi_fractal_dimension
 from marketmind.information import mutual_information, shannon_entropy, transfer_entropy
 from marketmind.mii import MarketMind, MarketMindConfig, MIIResult
@@ -17,6 +18,8 @@ from marketmind.study import (
 )
 
 __all__ = [
+    "BenchmarkBundle",
+    "BenchmarkConfig",
     "ConfirmatoryMarketResult",
     "DynamicNetwork",
     "EvaluationResult",
@@ -35,6 +38,7 @@ __all__ = [
     "mechanism_block_bootstrap",
     "mutual_information",
     "paired_sharpe_block_bootstrap",
+    "run_benchmark_bundle",
     "shannon_entropy",
     "strategy_exposures",
     "transfer_entropy",

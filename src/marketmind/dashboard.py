@@ -5,6 +5,7 @@ from __future__ import annotations
 import subprocess
 import sys
 from pathlib import Path
+from typing import Any
 
 
 def launch() -> int:
@@ -20,7 +21,7 @@ def launch() -> int:
     )
 
 
-def _evidence_footer(st, text: str) -> None:
+def _evidence_footer(st: Any, text: str) -> None:
     st.caption(text)
 
 
@@ -66,7 +67,7 @@ def app() -> None:
         st.caption("FLOW")
         st.caption("market → window → memory → information flow → connectivity → regime → diagnostics → export")
 
-    uploaded = None
+    uploaded: Any | None = None
     if source == "Upload wide CSV":
         uploaded = st.file_uploader(
             "CSV: date column followed by positive price columns", type="csv"
@@ -80,6 +81,7 @@ def app() -> None:
         if uploaded is None:
             st.error("Upload a CSV first.")
             st.stop()
+        assert uploaded is not None
         frame = pd.read_csv(uploaded)
         if "date" not in frame:
             st.error("The CSV needs a date column.")
@@ -126,7 +128,7 @@ def app() -> None:
     st.plotly_chart(px.scatter(regime_chart, x="date", y="mii", color="regime"), use_container_width=True)
     _evidence_footer(
         st,
-        "SOURCE / MarketMind regime classifier · STATUS / FOUNDER PRODUCED · LIMITATION / thresholds are historical classifications, not future-return guarantees",
+        "SOURCE / MarketMind regime classifier · STATUS / PENDING VALIDATION · LIMITATION / thresholds are historical classifications, not future-return guarantees",
     )
 
     st.subheader("Walk-forward diagnostics")
@@ -155,9 +157,9 @@ def app() -> None:
     st.subheader("Proof ledger")
     proof = pd.DataFrame(
         [
-            ["Frozen preregistration release", "v0.1.0", "FOUNDER PRODUCED", "Frozen"],
-            ["Controlled implementation", "v0.2.0", "FOUNDER PRODUCED", "Current"],
-            ["Controlled audit", "7 / 7 checks", "FOUNDER PRODUCED", "Passing"],
+            ["Frozen preregistration release", "v0.1.0", "OFFICIAL SOURCE", "Frozen"],
+            ["Controlled implementation", "v0.2.0", "PENDING VALIDATION", "Current"],
+            ["Controlled audit", "7 / 7 checks", "PENDING VALIDATION", "Passing"],
             ["Holdout result", "Not yet available", "PENDING VALIDATION", "Sealed"],
             ["Independent reproductions", "0", "PENDING VALIDATION", "Open zero"],
         ],
