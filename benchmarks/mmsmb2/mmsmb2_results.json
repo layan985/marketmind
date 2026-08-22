@@ -1,0 +1,49 @@
+{
+  "benchmark": "MMSMB-2 / Market Twins",
+  "run_date": "2026-08-22",
+  "seed_base": 20260822,
+  "replications_per_core_track": 200,
+  "replications_per_severity_level": 20,
+  "n_assets": 9,
+  "observations_per_replication": 3000,
+  "break_index": 1500,
+  "rolling_window": 240,
+  "step": 60,
+  "reference_end": 600,
+  "evaluation_min_start": 720,
+  "target_average_correlation": 0.3,
+  "mechanism_A_frobenius_distance": 0.41321907022788773,
+  "mechanism_A1_spectral_radius": 0.2268934625631437,
+  "mechanism_A2_spectral_radius": 0.17984359711335657,
+  "silent_shift_stationary_covariance_max_abs_difference": 2.6645352591003757e-15,
+  "silent_shift_innovation_covariance_min_eigenvalue": 0.6734707099852602,
+  "silent_mechanism_shift_auc": {
+    "mean_vol": {"mean": 0.5046818181818182, "median": 0.48863636363636365, "mean_ci95_low": 0.4749681453536698, "mean_ci95_high": 0.5343954910099666},
+    "avg_abs_corr": {"mean": 0.4972727272727273, "median": 0.4954545454545455, "mean_ci95_low": 0.4703623781978972, "mean_ci95_high": 0.5241830763475573},
+    "pc1_share": {"mean": 0.49679545454545454, "median": 0.4931818181818182, "mean_ci95_low": 0.4699790308573133, "mean_ci95_high": 0.5236118782335958},
+    "var_shift": {"mean": 0.7967045454545455, "median": 0.8318181818181818, "mean_ci95_low": 0.7753131285107592, "mean_ci95_high": 0.8180959623983318},
+    "lagcorr_shift": {"mean": 0.7271363636363637, "median": 0.75, "mean_ci95_low": 0.704328192917547, "mean_ci95_high": 0.7499445343551804}
+  },
+  "market_mirage_auc": {
+    "mean_vol": {"mean": 1.0, "median": 1.0, "mean_ci95_low": 1.0, "mean_ci95_high": 1.0},
+    "avg_abs_corr": {"mean": 0.5093636363636364, "median": 0.4931818181818182, "mean_ci95_low": 0.4797837096729585, "mean_ci95_high": 0.5389435630543141},
+    "pc1_share": {"mean": 0.5088636363636363, "median": 0.4954545454545455, "mean_ci95_low": 0.47921339968405624, "mean_ci95_high": 0.5385138730432164},
+    "var_shift": {"mean": 0.4914772727272727, "median": 0.4977272727272727, "mean_ci95_low": 0.4638946449138211, "mean_ci95_high": 0.5190599005407243},
+    "lagcorr_shift": {"mean": 0.5002727272727273, "median": 0.484090909090909, "mean_ci95_low": 0.4736020252102985, "mean_ci95_high": 0.5269434293351561}
+  },
+  "severity_curve_var_shift_mean_auc": {
+    "alpha_0.25": 0.4922727272727272,
+    "alpha_0.50": 0.5486363636363636,
+    "alpha_1.00": 0.8029545454545456,
+    "alpha_1.50": 0.9647727272727273,
+    "alpha_2.00": 0.9972727272727273
+  },
+  "impossible_orientation": {
+    "rho": 0.65,
+    "10fold_cv_accuracy_mean": 0.5162500000000001,
+    "10fold_cv_accuracy_sd": 0.07096800922481433,
+    "chance_accuracy": 0.5,
+    "do_X_equals_1_predicted_EY": {"X_to_Y": 0.65, "Y_to_X": 0.0}
+  },
+  "claim_boundary": "Controlled synthetic measurement evidence only. The VAR and lag-correlation baselines are change detectors, not guarantees of causal identification; no trading or return-prediction claim is made."
+}
