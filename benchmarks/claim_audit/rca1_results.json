@@ -1,0 +1,46 @@
+{
+  "benchmark": "RCA-1 / Regime Claim Audit",
+  "run_date": "2026-08-22",
+  "replications": 200,
+  "permutation_replications": 50,
+  "key_result": {
+    "raw_VAR": {
+      "silent_shift_auc": 0.8042954545454545,
+      "mirage_auc": 0.5198409090909091,
+      "rescaling_score_spearman": 0.327608137829912,
+      "rescaling_auc_abs_delta": 0.2195
+    },
+    "standardized_VAR": {
+      "silent_shift_auc": 0.8055454545454545,
+      "mirage_auc": 0.5204318181818182,
+      "rescaling_score_spearman": 1.0,
+      "rescaling_auc_abs_delta": 0.0
+    }
+  },
+  "silent_mechanism_shift_auc": {
+    "mean_vol": 0.4973409090909091,
+    "avg_abs_corr": 0.5076818181818181,
+    "pc1_share": 0.5081136363636364,
+    "var_raw_shift": 0.8042954545454545,
+    "var_std_shift": 0.8055454545454545,
+    "lagcorr_shift": 0.7122954545454546
+  },
+  "market_mirage_auc": {
+    "mean_vol": 1.0,
+    "avg_abs_corr": 0.5005909090909091,
+    "pc1_share": 0.5021590909090909,
+    "var_raw_shift": 0.5198409090909091,
+    "var_std_shift": 0.5204318181818182,
+    "lagcorr_shift": 0.5073863636363637
+  },
+  "positive_diagonal_reparameterization": {
+    "mean_vol": {"score_spearman": 0.7049560117302052, "auc_abs_delta": 0.12038636363636364},
+    "avg_abs_corr": {"score_spearman": 1.0, "auc_abs_delta": 0.0},
+    "pc1_share": {"score_spearman": 1.0, "auc_abs_delta": 0.0},
+    "var_raw_shift": {"score_spearman": 0.327608137829912, "auc_abs_delta": 0.2195},
+    "var_std_shift": {"score_spearman": 1.0, "auc_abs_delta": 0.0},
+    "lagcorr_shift": {"score_spearman": 1.0, "auc_abs_delta": 0.0}
+  },
+  "column_permutation_sanity": "all tested aggregate scores invariant to numerical tolerance",
+  "claim_boundary": "Controlled synthetic model-validation evidence only; no live-market causal, forecast, trading, regulatory, or universal invariance claim."
+}
